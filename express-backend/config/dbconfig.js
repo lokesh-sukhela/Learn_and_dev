@@ -3,6 +3,6 @@ module.exports={
     USER:"root",
     PASSWORD:"root",
     PORT:"5432",
-    DATABASE:"form",
+    DATABASE:"LearnAndDev",
     DIALECT:"postgres",
 }
