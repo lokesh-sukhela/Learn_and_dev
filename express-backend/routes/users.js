@@ -6,7 +6,7 @@ var admin=require("../model/controller/admin")
 
 /* GET users listing. */
 //while api calls this the particular action happens in the database eg. here we are inserting records
-router.post('/',admin.create_admin);
+router.post('/',admin.create_user_admin);
 
 //function(req, res, next) {
 //   res.send('respond with a resource');

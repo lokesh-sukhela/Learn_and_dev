@@ -4,6 +4,7 @@ import Mainfile from './components/mainfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import Sidebar from './components/admin2';
+import './style.css';
 
 function App() {
  

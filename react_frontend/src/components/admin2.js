@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Modal,Form } from 'react-bootstrap';
 import {
     TextField,
-    
     Typography, 
     Grid,
     FormControl,
@@ -13,6 +12,9 @@ import {
     Select,
     MenuItem,
   } from '@mui/material';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faFilter, faTimes } from '@fortawesome/free-solid-svg-icons';
+// import { faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
     const listItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9'];
@@ -120,12 +122,10 @@ const handleCloseModal = () => {
   
     return (
       <Container fluid>
-        <Row>
+        <Row className=''>
           <Col md={2} className="">
             <div id="list-div">
             <ListGroup id="list">
-            <br></br>
-            <br></br>
             <Link to="/" >Dashboard</Link>
             <br></br>
             <Link to="/">TimeSheet</Link>
@@ -161,9 +161,24 @@ const handleCloseModal = () => {
             </div>
           </Col>
           <Col>
-          <Button variant="primary" onClick={handleOpenModal}>
-          Create Training
-        </Button>
+          <h2 class = 'page-title'>Learning and Development</h2>
+        <div class = 'filter-and-create-training-container'>
+          <div className='filter'>
+            <select id = 'filter-dropdown'>
+              <option>a</option>
+              <option>b</option>
+              <option>c</option>
+            </select>
+            <div class ='filter-button'><button >
+              Apply Filter</button></div> &nbsp;
+            <div class ='remove-filter-button'><button >Remove Filter</button></div>
+            <div className='search-container'><label>🔍</label><input type = "search" className='search-in-table' placeholder='Search for Trainings' /></div>
+          </div>
+          <div class = 'training-creation-button-container'>
+          <Button variant="primary" onClick={handleOpenModal} className='create-training-button'>
+          <span>+</span> Add Training
+          </Button></div>
+        </div>
 {showModal && 
 <>
 <Modal show={showModal} onHide={handleCloseModal}>
@@ -252,12 +267,6 @@ return (<option value={index}>{item}</option>)
 
 }
 
-
-
-
-
-
-        
             <Table responsive>
               <thead>
                 <tr>
@@ -272,6 +281,7 @@ return (<option value={index}>{item}</option>)
                     <td>{row.id}</td>
                     <td>{row.name}</td>
                     <td>{row.age}</td>
+                    <td><button>Ok</button></td>
                   </tr>
                 ))}
               </tbody>
