@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from "react";
 
-
-
 function SignInForm() {
   const [state, setState] = useState({
     email: "",
@@ -32,26 +30,15 @@ function SignInForm() {
 
   return (
     <div className="form-container sign-in-container">
-      <form onSubmit={handleOnSubmit}>
-        <h1>Sign in</h1>
-        <div className="social-container">
-          {/* <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
-          </a> */}
-        </div>
-        <span>or use your account</span>
+      <form className="sign-in-form" onSubmit={handleOnSubmit}>
+      <h1 className="title">Sign in</h1>
         <input
           type="email"
           placeholder="Email"
           name="email"
           value={state.email}
           onChange={handleChange}
+          className="email-input-feild"
         />
         <input
           type="password"
@@ -59,9 +46,10 @@ function SignInForm() {
           placeholder="Password"
           value={state.password}
           onChange={handleChange}
+          className="password-input-feild"
         />
-        <a href="#">Forgot your password?</a>
-        <button>Sign In</button>
+        <a href="#" class = 'forgot-password'>Forgot your password?</a>
+        <button className="sign-in-button">Sign In</button>
       </form>
     </div>
   );
