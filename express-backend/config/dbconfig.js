@@ -2,7 +2,7 @@ module.exports={
     HOST:"localhost",
     USER:"root",
     PASSWORD:"root",
-    PORT:"8080",
+    PORT:"5432",
     DATABASE:"form",
-    DIALECT:"mysql",
+    DIALECT:"postgres",
 }
