@@ -1,12 +1,21 @@
 const dbconfig=require("../../config/dbconfig");
-const sql=require("mysql2/promise");
+const sql=require("pg");
 const {Sequelize,DataTypes}=require("sequelize");
 const db={};
 
-sql.createConnection({ user: dbconfig.USER, password: dbconfig.PASSWORD })
-    .then(()=>{
-        console.log("database connected successfully")
-    })
+const client= new sql.Client({ user: dbconfig.USER, password: dbconfig.PASSWORD })
+
+
+// Connect to the PostgreSQL database
+client.connect()
+  .then(() => {
+    console.log('Connected to PostgreSQL DATABASE Successfully');
+    // You can start executing queries here
+  })
+  .catch((err) => {
+    console.error('Error connecting to PostgreSQL database:', err);
+  });
+    
 
  
 const sequelize=new Sequelize(
