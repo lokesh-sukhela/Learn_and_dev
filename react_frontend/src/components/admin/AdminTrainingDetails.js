@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col, ListGroup, Table,Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal,Form } from 'react-bootstrap';
-import {
-    TextField,
-    Typography, 
-    Grid,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-  } from '@mui/material';
+import { TextField,Typography, Grid,FormControl,InputLabel,Select,MenuItem} from '@mui/material';
+import AdminService from '../../services/AdminService'
+
+  
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faFilter, faTimes } from '@fortawesome/free-solid-svg-icons';
 // import { faFilterCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
 
 const Sidebar = () => {
     const listItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9'];
@@ -27,6 +23,26 @@ const Sidebar = () => {
       // Add more rows as needed
     ];
 
+
+  useEffect(()=>{
+    Training_Details_Data();
+  },[])
+    
+    const Training_Details_Data = () => {
+      AdminService.getAllTrainingDetails()
+        .then(data => {
+          data.data.forEach(element => {
+            console.log(element);
+          });
+        })
+        .catch(error => {
+          console.error("An error occurred:", error);
+        });
+    };
+    
+    
+    
+      
 
     const [showModal, setShowModal] = useState(false);
     const [training,setTraining]=useState("");
