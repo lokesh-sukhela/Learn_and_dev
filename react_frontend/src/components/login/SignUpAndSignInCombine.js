@@ -3,7 +3,8 @@ import SignUpForm from './signup';
 import SignInForm from './signin';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function Mainfile() {
+
+function SignUpAndSignInCombine() {
     const [type, setType] = useState("signIn");
     const handleOnClick = text => {
       if (text !== type) {
@@ -15,11 +16,8 @@ function Mainfile() {
       "container " + (type === "signUp" ? "right-panel-active" : "");
     return (
       <>
-     
-   
-    
-   <div className='container-fluid'>
-        <h2>Sign in/up Form</h2>
+      <div className='container-fluid'>
+        <h2 className='main-title'>Sign in/Signup Form</h2>
         <div className={containerClass} >
           <SignUpForm />
           <SignInForm />
@@ -52,10 +50,10 @@ function Mainfile() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
       </>
   );
       
 }
 
-export default Mainfile;
+export default SignUpAndSignInCombine;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton} from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-import TrainingForm from './Trainingform';
+// import TrainingForm from './Trainingform';
 import { Link } from 'react-router-dom';
-import './tt.css';
+import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import SideNav from './components/side_nav'
+import SideNav from '../side_nav/side_nav'
 import Container from '@mui/material/Container'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -234,14 +234,14 @@ const TrainingTable = () => {
         </Paper>
       </Grid>
        )}
-      {selectedTraining && (
+      {/*{selectedTraining && (
   <TrainingForm
     training={selectedTraining}
     onSave={(editedTraining) => handleSaveTraining(editedTraining)}
     onCancel={() => setSelectedTraining(null)}
   />
   
-)}
+      )}*/}
     </Grid>
   );
 };
