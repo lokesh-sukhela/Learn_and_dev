@@ -34,25 +34,14 @@ function SignUpForm() {
   return (
     <div className="form-container sign-up-container">
       <form onSubmit={handleOnSubmit}>
-        <h1>Create Account</h1>
-        <div className="social-container">
-          {/* <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
-          </a> */}
-        </div>
-        <span>or use your email for registration</span>
+        <h1 className="title">Create Account</h1>
         <input
           type="text"
           name="name"
           value={state.name}
           onChange={handleChange}
           placeholder="Name"
+          className="name-input-feild"
         />
         <input
           type="email"
@@ -60,6 +49,7 @@ function SignUpForm() {
           value={state.email}
           onChange={handleChange}
           placeholder="Email"
+          className="email-input-feild"
         />
         <input
           type="password"
@@ -67,8 +57,9 @@ function SignUpForm() {
           value={state.password}
           onChange={handleChange}
           placeholder="Password"
+          className="password-input-feild"
         />
-        <button>Sign Up</button>
+        <button type = 'submit' class = 'sign-up-button'>Sign Up</button>
       </form>
     </div>
   );

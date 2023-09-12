@@ -15,11 +15,8 @@ function Mainfile() {
       "container " + (type === "signUp" ? "right-panel-active" : "");
     return (
       <>
-     
-   
-    
-   <div className='container-fluid'>
-        <h2>Sign in/up Form</h2>
+      <div className='container-fluid'>
+        <h2 className='main-title'>Sign in/Signup Form</h2>
         <div className={containerClass} >
           <SignUpForm />
           <SignInForm />
@@ -52,7 +49,7 @@ function Mainfile() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
       </>
   );
       
