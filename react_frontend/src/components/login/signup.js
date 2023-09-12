@@ -16,11 +16,25 @@ function SignUpForm() {
 
   const handleOnSubmit = evt => {
     evt.preventDefault();
+  console.log(state);
 
-    AdminService.saveDetails().then(data=>{
-      console.log(data);
+    let data= AdminService.saveDetails(state).then((d)=>{
+      console.log("Fronednd",d)
+ 
+
+      alert(d.data.message)
+
+
     })
-
+    .catch(err=>{
+      console.log("Errorror");
+      alert("User Existed")
+    })
+    // .
+    // then(data=>{
+    //   console.log(data);
+    // })
+console.log(data)
     // const { name, email, password } = state;
     // alert(
     //   `You are sign up with name: ${name} email: ${email} and password: ${password}`
@@ -62,7 +76,7 @@ function SignUpForm() {
           placeholder="Password"
           className="password-input-feild"
         />
-        <button type = 'submit' class = 'sign-up-button'>Sign Up</button>
+        <button type = 'submit' className = 'sign-up-button'>Sign Up</button>
       </form>
     </div>
   );
