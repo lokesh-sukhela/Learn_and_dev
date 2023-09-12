@@ -1,4 +1,5 @@
 import React from "react";
+import AdminService from "../../services/AdminService";
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -16,10 +17,14 @@ function SignUpForm() {
   const handleOnSubmit = evt => {
     evt.preventDefault();
 
-    const { name, email, password } = state;
-    alert(
-      `You are sign up with name: ${name} email: ${email} and password: ${password}`
-    );
+    AdminService.saveDetails().then(data=>{
+      console.log(data);
+    })
+
+    // const { name, email, password } = state;
+    // alert(
+    //   `You are sign up with name: ${name} email: ${email} and password: ${password}`
+    // );
 
     for (const key in state) {
       setState({

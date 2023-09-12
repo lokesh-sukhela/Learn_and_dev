@@ -4,12 +4,14 @@ const create_user_admin= async(req,res)=>{
     console.log(req.body.name)
    // req.body.password
 
+   const{name,email,password}=req.body;
+
    if(req.body.name && req.body.password && req.body.email){
    
         const result=await UA_table.create({
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password
+            FullName:name,
+            Email:email,
+            Password:password
         })
         console.log(result);
         

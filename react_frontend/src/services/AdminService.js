@@ -6,4 +6,8 @@ const getAllTrainingDetails = async ()=> {
 
 }
 
-export default {getAllTrainingDetails}
+const saveDetails = async()=>{
+    const Tdetails = await axios.post("https://localhost:8080/")
+    return Tdetails.data
+}
+export default {getAllTrainingDetails,saveDetails}
