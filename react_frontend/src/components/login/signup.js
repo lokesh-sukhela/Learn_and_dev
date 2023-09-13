@@ -1,6 +1,10 @@
 import React from "react";
+<<<<<<< HEAD:react_frontend/src/components/signup.js
 
 //,kjkvndsjknsjnvjn
+=======
+import AdminService from "../../services/AdminService";
+>>>>>>> 64d41ff308c1abdeab50cd8d2ac649b569a87295:react_frontend/src/components/login/signup.js
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -17,11 +21,29 @@ function SignUpForm() {
 
   const handleOnSubmit = evt => {
     evt.preventDefault();
+  console.log(state);
 
-    const { name, email, password } = state;
-    alert(
-      `You are sign up with name: ${name} email: ${email} and password: ${password}`
-    );
+    let data= AdminService.saveDetails(state).then((d)=>{
+      console.log("Fronednd",d)
+ 
+
+      alert(d.data.message)
+
+
+    })
+    .catch(err=>{
+      console.log("Errorror");
+      alert("User Existed")
+    })
+    // .
+    // then(data=>{
+    //   console.log(data);
+    // })
+console.log(data)
+    // const { name, email, password } = state;
+    // alert(
+    //   `You are sign up with name: ${name} email: ${email} and password: ${password}`
+    // );
 
     for (const key in state) {
       setState({
@@ -59,7 +81,7 @@ function SignUpForm() {
           placeholder="Password"
           className="password-input-feild"
         />
-        <button type = 'submit' class = 'sign-up-button'>Sign Up</button>
+        <button type = 'submit' className = 'sign-up-button'>Sign Up</button>
       </form>
     </div>
   );

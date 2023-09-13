@@ -3,7 +3,8 @@ import SignUpForm from './signup';
 import SignInForm from './signin';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function Mainfile() {
+
+function SignUpAndSignInCombine() {
     const [type, setType] = useState("signIn");
     const handleOnClick = text => {
       if (text !== type) {
@@ -55,4 +56,4 @@ function Mainfile() {
       
 }
 
-export default Mainfile;
+export default SignUpAndSignInCombine;
