@@ -4,6 +4,7 @@ import SignInForm from './signin';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 function SignUpAndSignInCombine() {
     const [type, setType] = useState("signIn");
     const handleOnClick = text => {
@@ -19,6 +20,7 @@ function SignUpAndSignInCombine() {
       <div className='container-fluid'>
         <h2 className='main-title'>Sign in/Signup Form</h2>
         <div className={containerClass} >
+
           <SignUpForm />
           <SignInForm />
           <div className="overlay-container">

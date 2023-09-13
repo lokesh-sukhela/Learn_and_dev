@@ -8,17 +8,18 @@ import SignUpAndSignInCombine from './components/login/SignUpAndSignInCombine';
 import TrainingTable from './components/admintrainingatble/AdminTrainingTable';
 
 
+
 function App() {
  
     return (
       <>
-    
+
       <Router>
       <Routes>
         <Route path="/" element={<SignUpAndSignInCombine/>}></Route>
-     <Route path="/admin" element={<Sidebar/>}></Route>
-     <Route path="/adminTrainingTable" element={<TrainingTable/>}></Route>
-      </Routes>
+       <Route path="/admin" element={<Sidebar/>}></Route>
+      <Route path="/adminTrainingTable" element={<TrainingTable/>}></Route>
+        </Routes>
     </Router>
       </>
   );
