@@ -27,9 +27,9 @@ var usersRouter = require('./routes/users');
 // var trainingRouter = require('./routes/users')
 
 // All Routers
-app.use("/",indexRouter)
-app.use('/users', usersRouter);
-app.use('/TrainingDetailsadmin', trainingRouter)
+// app.use("/",indexRouter)
+app.use('/', usersRouter);
+// app.use('/TrainingDetailsadmin', trainingRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
