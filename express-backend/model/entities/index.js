@@ -40,6 +40,7 @@ db.sequelize=sequelize;
 
 db.admin=require("./UserAdminRegistrations")(sequelize,DataTypes);
 
+
 db.sequelize.sync({force:false}).then(()=>{
     console.log("re-sync-done")
 })
