@@ -1,8 +1,7 @@
 import React from "react";
-<<<<<<< HEAD:react_frontend/src/components/signup.js
+react_frontend/src/components/signup.js
 
 //,kjkvndsjknsjnvjn
-=======
 import AdminService from "../../services/AdminService";
 function SignUpForm() {
   const [state, setState] = React.useState({
