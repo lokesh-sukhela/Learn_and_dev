@@ -12,11 +12,7 @@ import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-<<<<<<< HEAD
 import SideNav from '../side_nav/side_nav'
-=======
-import SideNav from './side_nav/side_nav'
->>>>>>> ecd7854ef39abedb88ab3781e83309b74b176056
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
