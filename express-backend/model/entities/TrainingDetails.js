@@ -29,8 +29,6 @@ module.exports=(sequelize,DataTypes)=>{
     ParticipationLimit:{
         type:DataTypes.INTEGER,
         allownull:false
-
-
     },
     TrainingMode:{
         type:DataTypes.STRING,
@@ -38,7 +36,12 @@ module.exports=(sequelize,DataTypes)=>{
     },
     MeetingLink:{
         type:DataTypes.STRING
+    },
+    Description:{
+        type:DataTypes.STRING,
+        allownull:false
     }
+
     }
     )
     return TDetails;
