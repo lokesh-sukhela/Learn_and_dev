@@ -60,7 +60,6 @@ const create_user_admin = async (req, res) => {
           Email: email,
           Password: password,
         });
-
         console.log(newUser);
         res.status(200).json({ message: "User added" });
       }

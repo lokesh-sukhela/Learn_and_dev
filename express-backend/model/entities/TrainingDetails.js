@@ -1,3 +1,5 @@
+const { text } = require("express");
+
 module.exports=(sequelize,DataTypes)=>{
     const TDetails=sequelize.define("TrainingDetails",{
        TrainingId:{
@@ -26,21 +28,25 @@ module.exports=(sequelize,DataTypes)=>{
         type:DataTypes.DATETIME,
         allownull:false
     },
-    ParticipationLimit:{
-        type:DataTypes.INTEGER,
+     Description: {
+        type:DataTypes.text,
         allownull:false
+    }
+    // ParticipationLimit:{
+    //     type:DataTypes.INTEGER,
+    //     allownull:false
 
 
-    },
-    TrainingMode:{
-        type:DataTypes.STRING,
-        allownull:false
-    },
-    MeetingLink:{
-        type:DataTypes.STRING
-    }
-    }
-    )
+    // },
+    // TrainingMode:{
+    //     type:DataTypes.STRING,
+    //     allownull:false
+    // },
+    // MeetingLink:{
+    //     type:DataTypes.STRING
+    // }
+    })
+
     return TDetails;
    }
    

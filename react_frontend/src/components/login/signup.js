@@ -20,11 +20,7 @@ function SignUpForm() {
 
     let data= AdminService.saveDetails(state).then((d)=>{
       console.log("Fronednd",d)
- 
-
       alert(d.data.message)
-
-
     })
     .catch(err=>{
       console.log("Errorror");
