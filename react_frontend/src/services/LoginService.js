@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 
 const checkDetails = async(data)=>{
   
