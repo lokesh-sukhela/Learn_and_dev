@@ -4,6 +4,8 @@ import LoginService from "../../services/LoginService";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import Cookies from 'universal-cookie';
+
 
 
 function SignInForm() {
@@ -19,16 +21,22 @@ function SignInForm() {
     });
   };
 
+  const cookies = new Cookies();
 
+  // Set a cookie
+  cookies.set('myCookieName', 'myCookieValue', { path: '/' });
 
-  const [cookies, setCookie] = useCookies(['UserData']);
+  
+  
+
+ // const [cookies, setCookie] = useCookies(['UserData']);
 
   const navigate = useNavigate()
   
 
 
-console.log(cookies.UserData.FullName);
-console.log(cookies.UserData.Role)
+// console.log(cookies.UserData.FullName);
+// console.log(cookies.UserData.Role)
 // console.log(cookies[0].FullName)
   const handleOnSubmit = evt => {
     evt.preventDefault();
@@ -39,8 +47,21 @@ console.log(cookies.UserData.Role)
       if (res.data.message==="Login Successful"){
         
         toast.success(res.data.message);
-        setCookie('UserData',res.data.userdata)
-        navigate('/admin')
+        // setCookie('UserData',res.data.userdata)
+        cookies.set("role",res.data.userdata.Role);
+        const roles=cookies.get("role");
+
+        for(var i=0;i<roles.length;i++){
+          console.log(roles[i]);
+        }
+
+        if (roles.includes("Admin")){
+
+          navigate('/admin')
+        }
+        else{
+          navigate('/adminTrainingTable')
+        }
 
         
                                                                                                                                                                                           
