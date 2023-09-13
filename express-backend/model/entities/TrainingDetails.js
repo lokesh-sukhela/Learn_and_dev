@@ -20,16 +20,16 @@ module.exports=(sequelize,DataTypes)=>{
            allownull:false
        },
        StartDate:{
-        type:DataTypes.DATETIME,
+        type:DataTypes.DATE,
         allownull:false
       
        },
        EndDate:{
-        type:DataTypes.DATETIME,
+        type:DataTypes.DATE,
         allownull:false
     },
      Description: {
-        type:DataTypes.text,
+        type:DataTypes.STRING,
         allownull:false
     },
     TrainingMode:{
@@ -37,15 +37,19 @@ module.exports=(sequelize,DataTypes)=>{
         allownull:false
     },
     MeetingLink:{
-        type:DataTypes.STRING
-    },
-    Description:{
         type:DataTypes.STRING,
+        allownull:true
+    },
+    MaxLimit:{
+        type:DataTypes.INTEGER,
         allownull:false
-    }
-
-    }
+    },
+  
+    },
+    {timestamp:false,
+        createdAt: false,
+        updatedAt:false}
     )
     return TDetails;
-   }
+}
    

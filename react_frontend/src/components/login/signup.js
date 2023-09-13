@@ -16,17 +16,12 @@ function SignUpForm() {
     });
   };
 
-
-  
   const handleOnSubmit = evt => {
     evt.preventDefault();
-  console.log(state);
-
+    console.log(state);
     let data= AdminService.saveDetails(state).then((d)=>{
-      console.log("Fronednd",d)
- 
+      console.log("Frontend",d)
       if (d.data.message==="User added"){
-
         toast.success(d.data.message);
       }
       if (d.data.message=== "User already exists!"){
@@ -36,8 +31,6 @@ function SignUpForm() {
         toast.warning(d.data.message);
       }
       // alert(d.data.message)
-
-
     })
     .catch(err=>{
       console.log("Errorror");

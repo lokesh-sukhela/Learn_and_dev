@@ -8,11 +8,9 @@ var TDetails = require("../model/controller/TrainingDetails_controller")
 
 //while api calls this the particular action happens in the database eg. here we are inserting records
 router.post('/',Useradmin.create_user_admin);
-// router.get("/TrainingDetailsAdmin",TDetails.Traning_details)
-
-
+// router.post('/users',)
+router.post("/TrainingDetailsAdmin",TDetails.Traning_details)
 //function(req, res, next) {
 //   res.send('respond with a resource');
 // }
-
 module.exports = router;

@@ -39,6 +39,7 @@ const sequelize=new Sequelize(
 db.sequelize=sequelize;
 
 db.UserAdminReg=require("./UserAdminRegistrations")(sequelize,DataTypes);
+db.trainingDetails=require("./TrainingDetails")(sequelize,DataTypes);
 
 db.sequelize.sync({force:false}).then(()=>{
     console.log("re-sync-done")

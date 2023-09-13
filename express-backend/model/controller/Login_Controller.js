@@ -3,9 +3,7 @@ const UA_table = db.UserAdminReg;
 
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
-
   const { name, email, password } = req.body;
-
   if (name && password && email) {
     try {
       // Check if a user with the same email already exists in the database

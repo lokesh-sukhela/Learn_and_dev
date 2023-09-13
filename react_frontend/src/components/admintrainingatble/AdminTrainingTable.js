@@ -7,12 +7,12 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
-import TrainingForm from './Trainingform';
+import TrainingForm from '../Trainingform';
 import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import SideNav from './components/side_nav'
+import SideNav from '../side_nav/side_nav'
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
