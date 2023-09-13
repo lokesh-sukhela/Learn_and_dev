@@ -36,9 +36,6 @@ function SignUpForm() {
       toast.error("User already Existed!")
     })
 
-
-
-
     for (const key in state) {
       setState({
         ...state,

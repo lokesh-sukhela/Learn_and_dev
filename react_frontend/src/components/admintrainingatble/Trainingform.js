@@ -11,13 +11,9 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-<<<<<<< HEAD:react_frontend/src/components/Trainingform.js
 import { ForkRight } from '@mui/icons-material';
 import AdminService from '../services/AdminService';
 import { toast } from 'react-toastify';
-=======
-
->>>>>>> 497f7052bac790eb399a063d90a0f2578b38cd8d:react_frontend/src/components/admintrainingatble/Trainingform.js
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const [formData, setFormData] = useState(() => {
@@ -30,11 +26,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
           startDateAndTime: '',
           endDateAndTime: '',
           description: '',
-<<<<<<< HEAD:react_frontend/src/components/Trainingform.js
-         count: '', // Add any other default values you may have
-=======
           count: 1, // Add any other default values you may have
->>>>>>> 497f7052bac790eb399a063d90a0f2578b38cd8d:react_frontend/src/components/admintrainingatble/Trainingform.js
           mode: '', // Add any other default values you may have
           
           Link: 'https://microsoftteams.uservoice.com/forums/555103-public/suggestions/38572981-easy-and-short-url-fo...', // Add any other default values you may have
