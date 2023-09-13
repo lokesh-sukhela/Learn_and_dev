@@ -1,5 +1,7 @@
 import React from "react";
 import AdminService from "../../services/AdminService";
+import { toast } from 'react-toastify';
+
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -14,6 +16,8 @@ function SignUpForm() {
     });
   };
 
+
+  
   const handleOnSubmit = evt => {
     evt.preventDefault();
   console.log(state);
@@ -21,14 +25,24 @@ function SignUpForm() {
     let data= AdminService.saveDetails(state).then((d)=>{
       console.log("Fronednd",d)
  
+      if (d.data.message==="User added"){
 
-      alert(d.data.message)
+        toast.success(d.data.message);
+      }
+      if (d.data.message=== "User already exists!"){
+        toast.error(d.data.message);
+      }
+      if (d.data.message=== "All fields are mandatory ; Please fill it."){
+        toast.warning(d.data.message);
+      }
+      // alert(d.data.message)
 
 
     })
     .catch(err=>{
       console.log("Errorror");
-      alert("User Existed")
+      // alert("User Existed")
+      toast.error("User already Existed!")
     })
     // .
     // then(data=>{
