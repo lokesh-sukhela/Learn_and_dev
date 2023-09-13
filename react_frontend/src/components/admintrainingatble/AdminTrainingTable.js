@@ -235,7 +235,7 @@ const TrainingTable = () => {
                       <TableCell className='td'>{training.endDateAndTime}</TableCell>
                       <TableCell className='td'>{training.description}</TableCell>
                       <TableCell className='td'>{training.count}</TableCell>
-                      <TableCell className='td'>{training.Mode}</TableCell>
+                      <TableCell className='td'>{training.mode}</TableCell>
                       <TableCell className='td'>{training.Link}</TableCell>
                       <TableCell>
 

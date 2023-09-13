@@ -20,13 +20,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users'); 
+var userRouter = require('./routes/registration'); 
+var login=require('./routes/login');
 // var trainingRouter = require('./routes/users')
 
 // All Routers
 // app.use("/",indexRouter)
-app.use('/', usersRouter);
-app.use('/TrainingDetailsadmin', usersRouter);
+app.use('/', userRouter);
+app.use('/loginDetails',login)
+// app.use('/TrainingDetailsadmin', trainingRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

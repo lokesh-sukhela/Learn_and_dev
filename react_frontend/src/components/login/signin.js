@@ -1,5 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import LoginService from "../../services/LoginService";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+
 
 function SignInForm() {
   const [state, setState] = useState({
@@ -14,11 +19,48 @@ function SignInForm() {
     });
   };
 
+
+
+  const [cookies, setCookie] = useCookies(['UserData']);
+
+  const navigate = useNavigate()
+  
+
+
+console.log(cookies.UserData.FullName);
+console.log(cookies.UserData.Role)
+// console.log(cookies[0].FullName)
   const handleOnSubmit = evt => {
     evt.preventDefault();
 
-    const { email, password } = state;
-    alert(`You are login with email: ${email} and password: ${password}`);
+    LoginService.checkDetails(state).then((res)=>{
+      console.log(res.data.message);
+
+      if (res.data.message==="Login Successful"){
+        
+        toast.success(res.data.message);
+        setCookie('UserData',res.data.userdata)
+        navigate('/admin')
+
+        
+                                                                                                                                                                                          
+
+        
+      }
+  
+      if (res.data.message=== "All fields are mandatory ; Please fill it."){
+        toast.warning(res.data.message);
+      }
+  
+      
+    }).catch(err=>{
+      console.log(err);
+      toast.error("Invalid email or password!")
+    })
+
+
+    
+
 
     for (const key in state) {
       setState({

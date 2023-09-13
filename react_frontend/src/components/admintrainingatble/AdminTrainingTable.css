@@ -5,24 +5,32 @@
   /* Main content */
   .content {
     margin-top: -24px;
-    margin-left:12%;
     margin-right: 0.3%;
+    margin-left: 12% !important;
     
-  }
+}
+  /* .content {
+    margin-left: -10px;;  Remove margin 
+
+  }*/
   
-  /* Heading styles */
+  .side-nav {
+    width: 250px; /* Adjust the width as needed */
+  }
   .lbheading {
     color: #0d0433;
     text-align: center;
     margin-left: 30%;
-    margin-top: 5%;
-  }
-
-.maincontent{
-    margin-left: 500px;
+    margin-top: 0; /* Remove top margin */
   }
   
- 
+  
+  
+  .maincontent {
+    margin-left: 0; /* Remove left margin */
+    width: 100%; /* Set width to 100% */
+  }
+  
   
   /* Table styles */
   .table {
