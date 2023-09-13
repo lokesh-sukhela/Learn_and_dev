@@ -151,6 +151,7 @@
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+  
 }
 
 .table-responsive-sm{
@@ -274,6 +275,16 @@
   }
 }
 
+.closebuttonpop {
+  position: absolute;
+  top: 10px;
+  left:80vh;
+  width:10px;
+  color:red;
+  font-size: larger;
+}
 
+.trainingmode{
+  margin-bottom: 10px;
 
-
+}
