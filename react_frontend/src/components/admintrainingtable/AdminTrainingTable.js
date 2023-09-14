@@ -7,7 +7,11 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
+<<<<<<< HEAD:react_frontend/src/components/admintrainingatble/AdminTrainingTable.js
 import TrainingForm from './Trainingform';
+=======
+import TrainingForm from './Trainingforms';
+>>>>>>> 2db6ede3b10616ca489ec0836247588140960631:react_frontend/src/components/admintrainingtable/AdminTrainingTable.js
 import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -19,15 +23,37 @@ import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+
+
 const TrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
+  // const [training, setTraining] = useState('');
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
 
+  // const [training, setTraining] = useState('');
+  // const [skill, setskill] = useState('');
+  // const [skillcat, setskillcat] = useState('');
   const handleCloseTrainingForm = () => {
     setTrainingFormOpen(false);
   };
+
+
+  // const training = [
+  //   {
+  //     trainingname: 'python',
+  //     value: 'py',
+  //     skillcategory: ['Critical Thinking', 'Problem Solving', 'Design'],
+  //     skilltitle: ['pandas', 'numpy', 'app development', 'DataScience'],
+  //   },
+  //   {
+  //     trainingname: 'java',
+  //     value: 'java',
+  //     skillcategory: ['Problem Solving', 'Development'],
+  //     skilltitle: ['Enterprise application', 'mobile app', 'games', 'website development'],
+  //   },
+  // ];
 
   const handleSubmitTrainingForm = (newTraining) => {
     // Handle form submission here, e.g., add the new training to the list
@@ -50,13 +76,19 @@ const TrainingTable = () => {
     localStorage.setItem('trainings', JSON.stringify(updatedTrainings));
   };
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState('All');
-  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedTraining, setEditedTraining] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(''); //search
+  const [filterCategory, setFilterCategory] = useState('All'); //filtering
+  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false); //new pop will come
+  const [isEditing, setIsEditing] = useState(false); // when we click edit new pop form opens
+  const [editedTraining, setEditedTraining] = useState(null); //saving the details after editing
 
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false); //responsive navbar
+
+
+
+
+
+  
   const handleOpenTrainingForm = () => {
     setIsEditing(false); // Set isEditing to false
     setIsAddingNewTraining(true); // Set isAddingNewTraining to true
@@ -142,7 +174,7 @@ const TrainingTable = () => {
           className="hamburger-icon"
           onClick={toggleSideNav}
         >
-          <MenuIcon style={{ fontSize: '2rem' }} />
+          <MenuIcon  />
         </IconButton>
       </div>
 
@@ -184,9 +216,9 @@ const TrainingTable = () => {
           </div>
           <div className="paper-content">
             <FormControl className="form-control responsive-select">
-              <InputLabel htmlFor="categoryFilter" className="label-filter">
+              {/* <InputLabel htmlFor="categoryFilter" className="label-filter">
                 Filter by Category:
-              </InputLabel>
+              </InputLabel> */}
               <Select
                 id="categoryFilter"
                 value={filterCategory}
@@ -210,7 +242,7 @@ const TrainingTable = () => {
           <Paper className="content">
             <div className="table-responsive">
               <Table className="table-responsive-sm">
-                <TableHead>
+                <TableHead className='tableheadings'>
                   <TableRow>
                     <TableCell className="tf"><strong>Training Title</strong></TableCell>
                     <TableCell className="tf"><strong>Skill Type</strong></TableCell>
@@ -220,7 +252,7 @@ const TrainingTable = () => {
                     <TableCell className="tf"><strong>Description</strong></TableCell>
                     <TableCell className="tf"><strong>Maximum Registration count</strong></TableCell>
                     <TableCell className="tf"><strong>Mode</strong></TableCell>
-                    <TableCell className="tf"><strong>Meeting Link</strong></TableCell>
+                    <TableCell className="tf"><strong>Location/Meeting Link</strong></TableCell>
                     <TableCell className="tf"></TableCell>
                     <TableCell className="tf"></TableCell>
                   </TableRow>
@@ -268,7 +300,7 @@ const TrainingTable = () => {
           </Paper>
         </Grid>
       )}
-      <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm}>
+      <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
         </Button>
@@ -290,6 +322,8 @@ const TrainingTable = () => {
               handleCloseTrainingForm();
             }}
             onCancel={handleCloseTrainingForm}
+
+            
           />
         </DialogContent>
         <DialogActions>
@@ -300,6 +334,5 @@ const TrainingTable = () => {
     </Grid>
   );
 };
-
 
 export default TrainingTable;

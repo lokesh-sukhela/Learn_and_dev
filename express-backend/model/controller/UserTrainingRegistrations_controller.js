@@ -5,8 +5,9 @@ const Create_UserTrainingDetails= async(req,res)=>{
 
     if(req.body.TId && req.body.email){
         const result=await UserTR_table.create({
-            name:req.body.TId,
-            email:req.body.email
+            TId:req.body.TId,
+            UserEmail:req.body.email,
+           RegiseteredOrNot:true
         })
         console.log(result);
         alert("Registration Successful"); 
