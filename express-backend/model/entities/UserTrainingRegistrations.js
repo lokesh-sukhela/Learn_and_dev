@@ -1,18 +1,23 @@
 module.exports=(sequelize,DataTypes)=>{
     const UserTR = sequelize.define("UserTrainingRegistrations",{
+
+        RegUserID:{
+            type:DataTypes.INTEGER,
+            primaryKey:true,
+            allownull:false
+        },
        TId:{
            type:DataTypes.INTEGER,
-           primaryKey: true,
+           allownull:false
        },
 
        UserEmail:{
           type:DataTypes.STRING,
-          unique:true,
           allownull:false
        },
        RegiseteredOrNot:{
            type:DataTypes.BOOLEAN,
-           default:false
+           defaultValue:false
           
        }
     }

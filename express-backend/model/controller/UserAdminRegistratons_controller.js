@@ -1,10 +1,9 @@
 const db = require("../entities");
-const UA_table = db.UserAdminReg;
-
+const UA_table = db.UserAdminRegTable;
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
 
-  const { name, email, password } = req.body;
+  const { name,email, password } = req.body;
 
   if (name && password && email) {
     try {
@@ -20,7 +19,6 @@ const create_user_admin = async (req, res) => {
           Email: email,
           Password: password,
         });
-
         console.log(newUser);
         res.status(200).json({ message: "User added" });
       }
