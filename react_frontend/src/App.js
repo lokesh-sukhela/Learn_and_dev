@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignUpAndSignInCombine />}></Route>
-          <Route path="/admin" element={<Sidebar />}></Route>
+          {/* <Route path="/admin" element={<Sidebar />}></Route> */}
           <Route path="/adminTrainingTable" element={<TrainingTable />}></Route>
           <Route path="/userTrainingTable" element={<UserTrainingTable />}></Route>
         </Routes>
