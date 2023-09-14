@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Sidebar from './components/admin/AdminTrainingDetails';
 import './style.css';
 import SignUpAndSignInCombine from './components/login/SignUpAndSignInCombine';
-import TrainingTable from './components/admintrainingatble/AdminTrainingTable';
+import TrainingTable from './components/admintrainingtable/AdminTrainingTable';
 
 
 
@@ -13,12 +13,11 @@ function App() {
  
     return (
       <>
-
       <Router>
       <Routes>
         <Route path="/" element={<SignUpAndSignInCombine/>}></Route>
-       <Route path="/admin" element={<Sidebar/>}></Route>
-      <Route path="/adminTrainingTable" element={<TrainingTable/>}></Route>
+       <Route path="/adminTrainingTable" element={<Sidebar/>}></Route>
+      <Route path="/admin" element={<TrainingTable/>}></Route>
         </Routes>
     </Router>
       </>

@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
-import TrainingForm from './Trainingform';
+import TrainingForm from './Trainingforms';
 import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -18,6 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+
 
 const TrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
@@ -168,7 +170,7 @@ const TrainingTable = () => {
           className="hamburger-icon"
           onClick={toggleSideNav}
         >
-          <MenuIcon style={{ fontSize: '2rem' }} />
+          <MenuIcon  />
         </IconButton>
       </div>
 
@@ -236,7 +238,7 @@ const TrainingTable = () => {
           <Paper className="content">
             <div className="table-responsive">
               <Table className="table-responsive-sm">
-                <TableHead>
+                <TableHead className='tableheadings'>
                   <TableRow>
                     <TableCell className="tf"><strong>Training Title</strong></TableCell>
                     <TableCell className="tf"><strong>Skill Type</strong></TableCell>
@@ -328,6 +330,5 @@ const TrainingTable = () => {
     </Grid>
   );
 };
-
 
 export default TrainingTable;

@@ -44,6 +44,7 @@ db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
 
 
 
+
 db.sequelize.sync({force:false}).then(()=>{
     console.log("re-sync-done")
 })

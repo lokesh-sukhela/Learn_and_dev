@@ -9,8 +9,14 @@ var Useradmin=require("../model/controller/UserAdminRegistratons_controller")
 
 //while api calls this the particular action happens in the database eg. here we are inserting records
 router.post('/',Useradmin.create_user_admin);
+<<<<<<< HEAD:express-backend/routes/users.js
+//router.get("/TrainingDetailsAdmin",TDetails.Traning_details)
+
+
+=======
 // router.post('/users',)
 // router.post("/TrainingDetailsAdmin",TDetails.Traning_details)
+>>>>>>> f3b5b78a2e7bce56bc0be9ee7b0e5c1d0ad5c4d2:express-backend/routes/registration.js
 //function(req, res, next) {
 //   res.send('respond with a resource');
 // }
