@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Sidebar from './components/admin/AdminTrainingDetails';
 import './style.css';
 import SignUpAndSignInCombine from './components/login/SignUpAndSignInCombine';
-import TrainingTable from './components/admintrainingatble/AdminTrainingTable';
+import TrainingTable from './components/admintrainingtable/AdminTrainingTable';
 
 
 
