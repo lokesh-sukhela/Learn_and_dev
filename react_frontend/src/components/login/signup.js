@@ -1,5 +1,7 @@
 import React from "react";
-react_frontend/src/components/signup.js
+import { toast } from 'react-toastify';
+
+// react_frontend/src/components/signup.js
 
 //,kjkvndsjknsjnvjn
 import AdminService from "../../services/AdminService";
