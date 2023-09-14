@@ -26,7 +26,7 @@
 }
 
 .lbheading {
-  color: #19105B;
+  color: #19105B !important;
   text-align: left !important;
   margin-left: 14%;
   margin-top: 3% !important;
@@ -57,7 +57,7 @@
 .paper-container {
   display: flex !important;
   justify-content: space-between !important;
-  margin-left: 5px !important;
+  margin-left: -150px !important;
 }
 
 .tf,
@@ -113,10 +113,10 @@
 
 #register_button_admin {
   font-size: 12px !important;
-  border: 1px solid #19105b !important;
+  background-color: #FF6196 !important;
   color: #f5f5f5 !important;
-  border-radius: 1vh !important;
-  background-color: #19105b !important;
+  height: 55px !important;
+  background-color: #FF6196 !important;
   cursor: pointer !important;
   margin-top: 10px !important;
   margin-left: 200px !important;
@@ -124,7 +124,7 @@
 }
 
 #register_button_admin:hover {
-  background-color: #0d0433 !important;
+  background-color: #cc4e78 !important;
   /* Change the color on hover */
 }
 
@@ -346,3 +346,11 @@ MenuItem {
 
 }
 
+#categoryFilter{
+  border:none !important;
+  outline:none;
+  background-color: #FF6196 !important;
+}
+#categoryFilter:focus{
+  border:none !important
+}

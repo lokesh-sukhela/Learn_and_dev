@@ -106,7 +106,6 @@ function SignInForm() {
           onChange={handleChange}
           className="password-input-feild"
         />
-        <a href="#" className = 'forgot-password'>Forgot your password?</a>
         <button className="sign-in-button">Sign In</button>
       </form>
     </div>
