@@ -23,13 +23,33 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const TrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
+  // const [training, setTraining] = useState('');
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
 
+  // const [training, setTraining] = useState('');
+  // const [skill, setskill] = useState('');
+  // const [skillcat, setskillcat] = useState('');
   const handleCloseTrainingForm = () => {
     setTrainingFormOpen(false);
   };
+
+
+  // const training = [
+  //   {
+  //     trainingname: 'python',
+  //     value: 'py',
+  //     skillcategory: ['Critical Thinking', 'Problem Solving', 'Design'],
+  //     skilltitle: ['pandas', 'numpy', 'app development', 'DataScience'],
+  //   },
+  //   {
+  //     trainingname: 'java',
+  //     value: 'java',
+  //     skillcategory: ['Problem Solving', 'Development'],
+  //     skilltitle: ['Enterprise application', 'mobile app', 'games', 'website development'],
+  //   },
+  // ];
 
   const handleSubmitTrainingForm = (newTraining) => {
     // Handle form submission here, e.g., add the new training to the list
@@ -52,13 +72,19 @@ const TrainingTable = () => {
     localStorage.setItem('trainings', JSON.stringify(updatedTrainings));
   };
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState('All');
-  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedTraining, setEditedTraining] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(''); //search
+  const [filterCategory, setFilterCategory] = useState('All'); //filtering
+  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false); //new pop will come
+  const [isEditing, setIsEditing] = useState(false); // when we click edit new pop form opens
+  const [editedTraining, setEditedTraining] = useState(null); //saving the details after editing
 
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false); //responsive navbar
+
+
+
+
+
+  
   const handleOpenTrainingForm = () => {
     setIsEditing(false); // Set isEditing to false
     setIsAddingNewTraining(true); // Set isAddingNewTraining to true
@@ -270,7 +296,7 @@ const TrainingTable = () => {
           </Paper>
         </Grid>
       )}
-      <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm}>
+      <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
         </Button>
@@ -292,6 +318,8 @@ const TrainingTable = () => {
               handleCloseTrainingForm();
             }}
             onCancel={handleCloseTrainingForm}
+
+            
           />
         </DialogContent>
         <DialogActions>
