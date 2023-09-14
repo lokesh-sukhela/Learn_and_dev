@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import AdminService from '../../services/AdminService';
 
 
 
@@ -125,10 +126,15 @@ const TrainingTable = () => {
   };
 
 
-
+//From Delete Button
   const handleDelete = (id) => {
     // Implement delete functionality here
     console.log(`Delete training with ID ${id}`);
+
+    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err=>{
+      console.log(err);
+    })
+
     const updatedTrainings = trainings.filter((training) => training.id !== id);
     setTrainings(updatedTrainings);
   };

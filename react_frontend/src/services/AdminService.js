@@ -22,8 +22,13 @@ const trainingDetails = async (data) => {
 
 const updateDetails=async(id)=>{
     console.log("called api")
-    const training = await axios.put(`https://localhost:8080/admin/EditTrainingDetailsAdmin/${id}`,data);
+    const training = await axios.put(`https://localhost:8080/admin/EditTrainingDetailsAdmin/${id}`);
     return training;
 }
-export default {getAllTrainingDetails,saveDetails,trainingDetails}
+
+const deletedetails=async(id)=>{
+    const training = await axios.put(`https://localhost:8080/admin/DeleteTrainingDetailsAdmin/${id}`);
+    return training;
+}
+export default {getAllTrainingDetails,saveDetails,trainingDetails,updateDetails,deletedetails}
 
