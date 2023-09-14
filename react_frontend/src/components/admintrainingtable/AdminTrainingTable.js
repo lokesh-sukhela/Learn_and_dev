@@ -7,7 +7,11 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
+<<<<<<< HEAD:react_frontend/src/components/admintrainingatble/AdminTrainingTable.js
+import TrainingForm from './Trainingform';
+=======
 import TrainingForm from './Trainingforms';
+>>>>>>> 2db6ede3b10616ca489ec0836247588140960631:react_frontend/src/components/admintrainingtable/AdminTrainingTable.js
 import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -300,7 +304,7 @@ const TrainingTable = () => {
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
         </Button>
-        
+
         <DialogContent>
           {/* Render the TrainingForm component with isEditing and editedTraining props */}
           <TrainingForm
