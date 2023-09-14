@@ -24,7 +24,7 @@ function SignInForm() {
   const cookies = new Cookies();
 
   // Set a cookie
-  cookies.set('myCookieName', 'myCookieValue', { path: '/' });
+  //cookies.set('myCookieName', 'myCookieValue', { path: '/' });
 
   
   
@@ -51,9 +51,9 @@ function SignInForm() {
         cookies.set("role",res.data.userdata.Role);
         const roles=cookies.get("role");
 
-        for(var i=0;i<roles.length;i++){
-          console.log(roles[i]);
-        }
+        // for(var i=0;i<roles.length;i++){
+        //   console.log(roles[i]);
+        // }
 
         if (roles.includes("Admin")){
 

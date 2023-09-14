@@ -2,7 +2,7 @@ const db = require("../entities");
 const UA_table = db.UserAdminReg;
 
 const logindetailscheck = async (req, res) => {
-  console.log(req.body.name);
+  ;
   const { email, password } = req.body;
   if (password && email) {
     try {

@@ -1,5 +1,5 @@
 const db=require("../entities")
-const UserTR_table=db.UserTR
+const UserTR_table=db.UserTRegTable
 const Create_UserTrainingDetails= async(req,res)=>{
     console.log(req.body.id)
 

@@ -1,4 +1,3 @@
-const { text } = require("express");
 
 module.exports=(sequelize,DataTypes)=>{
     const TDetails=sequelize.define("TrainingDetails",{
@@ -42,6 +41,10 @@ module.exports=(sequelize,DataTypes)=>{
         Description:{
             type:DataTypes.STRING,
             allownull:false
+        },
+        PeopleRegistered:{
+            type:DataTypes.INTEGER,
+            defaultValue:0
         }
 
     }

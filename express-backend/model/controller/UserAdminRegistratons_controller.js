@@ -1,5 +1,5 @@
 const db = require("../entities");
-const UA_table = db.UserAdminReg;
+const UA_table = db.UserAdminRegTable;
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
 
