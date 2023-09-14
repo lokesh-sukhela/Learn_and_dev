@@ -19,12 +19,12 @@ module.exports=(sequelize,DataTypes)=>{
             allownull:false
         },
         StartDate:{
-            type:DataTypes.DATETIME,
+            type:DataTypes.DATE,
             allownull:false
         
         },
         EndDate:{
-            type:DataTypes.DATETIME,
+            type:DataTypes.DATE,
             allownull:false
             },
         ParticipationLimit:{
