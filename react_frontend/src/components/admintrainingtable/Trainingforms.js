@@ -99,7 +99,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
       if (endDate <= startDate) {
         // Handle the validation error here (e.g., display an error message)
-        alert('End date must be greater than the start date.');
+        toast.error('End date must be greater than the start date.');
       }
     }
   };
@@ -141,7 +141,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
     if (selectedDate < minDate) {
       // Handle the validation error here (e.g., display an error message)
-      alert('Start date must be at least 7 days from now.');
+      toast.error('Start date must be at least 7 days from now.');
     } else {
       // Update the form data if the validation passes
       setFormData({
