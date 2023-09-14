@@ -1,6 +1,6 @@
 const db=require("../entities")
 
-const Tdetails_table=db.trainingDetails;
+const Tdetails_table=db.TrainingTable;
 const Traning_details= async(req,res)=>{
     const{  trainingname,
             skilltitle,
@@ -24,7 +24,8 @@ const Traning_details= async(req,res)=>{
                 Description:description,
                 MaxLimit:count,
                 TrainingMode:mode,
-                MeetingLink:Link
+                MeetingLink:Link,
+                
             });
             res.status(200).json({ message: "Training added" });
         }
@@ -32,7 +33,7 @@ const Traning_details= async(req,res)=>{
             console.log(error.message);
         }
     } else{
-        res.status(200).json({messages:"Please fill all the fields"});
+        res.status(200).json({message:"Please fill all the fields"});
     }
 }
 

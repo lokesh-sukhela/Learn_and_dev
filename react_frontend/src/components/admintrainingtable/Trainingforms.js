@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import './Trainingforms.css';
 import {
   TextField,
   Button,
@@ -29,7 +30,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
           count: 1, // Add any other default values you may have
           mode: '', // Add any other default values you may have
           
-          Link: 'https://microsoftteams.uservoice.com/forums/555103-public/suggestions/38572981-easy-and-short-url-fo...', // Add any other default values you may have
+          Link: 'Jman Group,tidel park,Chennai', // Add any other default values you may have
         };
   });
 
@@ -255,7 +256,10 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                     InputLabelProps={{
                       shrink: Boolean(formData.Link),
                     }}
-                    className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+                    // className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+                    className={`${
+                      formData.mode === 'virtual' ? 'virtual-mode-required' : ''
+                    } link-input`}
 
                   />
                 </FormControl>
