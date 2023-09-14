@@ -38,9 +38,10 @@ const sequelize=new Sequelize(
 
 db.sequelize=sequelize;
 
-db.UserAdminReg=require("./UserAdminRegistrations")(sequelize,DataTypes);
-// db.TrainigTable=require("./TrainingDetails")(sequelize,DataTypes);
-// db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
+db.UserAdminRegTable=require("./UserAdminRegistrations")(sequelize,DataTypes);
+db.TrainingTable=require("./TrainingDetails")(sequelize,DataTypes);
+db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
+
 
 
 

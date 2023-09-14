@@ -1,4 +1,3 @@
-const { text } = require("express");
 
 module.exports=(sequelize,DataTypes)=>{
     const TDetails=sequelize.define("TrainingDetails",{
@@ -20,12 +19,12 @@ module.exports=(sequelize,DataTypes)=>{
             allownull:false
         },
         StartDate:{
-            type:DataTypes.DATETIME,
+            type:DataTypes.DATE,
             allownull:false
         
         },
         EndDate:{
-            type:DataTypes.DATETIME,
+            type:DataTypes.DATE,
             allownull:false
             },
         ParticipationLimit:{
@@ -42,6 +41,10 @@ module.exports=(sequelize,DataTypes)=>{
         Description:{
             type:DataTypes.STRING,
             allownull:false
+        },
+        PeopleRegistered:{
+            type:DataTypes.INTEGER,
+            defaultValue:0
         }
 
     }

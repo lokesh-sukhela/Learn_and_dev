@@ -1,7 +1,10 @@
 import React from "react";
-import AdminService from "../../services/AdminService";
 import { toast } from 'react-toastify';
 
+// react_frontend/src/components/signup.js
+
+//,kjkvndsjknsjnvjn
+import AdminService from "../../services/AdminService";
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",

@@ -22,6 +22,10 @@ module.exports=(sequelize,DataTypes)=>{
            type:DataTypes.ARRAY(DataTypes.STRING),
            defaultValue: ['User']
        },
+       JWT:{
+        type:DataTypes.STRING
+
+       }
        
     },
     {timestamp:false,
