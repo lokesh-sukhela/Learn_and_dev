@@ -32,11 +32,17 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
           
           Link: 'Jman Group,tidel park,Chennai', // Add any other default values you may have
         };
+
   });
 
   const [isVirtualSelected, setIsVirtualSelected] = useState(
     // Initialize isVirtualSelected based on formData.mode when editing
     isEditing && formData.mode === 'virtual'
+  );
+
+  const [isPhysicalSelected, setisPhysicalSelected] = useState(
+    // Initialize isPhysicalSelected based on formData.mode when editing
+    isEditing && formData.mode === 'Physical'
   );
 
   const navigate = useNavigate();
@@ -57,6 +63,14 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
     const { name, value } = e.target;
     if (name === 'mode') {
       setIsVirtualSelected(value === 'virtual');
+    }
+    setFormData({ ...formData, [name]: value });
+  };
+  
+  const handleChange2 = (e) => {
+    const { name, value } = e.target;
+    if (name === 'mode') {
+      setisPhysicalSelected(value === 'Physical');
     }
     setFormData({ ...formData, [name]: value });
   };
@@ -235,6 +249,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   onChange={(e) => {
                     handleChange(e);
                     setIsVirtualSelected(e.target.value === 'virtual');
+                    setisPhysicalSelected(e.target.value === 'Physical');
                   }}
                 >
                   <MenuItem value="Select Mode of training"></MenuItem>
@@ -242,6 +257,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   <MenuItem value="virtual">Virtual</MenuItem>
                 </Select>
               </FormControl>
+
 
               {isVirtualSelected && (
                 <FormControl fullWidth required>
@@ -251,15 +267,36 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                     label="Meeting Link"
                     value={formData.meetingLink}
                     onChange={handleChange}
-                    // InputLabelProps={{ shrink: true }}
 
                     InputLabelProps={{
                       shrink: Boolean(formData.Link),
                     }}
-                    // className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+                  
                     className={`${
                       formData.mode === 'virtual' ? 'virtual-mode-required' : ''
                     } link-input`}
+
+                  />
+                </FormControl>
+              )}
+    {isPhysicalSelected && (
+                <FormControl fullWidth required>
+
+                  <TextField 
+                    name="Link"
+                    label="Location"
+                    value={formData.meetingLink}
+                    onChange={handleChange2}
+                   
+
+                    InputLabelProps={{
+                      shrink: Boolean(formData.Link),
+                    }}
+                    
+                    className={`${
+                      formData.mode === 'Physical' ? 'Physical-mode-required' : ''
+                    } link-input`}
+
 
                   />
                 </FormControl>
