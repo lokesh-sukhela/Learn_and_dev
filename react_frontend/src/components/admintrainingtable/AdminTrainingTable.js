@@ -212,9 +212,9 @@ const TrainingTable = () => {
           </div>
           <div className="paper-content">
             <FormControl className="form-control responsive-select">
-              <InputLabel htmlFor="categoryFilter" className="label-filter">
+              {/* <InputLabel htmlFor="categoryFilter" className="label-filter">
                 Filter by Category:
-              </InputLabel>
+              </InputLabel> */}
               <Select
                 id="categoryFilter"
                 value={filterCategory}
@@ -248,7 +248,7 @@ const TrainingTable = () => {
                     <TableCell className="tf"><strong>Description</strong></TableCell>
                     <TableCell className="tf"><strong>Maximum Registration count</strong></TableCell>
                     <TableCell className="tf"><strong>Mode</strong></TableCell>
-                    <TableCell className="tf"><strong>Meeting Link</strong></TableCell>
+                    <TableCell className="tf"><strong>Location/Meeting Link</strong></TableCell>
                     <TableCell className="tf"></TableCell>
                     <TableCell className="tf"></TableCell>
                   </TableRow>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import './Trainingforms.css';
 import {
   TextField,
   Button,
@@ -26,10 +27,10 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
           startDateAndTime: '',
           endDateAndTime: '',
           description: '',
-          count: 1,
-          mode: '',
-          location: '', // Added location field
-          Link: '', // Added Link field
+          count: 1, // Add any other default values you may have
+          mode: '', // Add any other default values you may have
+          
+          Link: 'Jman Group,tidel park,Chennai', // Add any other default values you may have
         };
   });
 
@@ -141,8 +142,8 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
         {isEditing ? 'Edit Training' : 'Add New Training'}
       </Typography>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+        <form onSubmit={handleSubmit} >
+          <Grid container spacing={2} >
             <Grid item xs={12}>
               <TextField
                 fullWidth
@@ -161,7 +162,10 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   value={formData.skillType}
                   onChange={handleChange}
                 >
-                  {/* ... skill type options ... */}
+                  <MenuItem value="">Select Skill Type</MenuItem>
+                  <MenuItem value="Full Stack Developer">Full Stack Developer</MenuItem>
+                  <MenuItem value="Data Engineer">Data Engineer</MenuItem>
+                  <MenuItem value="Cloud Manager">Cloud Manager</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -174,7 +178,12 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   value={formData.skillCategory}
                   onChange={handleChange}
                 >
-                  {/* ... skill category options ... */}
+                  <MenuItem value="">Select Skill category</MenuItem>
+                  <MenuItem value="Python">Python</MenuItem>
+                  <MenuItem value="Azure">Azure </MenuItem>
+                  <MenuItem value="Frontend">Frontend</MenuItem>
+                  <MenuItem value="Backend">Backend</MenuItem>
+
                 </Select>
               </FormControl>
             </Grid>
@@ -212,6 +221,8 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 value={formData.count}
                 onChange={handleChange}
                 required
+                // disabled
+                // InputProps={{ placeholder: '' }}
                 InputProps={{ inputProps: { min: 1 } }}
               />
             </Grid>
@@ -226,38 +237,34 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                     setIsVirtualSelected(e.target.value === 'virtual');
                   }}
                 >
-                  <MenuItem value="">Select Mode of training</MenuItem>
+                  <MenuItem value="Select Mode of training"></MenuItem>
                   <MenuItem value="Physical">Physical</MenuItem>
                   <MenuItem value="virtual">Virtual</MenuItem>
                 </Select>
               </FormControl>
+
               {isVirtualSelected && (
                 <FormControl fullWidth required>
-                  <TextField
+
+                  <TextField 
                     name="Link"
-                    label="Location/Meeting Link"
-                    value={formData.Link}
+                    label="Meeting Link"
+                    value={formData.meetingLink}
                     onChange={handleChange}
+                    // InputLabelProps={{ shrink: true }}
+
                     InputLabelProps={{
                       shrink: Boolean(formData.Link),
                     }}
-                    className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+                    // className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+                    className={`${
+                      formData.mode === 'virtual' ? 'virtual-mode-required' : ''
+                    } link-input`}
+
                   />
                 </FormControl>
               )}
-              {!isVirtualSelected && (
-                <FormControl fullWidth required>
-                  <TextField
-                    name="location"
-                    label="Location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                      shrink: Boolean(formData.location),
-                    }}
-                  />
-                </FormControl>
-              )}
+
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -279,18 +286,16 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
             className='addtrainingbutton'
             style={{
               marginTop: '16px',
-              marginLeft: "71.6%"
+              marginLeft: "71.6%"// Add some space between the form and the button
             }}
-            onClick={handleTrainingsubmit}
-          >
+          onClick={handleTrainingsubmit}>
             Add Training
           </Button>
         </form>
       </div>
     </Container>
+
   );
 };
 
 export default TrainingForm;
-
-// export default TrainingForm;
