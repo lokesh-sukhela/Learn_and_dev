@@ -17,6 +17,7 @@ const logindetailscheck = async (req, res) => {
 
         // Update the JWT column in the backend database
         await existingUser.update({ JWT: token });
+        
 
         res.status(200).json({ message: "Login Successful" ,userdata:existingUser});
       } else{
