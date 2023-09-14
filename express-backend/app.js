@@ -25,11 +25,13 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/registration'); 
 var login=require('./routes/login');
 // var trainingRouter = require('./routes/users')
+var adminportal=require('./routes/admin')
 
 // All Routers
 // app.use("/",indexRouter)
 app.use('/', userRouter);
 app.use('/loginDetails',login)
+app.use("/admin",adminportal)
 // app.use('/TrainingDetailsadmin', trainingRouter)
 
 // catch 404 and forward to error handler
