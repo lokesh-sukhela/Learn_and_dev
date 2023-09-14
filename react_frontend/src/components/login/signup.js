@@ -19,17 +19,13 @@ function SignUpForm() {
     });
   };
 
-
-  
   const handleOnSubmit = evt => {
     evt.preventDefault();
-  console.log(state);
-
+    console.log(state);
     let data= AdminService.saveDetails(state).then((d)=>{
-      console.log("Fronednd",d)
+      
  
       if (d.data.message==="User added"){
-
         toast.success(d.data.message);
       }
       if (d.data.message=== "User already exists!"){
@@ -38,24 +34,10 @@ function SignUpForm() {
       if (d.data.message=== "All fields are mandatory ; Please fill it."){
         toast.warning(d.data.message);
       }
-      // alert(d.data.message)
-
-
     })
     .catch(err=>{
-      console.log("Errorror");
-      // alert("User Existed")
       toast.error("User already Existed!")
     })
-    // .
-    // then(data=>{
-    //   console.log(data);
-    // })
-console.log(data)
-    // const { name, email, password } = state;
-    // alert(
-    //   `You are sign up with name: ${name} email: ${email} and password: ${password}`
-    // );
 
     for (const key in state) {
       setState({

@@ -12,10 +12,11 @@ import {
   MenuItem,
 } from '@mui/material';
 import { ForkRight } from '@mui/icons-material';
+import AdminService from '../../services/AdminService';
+import { toast } from 'react-toastify';
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const [formData, setFormData] = useState(() => {
-    // Initialize with editedTraining data if editing, or with default values if not
     return isEditing
       ? editedTraining
       : {
@@ -25,9 +26,10 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
           startDateAndTime: '',
           endDateAndTime: '',
           description: '',
-          count: 0, // Add any other default values you may have
+          count: 1, // Add any other default values you may have
           mode: '', // Add any other default values you may have
-          Link: 'Chennai', // Add any other default values you may have
+          
+          Link: 'https://microsoftteams.uservoice.com/forums/555103-public/suggestions/38572981-easy-and-short-url-fo...', // Add any other default values you may have
         };
   });
 
@@ -44,9 +46,11 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
       id: isEditing ? formData.id : Date.now(), // Use existing ID if editing, generate a new one if not
       ...formData,
     };
-    navigate('/trainingtable');
+    // navigate('/trainingtable');
     onSave(newTraining);
   };
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +59,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
     }
     setFormData({ ...formData, [name]: value });
   };
+  
 
   const handleChangeenddate = (event) => {
     const { name, value } = event.target;
@@ -84,7 +89,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
     }
   };
 
-  // ... rest of the component remains the same
+
 
 
 
@@ -99,9 +104,18 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
       onSave(newTraining);
     }
   };
+  const handleTrainingsubmit = () =>{
+    AdminService.trainingDetails(formData).then((data)=>{
+      if(data.data.message == "Training added"){
+        toast.success("Training Published");
+      }
+    }).catch(error=>{
+      toast.error("empty fields are not allowed")
+    })
+    
+  }
   const handleChangestartdate = (event) => {
     const { name, value } = event.target;
-
     // Check if the entered date is at least 7 days from the current date
     const currentDate = new Date();
     const selectedDate = new Date(value);
@@ -207,7 +221,8 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 onChange={handleChange}
                 required
                 // disabled
-                InputProps={{ placeholder: '' }}
+                // InputProps={{ placeholder: '' }}
+                InputProps={{ inputProps: { min: 1 } }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -218,7 +233,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   value={formData.mode}
                   onChange={(e) => {
                     handleChange(e);
-                    // setIsVirtualSelected(e.target.value === 'virtual');
+                    setIsVirtualSelected(e.target.value === 'virtual');
                   }}
                 >
                   <MenuItem value="Select Mode of training"></MenuItem>
@@ -230,14 +245,18 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
               {isVirtualSelected && (
                 <FormControl fullWidth required>
 
-                  <TextField
-                    name="meetingLink"
+                  <TextField 
+                    name="Link"
                     label="Meeting Link"
                     value={formData.meetingLink}
                     onChange={handleChange}
+                    // InputLabelProps={{ shrink: true }}
+
                     InputLabelProps={{
-                      shrink: Boolean(formData.meetingLink),
+                      shrink: Boolean(formData.Link),
                     }}
+                    className={formData.mode === 'virtual' ? 'virtual-mode-required' : ''}
+
                   />
                 </FormControl>
               )}
@@ -265,7 +284,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
               marginTop: '16px',
               marginLeft: "71.6%"// Add some space between the form and the button
             }}
-          >
+          onClick={handleTrainingsubmit}>
             Add Training
           </Button>
         </form>

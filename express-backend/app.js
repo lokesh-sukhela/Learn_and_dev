@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cors=require('cors');
 const bcrypt = require('bcrypt')
 
-
-
 var app = express();
 
 // view engine setup
@@ -21,14 +19,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
-
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users'); 
+var userRouter = require('./routes/registration'); 
+var login=require('./routes/login');
 // var trainingRouter = require('./routes/users')
 
 // All Routers
 // app.use("/",indexRouter)
-app.use('/', usersRouter);
+app.use('/', userRouter);
+app.use('/loginDetails',login)
 // app.use('/TrainingDetailsadmin', trainingRouter)
 
 // catch 404 and forward to error handler
