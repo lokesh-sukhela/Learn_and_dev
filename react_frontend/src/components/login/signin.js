@@ -61,12 +61,7 @@ function SignInForm() {
         }
         else{
           navigate('/adminTrainingTable')
-        }
-
-        
-                                                                                                                                                                                          
-
-        
+        }    
       }
   
       if (res.data.message=== "All fields are mandatory ; Please fill it."){
