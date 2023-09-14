@@ -1,52 +1,44 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 //import { json, useNavigate } from 'react-router-dom';
-import './side_nav.css'
+import './side_nav.css';
+import { Link } from 'react-router-dom';
 
 function LearningAndDev() {
-    return (
-      <div>
-        <div className="container">
-          <div className="sidenav">
-            <div className="logo">
-            </div>
-            <div className="Dashboard" style={{ paddingTop: '20px' }}>
-            <a href='#'></a>
-            <a href="/Profile">Profile</a>
-              <a href="#">Dashboard</a>
-              <a href="#">Timesheet</a>
-              <a href="#">Projects</a>
-              <button className="dropdown-btn">Leave
-                <i className="fa fa-caret-down"></i>
-              </button>
-              <div className="dropdown-container">
-              </div>
-              <a href="#">Work From Home</a>
-              <button className="dropdown-btn">Approvals
-                <i className="fa fa-caret-down"></i>
-              </button>
-              <a href="#">Survey</a>
-              <a href="#">Service Desk</a>
-              <a href="#">Forms</a>
-              <a href="#">Travel</a>
-              <a href="#">Expenses</a>
-              <button className="dropdown-btn">Settings
-                <i className="fa fa-caret-down"></i>
-              </button>
-              <button className="dropdown-btn">Control Panel
-                <i className="fa fa-caret-down"></i>
-              </button>
-              <a href="#">Resourcing</a>
-              <a href="#">Access Control</a>
-              <a href="/Learn">L&D</a>
-              {/* <a href="/"><button type="button" id = "logoutbtn"class="btn btn-danger">Logout</button></a> */}
-            </div>
+  return (
+    <div>
+      <div className="container">
+        <div className="sidenav">
+          <div className="logo">
           </div>
-         </div>
+          <div className="Dashboard">
+            {/* <Link to='#' className='linkstonavigate'></Link> */}
+            <br/><br/>
+            <Link to='/Profile' className='linkstonavigate'>Profile</Link>
+            <Link to='#' className='linkstonavigate'>Dashboard</Link>
+            <Link to='#' className='linkstonavigate'>Timesheet</Link>
+            <Link to='#' className='linkstonavigate'>Projects</Link>
+            <Link to='#' className='linkstonavigate'>Leave</Link>
+            <Link to='#' className='linkstonavigate'>Work From Home</Link>
+            <Link to="#" className='linkstonavigate'>Approvals</Link>
+            <Link to='#' className='linkstonavigate'>Survey</Link>
+            <Link to='#' className='linkstonavigate'>Service Desk</Link>
+            <Link to="#" className='linkstonavigate'>Forms</Link>
+            <Link to="#" className='linkstonavigate'>Travel</Link>
+            <Link to='#' className='linkstonavigate'>Expenses</Link>
+            <Link to='#' className='linkstonavigate'>Settings</Link>
+            <Link to='#' className='linkstonavigate'>Control Panel</Link>
+            <Link to='#' className='linkstonavigate'>Resourcing</Link>
+            <Link to='#' className='linkstonavigate'>Access Control</Link>
+            <Link to='/adminTrainingTable' className='linkstonavigate'>L&D</Link>
+
+            {/* <a href="/"><button type="button" id = "logoutbtn"class="btn btn-danger">Logout</button></a> */}
+          </div>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default LearningAndDev;
+export default LearningAndDev;
 
-  
