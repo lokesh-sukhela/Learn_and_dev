@@ -10,7 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
 import Cookies from 'universal-cookie';
-import UserService from '../../services/UserService';
+import { toast } from 'react-toastify';
+
+import { saveTrainingDetails } from '../../services/UserService';
 
 
 
@@ -22,6 +24,7 @@ const UserTrainingTable = () => {
     const [filterCategory, setFilterCategory] = useState('All');
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const [ getAllTrainingsData,setGetAllTrainingsData]= useState([])
+    const[buttondisable,setButtonDisabled]=useState(false);
 
     const toggleSideNav = () => {
         setIsSideNavOpen(!isSideNavOpen);
@@ -49,10 +52,18 @@ const UserTrainingTable = () => {
 
 
     const TrainingRegistration= (Id,Email)=>{
-        UserService.saveTrainingDetails(Id,Email).then((data)=>{
-            
+      saveTrainingDetails(Id,Email).then((data)=>{
+        if(data.data.message === "Training Registered"){
+            toast.success(data.data.message)
+            if(data.data.button === true){
+                console.log("Button is Disabled Or not: ",data.data.button )
+                setButtonDisabled(true)
+            }
+        }
+        }).catch(err=>{
+            console.log(err)
         })
-        console.log(Id,Email)
+       
         
     }
 
@@ -174,7 +185,9 @@ const UserTrainingTable = () => {
                       <td className='td'>{training.TrainingMode}</td>
                       <td className='td'>{training.MeetingLink}</td>
                       <td>
-                    <Button id='register_button_user'startIcon={<PersonAddIcon />}variant="outlined"  onClick={()=>TrainingRegistration(training.TrainingId,Email)}>
+                        
+                    <Button  id='register_button_user'startIcon={<PersonAddIcon />}variant="outlined"  onClick={()=>TrainingRegistration(training.TrainingId,Email)}
+                    disabled={buttondisable}>
 	 Register</Button>
                       </td>
                     </tr>

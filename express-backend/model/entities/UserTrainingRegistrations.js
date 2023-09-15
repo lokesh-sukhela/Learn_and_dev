@@ -3,6 +3,7 @@ module.exports=(sequelize,DataTypes)=>{
 
         RegUserID:{
             type:DataTypes.INTEGER,
+            autoIncrement:true,
             primaryKey:true,
             allownull:false
         },
