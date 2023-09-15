@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon,Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -8,7 +8,7 @@ import {
   DialogActions,
 } from '@mui/material';
 import TrainingForm from './Trainingforms';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -28,11 +28,6 @@ const TrainingTable = () => {
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
-
-const navigate=useNavigate();
-
-
-  const[gettingAll,setGettingall]=useState([]);
 
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
@@ -57,54 +52,20 @@ const navigate=useNavigate();
   //   },
   // ];
 
-  // const handleSubmitTrainingForm = (newTraining) => {
-  //   // Handle form submission here, e.g., add the new training to the list
-  //   // and close the modal
-  //   addTraining(newTraining);
-  //   handleCloseTrainingForm();
-  // };
-  // const toggleTable = () => {
-  //   setTableOpen(!isTableOpen);
-  // };
-
-
-
-
-
-
+  const handleSubmitTrainingForm = (newTraining) => {
+    // Handle form submission here, e.g., add the new training to the list
+    // and close the modal
+    addTraining(newTraining);
+    handleCloseTrainingForm();
+  };
+  const toggleTable = () => {
+    setTableOpen(!isTableOpen);
+  };
 
   useEffect(() => {
-    // const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-    // setTrainings(storedTrainings);
-    getAllDetails();
+    const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
+    setTrainings(storedTrainings);
   }, []);
-
-
-const getAllDetails=()=>{
-
-  AdminService.getAllTrainingDetails().then((data)=>{
-    console.log(data.data.alldata);
-    setGettingall(data.data.alldata);
-    
-  }).catch(err=>{
-    console.log(err)
-  })
-}
-
-const editUser=(id)=>{
- 
-
-  
-}
-const deleteUser=(id)=>{
-
-  AdminService.deletedetails(id).then((data)=>{
-    getAllDetails();
-  }).catch(err=>{
-alert("Not deleted",err);
-  })
-}
-
 
   function addTraining(newTraining) {
     const updatedTrainings = [...trainings, newTraining];
@@ -135,18 +96,18 @@ alert("Not deleted",err);
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  // const handleEdit = (id) => {
-  //   // Find the training with the given id
-  //   const trainingToEdit = trainings.find((training) => training.id === id);
+  const handleEdit = (id) => {
+    // Find the training with the given id
+    const trainingToEdit = trainings.find((training) => training.id === id);
 
-  //   // Set the selected training for editing
-  //   setSelectedTraining(trainingToEdit);
+    // Set the selected training for editing
+    setSelectedTraining(trainingToEdit);
 
-  //   // Open the popup form and pass the editing props
-  //   setTrainingFormOpen(true);
-  //   setIsEditing(true);
-  //   setEditedTraining(trainingToEdit);
-  // };
+    // Open the popup form and pass the editing props
+    setTrainingFormOpen(true);
+    setIsEditing(true);
+    setEditedTraining(trainingToEdit);
+  };
 
   const handleSaveTraining = (editedTraining) => {
     // Find the index of the edited training in the trainings array
@@ -165,49 +126,64 @@ alert("Not deleted",err);
   };
 
 
-// //From Delete Button
-//   const handleDelete = (id) => {
-//     // Implement delete functionality here
-//     console.log(`Delete training with ID ${id}`);
+  //From Delete Button
+  const handleDelete = (id) => {
+    // Implement delete functionality here
+    console.log(`Delete training with ID ${id}`);
 
-//     AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err=>{
-//       console.log(err);
-//     })
+    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err => {
+      console.log(err);
+    })
 
-//     const updatedTrainings = trainings.filter((training) => training.id !== id);
-//     setTrainings(updatedTrainings);
-//   };
+    const updatedTrainings = trainings.filter((training) => training.id !== id);
+    setTrainings(updatedTrainings);
+  };
 
-  // const filteredTrainings = trainings.filter((training) => {
-  //   if (filterCategory === 'All') {
-  //     return true;
-  //   }
-  //   return training.skillCategory.toLowerCase() === filterCategory.toLowerCase();
-  // });
+  const filteredTrainings = trainings.filter((training) => {
+    if (filterCategory === 'All') {
+      return true;
+    }
+    return training.skillCategory.toLowerCase() === filterCategory.toLowerCase();
+  });
 
-  // const filteredTrainingsWithSearch = filteredTrainings.filter((training) => {
-  //   const searchFields = [
-  //     training.title,
-  //     training.skillType,
-  //     training.skillCategory,
-  //     training.description,
-  //   ];
+  const filteredTrainingsWithSearch = filteredTrainings.filter((training) => {
+    const searchFields = [
+      training.title,
+      training.skillType,
+      training.skillCategory,
+      training.description,
+    ];
 
-  //   return searchFields.some((field) =>
-  //     field.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  // });
+    return searchFields.some((field) =>
+      field.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+  const[gettingAll,setGettingall]=useState([]);
+
+
+    useEffect(() => {
+        // const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
+        // setTrainings(storedTrainings);
+        getAllDetails();
+      }, []);
+    
+    
+    const getAllDetails=()=>{
+    
+      AdminService.getAllTrainingDetails().then((data)=>{
+        console.log(data.data.alldata);
+        setGettingall(data.data.alldata);
+        
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
 
   return (
-
-
     <Grid container spacing={3}>
-      {/* Large screen navigation */}
       <div className="large-screen-nav">
         <SideNav />
       </div>
-
-      {/* Hamburger menu for small screens */}
       <div className="small-screen-nav">
         <IconButton
           color="inherit"
@@ -228,7 +204,7 @@ alert("Not deleted",err);
       <h1 className="lbheading"><strong>Learning and Development</strong></h1>
       <Grid item xs={12} className="headers">
         <Paper className="paper-container">
-          
+
           <div className="paper-content">
             <TextField
               id="search"
@@ -280,64 +256,71 @@ alert("Not deleted",err);
         </Paper>
       </Grid>
 
-      
+      {isTableOpen && (
         <Grid item xs={12}>
           <Paper className="content">
             <div className="table-responsive">
               <Table className="table-responsive-sm">
-                <TableHead className='tableheadings'>
-                  <TableRow>
-                    <TableCell className="tf">Training Title</TableCell>
-                    <TableCell className="tf">Skill Type</TableCell>
-                    <TableCell className="tf">Skill Category</TableCell>
-                    <TableCell className="tf">Start Date and Time</TableCell>
-                    <TableCell className="tf">End Date and Time</TableCell>
-                    <TableCell className="tf">Description</TableCell>
-                    <TableCell className="tf">Participation limit</TableCell>
-                    <TableCell className='tf'>Number of Registrations</TableCell>
-                    <TableCell className="tf">Mode</TableCell>
-                    <TableCell className="tf">Location/Meeting Link</TableCell>
-                    <TableCell className="tf">Edit</TableCell>
-                    <TableCell className="tf">Delete</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                {gettingAll.map((user, index) => (
-              <tr key={user.TrainingId}>
-                {/* <td>{index + 1}</td> */}
-                <td>{user.TrainingTitle}</td>
-                <td>{user.SkillTitle}</td>
-                <td>{user.SkillCategory}</td>
-                <td>{user.StartDate}</td>
-                <td>{user.EndDate}</td>
-                <td>{user.Description}</td>
-                <td>{user.PeopleRegistered}</td>
-                <td>{user.TrainingMode}</td>
-                {/* <td>{user.SkillCategory}</td> */}
-                <td>
-                  <Link
-                    //to={`edit/${user.TrainingId}`}
+                <thead className='tableheadings'>
+                  <tr>
+                    <td className="tf">Training Title</td>
+                    <td className="tf">Skill Type</td>
+                    <td className="tf">Skill Category</td>
+                    <td className="tf">Start Date and Time</td>
+                    <td className="tf">End Date and Time</td>
+                    <td className="tf">Participation limit</td>
+                    <td className='tf'>Number of Registrations</td>
+                    <td className="tf">Mode</td>
+                    <td className="tf">Location/Meeting Link</td>
+                    <td className="tf">Description</td>
+                    <td className="tf">Edit</td>
+                    <td className="tf">Delete</td>
+                  </tr>
+                </thead>
+                <tbody>
+                {gettingAll.map((training) => (
+                    <tr key={training.id}>
+                      <td className='td'>{training.TrainigTitle}</td>
+                      <td className='td'>{training.SkillTitle}</td>
+                      <td className='td'>{training.SkillCategory}</td>
+                      <td className='td'>{training.StartDate}</td>
+                      <td className='td'>{training.EndDate}</td>
+                      <td className='td'>{training.ParticipationLimit}</td>
+                      <td className='td'>{training.PeopleRegistered}</td>
+                      <td className='td'>{training.TrainingMode}</td>
+                      <td className='td'>{training.MeetingLink}</td>
+                      <td className='td'>{training.Description}</td>
+                      <td>
 
-                    onClick={()=>editUser(user.TrainingId)}
-                    className="button is-small is-info mr-2"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    onClick={() => deleteUser(user.TrainingId)}
-                    className="button is-small is-danger"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-                </TableBody>
+                        <Button
+                          id="button12"
+                          variant="outlined"
+                          startIcon={<EditIcon />}
+                          onClick={() => handleEdit(training.id)}
+                        >
+                          Edit
+                        </Button>
+
+                      </td>
+                      <td>
+                        <Button
+                          id='delete_button_admin'
+                          variant="outlined"
+                          startIcon={<DeleteIcon />}
+                          onClick={() => handleDelete(training.id)}
+                        >
+                          Delete
+                        </Button>
+
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </Table>
             </div>
           </Paper>
         </Grid>
-      
+      )}
       <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
