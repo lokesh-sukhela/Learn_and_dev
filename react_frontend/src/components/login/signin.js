@@ -3,8 +3,8 @@ import { useState } from "react";
 import LoginService from "../../services/LoginService";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-// import { useCookies } from "react-cookie";
-// import Cookies from 'universal-cookie';
+import { useCookies } from "react-cookie";
+import Cookies from 'universal-cookie';
 
 
 
@@ -21,7 +21,7 @@ function SignInForm() {
     });
   };
 
-  // const cookies = new Cookies();
+  const cookies = new Cookies();
 
 
   const navigate = useNavigate()
@@ -41,20 +41,25 @@ function SignInForm() {
         
         toast.success(res.data.message);
         // setCookie('UserData',res.data.userdata)
-      //   cookies.set("role",res.data.userdata.Role);
-      //   const roles=cookies.get("role");
+        cookies.set("role",res.data.userdata.Role);
+        const roles=cookies.get("role");
+        
 
-      //   // for(var i=0;i<roles.length;i++){
-      //   //   console.log(roles[i]);
-      //   // }
+        cookies.set("token",res.data.token)
+        const token=cookies.get("token");
+        console.log(token);
 
-      //   if (roles.includes("Admin")){
+        // for(var i=0;i<roles.length;i++){
+        //   console.log(roles[i]);
+        // }
 
-      //     navigate('/admin')
-      //   }
-      //   else{
-      //     navigate('/adminTrainingTable')
-      //   }    
+        if (roles.includes("Admin")){
+
+          navigate('/adminTrainingTable')
+        }
+        else{
+          navigate('/userTrainingTable')
+        }    
       }
 
 
@@ -68,6 +73,11 @@ function SignInForm() {
       console.log(err);
       toast.error("Invalid email or password!")
     })
+
+
+    
+
+
     for (const key in state) {
       setState({
         ...state,
