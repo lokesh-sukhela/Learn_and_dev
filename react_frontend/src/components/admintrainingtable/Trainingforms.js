@@ -54,7 +54,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTraining = {
-      id: isEditing ? formData.id : Date.now(), // Use existing ID if editing, generate a new one if not
+      id: isEditing ? formData.TrainingId : Date.now(), // Use existing ID if editing, generate a new one if not
       ...formData,
     };
     // navigate('/trainingtable');
@@ -65,15 +65,15 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'mode') {
-      setIsVirtualSelected(value === 'virtual');
+    if (name === 'Mode') {
+      setIsVirtualSelected(value === 'Virtual');
     }
     setFormData({ ...formData, [name]: value });
   };
   
   const handleChange2 = (e) => {
     const { name, value } = e.target;
-    if (name === 'mode') {
+    if (name === 'Mode') {
       setisPhysicalSelected(value === 'Physical');
     }
     setFormData({ ...formData, [name]: value });
