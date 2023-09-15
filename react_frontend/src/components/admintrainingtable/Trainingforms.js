@@ -17,6 +17,8 @@ import AdminService from '../../services/AdminService';
 import { toast } from 'react-toastify';
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
+
+
   const [formData, setFormData] = useState(() => {
     return isEditing
       ? editedTraining
@@ -34,6 +36,8 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
         };
 
   });
+
+ 
 
   const [isVirtualSelected, setIsVirtualSelected] = useState(
     // Initialize isVirtualSelected based on formData.mode when editing
@@ -163,7 +167,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 fullWidth
                 label="Title"
                 name="title"
-                value={formData.title}
+                value={formData.TrainingTitle}
                 onChange={handleChange}
                 required
               />

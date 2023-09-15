@@ -22,12 +22,15 @@ import AdminService from '../../services/AdminService';
 
 
 
+
 const TrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
   // const [training, setTraining] = useState('');
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
+
+  const[secondform,Setsecondform]=useState(false)
 
 const navigate=useNavigate();
 
@@ -91,11 +94,14 @@ const getAllDetails=()=>{
   })
 }
 
-const editUser=(id)=>{
- console.log(id)
-  AdminService.updateDetails(id).then((data)=>{
+const editUser=(user)=>{
+ console.log(user)
+  // AdminService.updateDetails(user.id).then((data)=>{
 
-  })
+  // })
+  setIsEditing(false); // Set isEditing to false
+  setIsAddingNewTraining(true); // Set isAddingNewTraining to true
+  setTrainingFormOpen(true); 
 
   
 }
@@ -151,21 +157,7 @@ alert("Not deleted",err);
   //   setEditedTraining(trainingToEdit);
   // };
 
-  const handleSaveTraining = (editedTraining) => {
-    // Find the index of the edited training in the trainings array
-    const index = trainings.findIndex((training) => training.id === editedTraining.id);
-
-    // Create a new array with the edited training
-    const updatedTrainings = [...trainings];
-    updatedTrainings[index] = editedTraining;
-
-    // Update the state and local storage
-    setTrainings(updatedTrainings);
-    localStorage.setItem('trainings', JSON.stringify(updatedTrainings));
-
-    // Clear the selected training
-    setSelectedTraining(null);
-  };
+  
 
 
 // //From Delete Button
@@ -321,7 +313,7 @@ alert("Not deleted",err);
                   <Link
                     //to={`edit/${user.TrainingId}`}
 
-                    onClick={()=>editUser(user.TrainingId)}
+                    onClick={()=>editUser(user)}
                     className="button is-small is-info mr-2"
                   >
                     Edit
@@ -352,14 +344,12 @@ alert("Not deleted",err);
             isEditing={isEditing}
             editedTraining={editedTraining}
             isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={(newTraining) => {
+            onSave={(user) => {
               // Handle form submission here, e.g., add the new training to the list
               // or update the edited training, and close the modal
-              if (isEditing) {
-                handleSaveTraining(newTraining);
-              } else {
-                addTraining(newTraining);
-              }
+             
+                addTraining(user);
+              
               handleCloseTrainingForm();
             }}
             onCancel={handleCloseTrainingForm}
