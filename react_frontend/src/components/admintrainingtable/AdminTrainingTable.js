@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon,Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -272,6 +272,7 @@ const TrainingTable = () => {
                       <TableCell className='td'>{training.endDateAndTime}</TableCell>
                       <TableCell className='td'>{training.description}</TableCell>
                       <TableCell className='td'>{training.count}</TableCell>
+                      <TableCell className='td'>{training.registrations}</TableCell>
                       <TableCell className='td'>{training.mode}</TableCell>
                       <TableCell className='td'>{training.Link}</TableCell>
                       <TableCell>
