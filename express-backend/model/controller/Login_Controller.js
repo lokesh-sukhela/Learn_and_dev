@@ -23,6 +23,8 @@ const logindetailscheck = async (req, res) => {
         
           // cookies.set('token',token)
 
+          console.log(token);
+
         res.status(200).json({ message: "Login Successful" ,userdata:existingUser,  token:token});
       } else{
         if(existingUser.Email !== email){
