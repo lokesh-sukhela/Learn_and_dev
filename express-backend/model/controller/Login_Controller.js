@@ -17,12 +17,7 @@ const logindetailscheck = async (req, res) => {
         const token = jwt.sign({email: existingUser.Email}, 'JMAN_USER_LOGIN',{expiresIn: "2d",});
 
         // Update the JWT column in the backend database
-<<<<<<< HEAD
-        await existingUser.update({ JWT: token });
-        
-=======
         // await existingUser.update({ JWT: token });
->>>>>>> 089985412d851aba273cbdc99e9551cdda0c2a09
 
           
         
