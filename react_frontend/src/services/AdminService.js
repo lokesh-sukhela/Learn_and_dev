@@ -7,13 +7,6 @@ const getAllTrainingDetails = async ()=> {
 }
 
 
-const saveDetails = async(data)=>{
-    const Tdetails = await axios.post(`http://localhost:8080/`,data)
-    return Tdetails
-}
-
-
-
 const trainingDetails = async (data) => {
     console.log("called api")
     const training = await axios.post('http://localhost:8080/admin/TrainingDetailsAdmin',data);
@@ -30,5 +23,11 @@ const deletedetails=async(id)=>{
     const training = await axios.delete(`http://localhost:8080/admin/DeleteTrainingDetailsAdmin/${id}`);
     return training;
 }
-export default {getAllTrainingDetails,saveDetails,trainingDetails,updateDetails,deletedetails}
+
+
+
+
+
+
+export default {getAllTrainingDetails,trainingDetails,updateDetails,deletedetails}
 

@@ -22,7 +22,7 @@ const create_user_admin = async (req, res) => {
 
      // const email_pattern=/^[\w.-]+@jmangroup\.com$/
       else if(!email_pattern.test(email)){
-        res.status(200).json({ message: "In email domain name should contain jmangroup"})
+        res.status(200).json({ message: "In email domain name should contain jmangroup and only small letters"})
       }
 
 

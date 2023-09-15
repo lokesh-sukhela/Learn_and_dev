@@ -45,26 +45,13 @@ const TrainingTable = () => {
   };
 
 
-  // const training = [
-  //   {
-  //     trainingname: 'python',
-  //     value: 'py',
-  //     skillcategory: ['Critical Thinking', 'Problem Solving', 'Design'],
-  //     skilltitle: ['pandas', 'numpy', 'app development', 'DataScience'],
-  //   },
-  //   {
-  //     trainingname: 'java',
-  //     value: 'java',
-  //     skillcategory: ['Problem Solving', 'Development'],
-  //     skilltitle: ['Enterprise application', 'mobile app', 'games', 'website development'],
-  //   },
-  // ];
+
 
   const handleSubmitTrainingForm = (newTraining) => {
     // Handle form submission here, e.g., add the new training to the list
     // and close the modal
     addTraining(newTraining);
-    handleCloseTrainingForm();
+    handleCloseTrainingForm(newTraining);
   };
   const toggleTable = () => {
     setTableOpen(!isTableOpen);
@@ -78,7 +65,8 @@ const TrainingTable = () => {
 
   const getAllDetails=()=>{
     
-    AdminService.getAllTrainingDetails().then((data)=>{
+    AdminService.getAllTrainingDetails()
+    .then((data)=>{
       console.log(data.data.alldata);
       setGettingall(data.data.alldata);
       
@@ -246,11 +234,11 @@ return (
       </IconButton>
     </div>
 
-    {isSideNavOpen && (
-      <div className="side-nav">
-        <SideNav /> {/* Place your SideNav component here */}
-      </div>
-    )}
+      {isSideNavOpen && (
+        <div className="side-nav">
+          <SideNav /> {/* Place your SideNav component here */}
+        </div>
+      )}
 
     <h1 className="lbheading">
       <strong>Learning and Development</strong>
@@ -396,27 +384,32 @@ return (
         X
       </Button>
 
-      <DialogContent>
-        <TrainingForm
-          isEditing={isEditing}
-          editedTraining={editedTraining}
-          isAddingNewTraining={isAddingNewTraining}
-          onSave={(newTraining) => {
-            if (isEditing) {
-              handleSaveTraining(newTraining);
-            } else {
-              addTraining(newTraining);
-            }
-            handleCloseTrainingForm();
-          }}
-          onCancel={handleCloseTrainingForm}
-        />
-        
-      </DialogContent>
-      <DialogActions></DialogActions>
-    </Dialog>
-  </Grid>
-);
+        <DialogContent>
+          {/* Render the TrainingForm component with isEditing and editedTraining props */}
+          <TrainingForm
+            isEditing={isEditing}
+            editedTraining={editedTraining}
+            isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
+            onSave={gettingAll} //=> {
+            //   // Handle form submission here, e.g., add the new training to the list
+            //   // or update the edited training, and close the modal
+             
+            //     addTraining(training);
+              
+            //   handleCloseTrainingForm();
+            // }}
+            onCancel={handleCloseTrainingForm}
+
+
+          />
+        </DialogContent>
+        <DialogActions>
+
+
+        </DialogActions>
+      </Dialog>
+    </Grid>
+  );
 };
 
 export default TrainingTable;

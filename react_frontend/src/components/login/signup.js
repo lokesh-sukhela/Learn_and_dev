@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 // react_frontend/src/components/signup.js
 
 //,kjkvndsjknsjnvjn
-import AdminService from "../../services/AdminService";
+import LoginService from "../../services/LoginService";
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -22,7 +22,7 @@ function SignUpForm() {
   const handleOnSubmit = evt => {
     evt.preventDefault();
     console.log(state);
-    let data= AdminService.saveDetails(state).then((d)=>{
+    let data= LoginService.saveDetails(state).then((d)=>{
       
  
       if (d.data.message==="User added"){

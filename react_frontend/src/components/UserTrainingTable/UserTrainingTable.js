@@ -9,6 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ReactPaginate from 'react-paginate';
+import AdminService from '../../services/AdminService';
+import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
+import { saveTrainingDetails } from '../../services/userService';
 
 const UserTrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
@@ -19,30 +23,68 @@ const UserTrainingTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
   const [selectedRow, setSelectedRow] = useState(null);
-
+  const [ getAllTrainingsData,setGetAllTrainingsData]= useState([])
+  const[buttondisable,setButtonDisabled]=useState(false);
   const gettingAll = trainings; // Replace this with your actual data source
 
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const displayedTrainings = gettingAll.slice(startIndex, endIndex);
+  const displayedTrainings = getAllTrainingsData.slice(startIndex, endIndex);
 
-  const pageCount = Math.ceil(gettingAll.length / itemsPerPage);
+  const pageCount = Math.ceil(getAllTrainingsData.length / itemsPerPage);
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
     setSelectedRow(null);
   };
+   useEffect(()=>{
+        GetAllDetails()
+    },[])
+
+    const GetAllDetails = ()=>{
+        AdminService.getAllTrainingDetails().
+        then((d)=>{
+            console.log(d.data.alldata)
+            setGetAllTrainingsData(d.data.alldata)
+        }).catch(err=>{
+            console.log(err)
+          })
+    }
+
+
+    const cookies = new Cookies()
+    const Email=cookies.get("Email");
+    console.log(Email);
+
+
+    const TrainingRegistration= (Id,Email)=>{
+      saveTrainingDetails(Id,Email).then((data)=>{
+        if(data.data.message === "Training Registered"){
+            toast.success(data.data.message)
+            if(data.data.button === true){
+                console.log("Button is Disabled Or not: ",data.data.button )
+                setButtonDisabled(true)
+            }
+        }
+        }).catch(err=>{
+            console.log(err)
+        })
+       
+        
+    }
+
+    const filteredTrainings = trainings.filter((training) => {
+        if (filterCategory === 'All') {
+            return true;
+        }
+        return training.skillCategory.toLowerCase() === filterCategory.toLowerCase();
+    });
 
   const toggleSideNav = () => {
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  const filteredTrainings = trainings.filter((training) => {
-    if (filterCategory === 'All') {
-      return true;
-    }
-    return training.skillCategory.toLowerCase() === filterCategory.toLowerCase();
-  });
+
 
   const filteredTrainingsWithSearch = filteredTrainings.filter((training) => {
     const searchFields = [
@@ -140,29 +182,34 @@ const UserTrainingTable = () => {
                     <TableCell className="tf">Register</TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  {displayedTrainings.map((training) => (
-                    <TableRow key={training.id}>
-                      <TableCell className="td">{training.title}</TableCell>
-                      <TableCell className="td">{training.skillType}</TableCell>
-                      <TableCell className="td">{training.skillCategory}</TableCell>
-                      <TableCell className="td">{training.startDate}</TableCell>
-                      <TableCell className="td">{training.endDate}</TableCell>
-                      <TableCell className="td">{training.description}</TableCell>
-                      <TableCell className="td">{training.mode}</TableCell>
-                      <TableCell className="td">{training.location}</TableCell>
-                      <TableCell>
+                <tbody>
+              {displayedTrainings.map((training) => (
+                <tr
+                key={training.id}
+                className={selectedRow === training.id ? 'selected-row' : ''}
+                onClick={() => setSelectedRow(training.id)}
+              >
+                  <td className="td">{training.TrainingTitle}</td>
+                  <td className="td">{training.SkillTitle}</td>
+                  <td className="td">{training.SkillCategory}</td>
+                  <td className="td">{training.StartDate}</td>
+                  <td className="td">{training.EndDate}</td>
+                  <td className="td">{training.Description}</td>
+                  <td className="td">{training.TrainingMode}</td>
+                  <td className="td">{training.MeetingLink}</td>
+                      <td>
                         <Button
                           id='register_button_user'
                           startIcon={<PersonAddIcon />}
                           variant="outlined"
+                          onClick={()=>{TrainingRegistration(training.TrainingId,Email)}}
                         >
                           Register
                         </Button>
-                      </TableCell>
-                    </TableRow>
+                        </td>
+                    </tr>
                   ))}
-                </TableBody>
+                </tbody>
               </Table>
             </div>
             <Grid item xs={12}>

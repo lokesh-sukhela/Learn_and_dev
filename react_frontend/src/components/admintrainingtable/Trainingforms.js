@@ -125,9 +125,10 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
       onSave(newTraining);
     }
   };
+
   const handleTrainingsubmit = () =>{
     AdminService.trainingDetails(formData).then((data)=>{
-      if(data.data.message == "Training added"){
+      if(data.data.message ==="Training added"){
         toast.success("Training Published");
       }
     }).catch(error=>{
