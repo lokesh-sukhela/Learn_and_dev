@@ -33,7 +33,7 @@ function SignUpForm() {
         toast.warning(d.data.message);
       }
 
-      if (d.data.message=== "In email domain name should contain jmangroup"){
+      if (d.data.message=== "In email domain name should contain jmangroup and only small letters"){
         toast.error(d.data.message);
       }
 
