@@ -17,8 +17,7 @@ module.exports=(sequelize,DataTypes)=>{
        },
        RegiseteredOrNot:{
            type:DataTypes.BOOLEAN,
-           defaultValue:false
-          
+           defaultValue:true  
        }
     }
     )

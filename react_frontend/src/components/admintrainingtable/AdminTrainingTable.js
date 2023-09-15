@@ -65,7 +65,7 @@ const TrainingTable = () => {
     // Handle form submission here, e.g., add the new training to the list
     // and close the modal
     addTraining(newTraining);
-    handleCloseTrainingForm();
+    handleCloseTrainingForm(newTraining);
   };
   const toggleTable = () => {
     setTableOpen(!isTableOpen);
@@ -79,7 +79,8 @@ const TrainingTable = () => {
 
   const getAllDetails=()=>{
     
-    AdminService.getAllTrainingDetails().then((data)=>{
+    AdminService.getAllTrainingDetails()
+    .then((data)=>{
       console.log(data.data.alldata);
       setGettingall(data.data.alldata);
       
@@ -346,7 +347,7 @@ alert("Not deleted",err);
             isEditing={isEditing}
             editedTraining={editedTraining}
             isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={gettingAll} //=> {
+            // onSave={gettingAll} //=> {
             //   // Handle form submission here, e.g., add the new training to the list
             //   // or update the edited training, and close the modal
              

@@ -8,6 +8,12 @@ import SideNav from '../side_nav/side_nav'
 import MenuIcon from '@mui/icons-material/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import AdminService from '../../services/AdminService';
+import Cookies from 'universal-cookie';
+import UserService from '../../services/UserService';
+
+
+
 
 const UserTrainingTable = () => {
     const [trainings, setTrainings] = useState([]);
@@ -15,12 +21,40 @@ const UserTrainingTable = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCategory, setFilterCategory] = useState('All');
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-
+    const [ getAllTrainingsData,setGetAllTrainingsData]= useState([])
 
     const toggleSideNav = () => {
         setIsSideNavOpen(!isSideNavOpen);
     };
 
+
+   useEffect(()=>{
+        GetAllDetails()
+    },[])
+
+    const GetAllDetails = ()=>{
+        AdminService.getAllTrainingDetails().
+        then((d)=>{
+            console.log(d.data.alldata)
+            setGetAllTrainingsData(d.data.alldata)
+        }).catch(err=>{
+            console.log(err)
+          })
+    }
+
+
+    const cookies = new Cookies()
+    const Email=cookies.get("Email");
+    console.log(Email);
+
+
+    const TrainingRegistration= (Id,Email)=>{
+        UserService.saveTrainingDetails(Id,Email).then((data)=>{
+            
+        })
+        console.log(Id,Email)
+        
+    }
 
     const filteredTrainings = trainings.filter((training) => {
         if (filterCategory === 'All') {
@@ -128,26 +162,24 @@ const UserTrainingTable = () => {
                                         <TableCell className="tf">Register</TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell className='td'>##</TableCell>
-                                    <TableCell>
-                                        <Button
-                                            id='register_button_user'
-                                            startIcon={<PersonAddIcon />}
-                                            variant="outlined"
-                                        >
-                                            Register
-                                        </Button>
-
-                                    </TableCell>
-                                </TableBody>
+                                <tbody>
+                {getAllTrainingsData.map((training,index) => (
+                    <tr key={training.TrainingId}>
+                      <td className='td'>{training.TrainingTitle}</td>
+                      <td className='td'>{training.SkillTitle}</td>
+                      <td className='td'>{training.SkillCategory}</td>
+                      <td className='td'>{training.StartDate}</td>
+                      <td className='td'>{training.EndDate}</td>
+                      <td className='td'>{training.Description}</td>
+                      <td className='td'>{training.TrainingMode}</td>
+                      <td className='td'>{training.MeetingLink}</td>
+                      <td>
+                    <Button id='register_button_user'startIcon={<PersonAddIcon />}variant="outlined"  onClick={()=>TrainingRegistration(training.TrainingId,Email)}>
+	 Register</Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
                                 
                             </Table>
                         </div>
