@@ -2,21 +2,21 @@ const db=require("../entities")
 
 const Tdetails_table=db.TrainingTable;
 
+const deletetraining=async(req,res)=>{
 
-const edittraining=async(req,res)=>{
     try {
-        await Tdetails_table.update(req.body,{
+        await Tdetails_table.destroy({
             where:{
                 id: req.params.id
             }
         });
-        res.status(200).json({msg: "User Updated"});
+        res.status(200).json({msg: "User Deleted"});
     } catch (error) {
         console.log(error.message);
     }
+
 }
 
-
 module.exports={
-    edittraining,
+    deletetraining,
 }

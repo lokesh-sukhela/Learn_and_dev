@@ -1,0 +1,265 @@
+
+
+/* Main content */
+.content {
+    margin-top: -320px !important;
+    margin-right: 0.3% !important;
+    margin-left: 14% !important;
+    margin-bottom: -100%;
+}
+
+
+.headers {
+    margin-top: -400px !important;
+    margin-left: 13% !important;
+}
+
+.side-nav {
+    width: 250px !important;
+}
+
+.lbheading {
+    color: #19105B;
+    margin-left:15%;
+    
+}
+
+
+.maincontent {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+
+/* Table styles */
+.table {
+    width: 100% !important;
+    font-size: 15px !important;
+    border-collapse: collapse !important;
+}
+
+.tf {
+    background-color: #19105B !important;
+    color: #f5f5f5 !important;
+}
+
+.paper-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-left: 5px !important;
+    box-shadow: none !important;
+}
+
+.tf,
+.td {
+    padding: 5px !important;
+    text-align: center !important;
+    border: 1px solid rgb(184, 184, 184) !important;
+    height: 10px !important;
+}
+
+.filtering {
+    height: 8px !important;
+    width: 150px !important;
+    font-size: 12px !important;
+}
+
+#search {
+    width: 250px !important;
+    height: 10px !important;
+    margin-left: 0% !important;
+}
+
+
+#register_button_user{
+    font-size: 12px !important;
+    border: 1px solid #FF6196 !important;
+    color: #f5f5f5 !important;
+    border-radius: 1vh !important;
+    background-color: #FF6196 !important;
+    cursor: pointer !important;
+    margin-top: 10px !important;
+    align-items: center;
+    padding : 5px;
+    margin-left: 20px;
+}
+
+#register_button_user:hover {
+    background-color: #d64576 !important;
+}
+
+.form-control {
+    min-width: 120px !important;
+    margin-right: 10px !important;
+}
+
+.form-control {
+    background-color: #FF6196 !important;
+
+}
+
+.label-filter {
+    color: #f5f5f5 !important;
+}
+
+MenuItem {
+    color: #f5f5f5 !important;
+}
+
+/* Show/hide large-screen-nav on screens larger than 1024px */
+@media (min-width: 1025px) {
+    .large-screen-nav {
+        display: block;
+    }
+
+    .small-screen-nav {
+        display: none;
+    }
+}
+
+/* Show/hide small-screen-nav on screens up to 1024px */
+@media (max-width: 1024px) {
+    .large-screen-nav {
+        display: none;
+    }
+
+    .small-screen-nav {
+        display: block;
+    }
+}
+
+/* Style the hamburger icon */
+/* Style the hamburger icon */
+.hamburger-icon {
+    font-size: 2rem;
+    padding: 10px;
+    margin-left: 10px;
+    position: fixed;
+    z-index: 1000;
+    top: 30px;
+    left: 30px;
+}
+
+/* Default table styles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+
+}
+
+.table-responsive-sm {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 12px;
+        width: 768px;
+    }
+
+    .th,
+    .td {
+        padding: 4px;
+        /* Adjust cell padding for smaller screens */
+    }
+}
+
+/* Default styles for the Paper container */
+
+
+/* Adjust button size on smaller screens */
+.responsive-button {
+    flex-basis: 100%;
+    /* Full width on smaller screens */
+}
+
+/* Adjust search input size on smaller screens */
+.responsive-search {
+    flex-basis: 100%;
+    /* Full width on smaller screens */
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+    .paper-container {
+        flex-direction: column;
+        /* Stack elements vertically on smaller screens */
+    }
+
+    /* Adjust margin between button and search/filter on smaller screens */
+
+}
+
+/* Default styles for the Paper container */
+.paper-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Adjust button size on smaller screens */
+
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+
+    /* Stack elements vertically on smaller screens */
+    .paper-container {
+        flex-direction: column;
+    }
+
+    /* Adjust margin between button and search/filter on smaller screens */
+    .responsive-button,
+    .responsive-search {
+        margin-bottom: 10px;
+    }
+
+   
+
+    /* Center-align the hamburger icon on small screens */
+    .hamburger-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+
+
+/* Your custom styles */
+
+.paper-container {
+    /* Paper container styles */
+    padding: 10px;
+    /* Add padding for better spacing */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .headers {
+        flex-direction: column;
+        /* Stack components vertically */
+        text-align: center;
+    }
+
+    .responsive-button {
+        display: block;
+        /* Show the button */
+        margin-bottom: 10px;
+        /* Add some space below the button */
+    }
+
+    .paper-content {
+        display: flex;
+        flex-direction: row;
+        /* Arrange search and filter side by side */
+        justify-content: center;
+    }
+}
