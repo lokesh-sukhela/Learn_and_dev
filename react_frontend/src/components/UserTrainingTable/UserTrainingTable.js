@@ -12,7 +12,7 @@ import AdminService from '../../services/AdminService';
 import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
 
-import { saveTrainingDetails } from '../../services/UserService';
+import { saveTrainingDetails } from '../../services/userService';
 
 
 
