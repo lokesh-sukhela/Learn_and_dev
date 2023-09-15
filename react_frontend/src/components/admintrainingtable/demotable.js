@@ -3,7 +3,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import AdminService from '../../services/AdminService';
 
 
-const Table=()=>{
+const DemoTable=()=>{
 
     const[gettingAll,setGettingall]=useState([]);
 
@@ -27,21 +27,12 @@ const Table=()=>{
     }
     return (
         <>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#">My App</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="#">Dashboard</Nav.Link>
-              <Nav.Link href="#">Settings</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        
 
 
         <div>
     
-      <Table striped bordered hover>
+      <table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
@@ -63,7 +54,7 @@ const Table=()=>{
           
           {/* Add more rows as needed */}
         </tbody>
-      </Table>
+      </table>
     </div>
 
         </>
@@ -71,4 +62,5 @@ const Table=()=>{
     }
 
 
-export default Table;
+export default DemoTable;
+
