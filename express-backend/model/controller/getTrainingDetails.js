@@ -5,13 +5,13 @@ const getTrianing_details= async(req,res)=>{
     
         try{
        
-            const newTraining = await Tdetails_table.findAll();
-            if(newTraining){
-                res.status(200).json({ message: "data Fetched" });
+            const allTrainings = await Tdetails_table.findAll();
+            if(allTrainings){
+                res.status(200).json({ message: "data Fetched" ,alldata:allTrainings});
             }
             else{
 
-                res.status(404).json({message:"data Not Fetched"});
+                res.status(200).json({message:"data Not Fetched"});
             }
           
         }
