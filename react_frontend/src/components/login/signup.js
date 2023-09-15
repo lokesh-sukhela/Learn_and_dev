@@ -28,15 +28,26 @@ function SignUpForm() {
       if (d.data.message==="User added"){
         toast.success(d.data.message);
       }
+
+      if (d.data.message==="Password must have a capital letter a small letter and a number and include any special character"){
+        toast.warning(d.data.message);
+      }
+
+      if (d.data.message=== "In email domain name should contain jmangroup"){
+        toast.error(d.data.message);
+      }
+
+
       if (d.data.message=== "User already exists!"){
         toast.error(d.data.message);
       }
+
       if (d.data.message=== "All fields are mandatory ; Please fill it."){
         toast.warning(d.data.message);
       }
     })
     .catch(err=>{
-      toast.error("User already Existed!")
+      toast.error("Email And Password is not matching")
     })
 
     for (const key in state) {

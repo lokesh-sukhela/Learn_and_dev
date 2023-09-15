@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon,Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -124,7 +124,7 @@ alert("Not deleted",err);
 
 
 
-  
+
   const handleOpenTrainingForm = () => {
     setIsEditing(false); // Set isEditing to false
     setIsAddingNewTraining(true); // Set isAddingNewTraining to true
@@ -215,7 +215,7 @@ alert("Not deleted",err);
           className="hamburger-icon"
           onClick={toggleSideNav}
         >
-          <MenuIcon  />
+          <MenuIcon />
         </IconButton>
       </div>
 
@@ -225,19 +225,10 @@ alert("Not deleted",err);
         </div>
       )}
 
-      <h1 className="lbheading">LEARNING AND DEVELOPMENT</h1>
+      <h1 className="lbheading"><strong>Learning and Development</strong></h1>
       <Grid item xs={12} className="headers">
         <Paper className="paper-container">
-          <div className="paper-content">
-            <Button
-              variant="outlined"
-              id="register_button_admin"
-              className="responsive-button"
-              onClick={handleOpenTrainingForm}
-            >
-              Add New Training
-            </Button>
-          </div>
+          
           <div className="paper-content">
             <TextField
               id="search"
@@ -275,6 +266,17 @@ alert("Not deleted",err);
               </Select>
             </FormControl>
           </div>
+          <div className="paper-content">
+            <Button
+              variant="outlined"
+              id="register_button_admin"
+              className="responsive-button"
+              startIcon={<AddIcon />}
+              onClick={handleOpenTrainingForm}
+            >
+              Add New Training
+            </Button>
+          </div>
         </Paper>
       </Grid>
 
@@ -285,17 +287,18 @@ alert("Not deleted",err);
               <Table className="table-responsive-sm">
                 <TableHead className='tableheadings'>
                   <TableRow>
-                    <TableCell className="tf"><strong>Training Title</strong></TableCell>
-                    <TableCell className="tf"><strong>Skill Type</strong></TableCell>
-                    <TableCell className="tf"><strong>Skill Category</strong></TableCell>
-                    <TableCell className="tf"><strong>Start Date and Time</strong></TableCell>
-                    <TableCell className="tf"><strong>End Date and Time</strong></TableCell>
-                    <TableCell className="tf"><strong>Description</strong></TableCell>
-                    <TableCell className="tf"><strong>Maximum Registration count</strong></TableCell>
-                    <TableCell className="tf"><strong>Mode</strong></TableCell>
-                    <TableCell className="tf"><strong>Location/Meeting Link</strong></TableCell>
-                    <TableCell className="tf"></TableCell>
-                    <TableCell className="tf"></TableCell>
+                    <TableCell className="tf">Training Title</TableCell>
+                    <TableCell className="tf">Skill Type</TableCell>
+                    <TableCell className="tf">Skill Category</TableCell>
+                    <TableCell className="tf">Start Date and Time</TableCell>
+                    <TableCell className="tf">End Date and Time</TableCell>
+                    <TableCell className="tf">Description</TableCell>
+                    <TableCell className="tf">Participation limit</TableCell>
+                    <TableCell className='tf'>Number of Registrations</TableCell>
+                    <TableCell className="tf">Mode</TableCell>
+                    <TableCell className="tf">Location/Meeting Link</TableCell>
+                    <TableCell className="tf">Edit</TableCell>
+                    <TableCell className="tf">Delete</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -358,7 +361,7 @@ alert("Not deleted",err);
             }}
             onCancel={handleCloseTrainingForm}
 
-            
+
           />
         </DialogContent>
         <DialogActions>
