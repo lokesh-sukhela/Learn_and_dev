@@ -23,13 +23,6 @@ function SignInForm() {
 
   const cookies = new Cookies();
 
-  // Set a cookie
-  //cookies.set('myCookieName', 'myCookieValue', { path: '/' });
-
-  
-  
-
- // const [cookies, setCookie] = useCookies(['UserData']);
 
   const navigate = useNavigate()
   
@@ -50,6 +43,11 @@ function SignInForm() {
         // setCookie('UserData',res.data.userdata)
         cookies.set("role",res.data.userdata.Role);
         const roles=cookies.get("role");
+        
+
+        cookies.set("token",res.data.token)
+        const token=cookies.get("token");
+        console.log(token);
 
         // for(var i=0;i<roles.length;i++){
         //   console.log(roles[i]);
@@ -63,6 +61,8 @@ function SignInForm() {
           navigate('/adminTrainingTable')
         }    
       }
+
+
   
       if (res.data.message=== "All fields are mandatory ; Please fill it."){
         toast.warning(res.data.message);
@@ -106,7 +106,6 @@ function SignInForm() {
           onChange={handleChange}
           className="password-input-feild"
         />
-        <a href="#" className = 'forgot-password'>Forgot your password?</a>
         <button className="sign-in-button">Sign In</button>
       </form>
     </div>

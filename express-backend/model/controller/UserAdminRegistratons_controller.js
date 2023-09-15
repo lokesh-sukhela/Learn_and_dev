@@ -1,5 +1,6 @@
 const db = require("../entities");
 const UA_table = db.UserAdminRegTable;
+
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
 
@@ -12,7 +13,20 @@ const create_user_admin = async (req, res) => {
         console.log(existingUser,"BAckend signup")
       if (existingUser) {
         res.status(200).json({ message: "User already exists!" });
-      } else {
+      } 
+
+      const email_pattern=/^[\w.-]+@jmangroup\.com$/
+      if(!email_pattern.test(email)){
+        res.status(200).json({ message: "In email domain name should contain jmangroup"})
+      }
+
+
+      const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@#$%^&*!]{8,}$/
+      if(!password_pattern.test(password)){
+        res.status(200).json({ message: "Password must have a capital letter a small letter and a number and include any special character"});  
+      }
+
+      else {
         // Create a new user in the database
         const newUser = await UA_table.create({
           FullName: name,
