@@ -22,6 +22,7 @@ import AdminService from '../../services/AdminService';
 
 
 
+
 const TrainingTable = () => {
   const [trainings, setTrainings] = useState([]);
   // const [training, setTraining] = useState('');
@@ -29,6 +30,16 @@ const TrainingTable = () => {
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
 
+<<<<<<< HEAD
+=======
+  const[secondform,Setsecondform]=useState(false)
+
+const navigate=useNavigate();
+
+
+  const[gettingAll,setGettingall]=useState([]);
+
+>>>>>>> Kishore
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
   // const [skillcat, setskillcat] = useState('');
@@ -66,6 +77,39 @@ const TrainingTable = () => {
     const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
     setTrainings(storedTrainings);
   }, []);
+
+
+const getAllDetails=()=>{
+
+  AdminService.getAllTrainingDetails().then((data)=>{
+    console.log(data.data.alldata);
+    setGettingall(data.data.alldata);
+    
+  }).catch(err=>{
+    console.log(err)
+  })
+}
+
+const editUser=(user)=>{
+ console.log(user)
+  // AdminService.updateDetails(user.id).then((data)=>{
+
+  // })
+  setIsEditing(false); // Set isEditing to false
+  setIsAddingNewTraining(true); // Set isAddingNewTraining to true
+  setTrainingFormOpen(true); 
+
+  
+}
+const deleteUser=(id)=>{
+
+  AdminService.deletedetails(id).then((data)=>{
+    getAllDetails();
+  }).catch(err=>{
+alert("Not deleted",err);
+  })
+}
+
 
   function addTraining(newTraining) {
     const updatedTrainings = [...trainings, newTraining];
@@ -109,21 +153,7 @@ const TrainingTable = () => {
     setEditedTraining(trainingToEdit);
   };
 
-  const handleSaveTraining = (editedTraining) => {
-    // Find the index of the edited training in the trainings array
-    const index = trainings.findIndex((training) => training.id === editedTraining.id);
-
-    // Create a new array with the edited training
-    const updatedTrainings = [...trainings];
-    updatedTrainings[index] = editedTraining;
-
-    // Update the state and local storage
-    setTrainings(updatedTrainings);
-    localStorage.setItem('trainings', JSON.stringify(updatedTrainings));
-
-    // Clear the selected training
-    setSelectedTraining(null);
-  };
+  
 
 
   //From Delete Button
@@ -256,7 +286,7 @@ const TrainingTable = () => {
         </Paper>
       </Grid>
 
-      {isTableOpen && (
+     
         <Grid item xs={12}>
           <Paper className="content">
             <div className="table-responsive">
@@ -291,36 +321,29 @@ const TrainingTable = () => {
                       <td className='td'>{training.MeetingLink}</td>
                       <td className='td'>{training.Description}</td>
                       <td>
-
-                        <Button
-                          id="button12"
-                          variant="outlined"
-                          startIcon={<EditIcon />}
-                          onClick={() => handleEdit(training.id)}
-                        >
-                          Edit
-                        </Button>
-
-                      </td>
-                      <td>
-                        <Button
-                          id='delete_button_admin'
-                          variant="outlined"
-                          startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(training.id)}
-                        >
-                          Delete
-                        </Button>
-
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                      <button
+                    onClick={()=>editUser(user)}
+                    className="button is-small is-info mr-2"
+                  >
+                    Edit
+                    </button></td>
+                    <td>
+                  <button
+                    onClick={() => deleteUser(user.TrainingId)}
+                    className="button is-small is-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+         
+            ))}
+                  </tbody>
               </Table>
             </div>
           </Paper>
         </Grid>
-      )}
+      
       <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
@@ -332,14 +355,12 @@ const TrainingTable = () => {
             isEditing={isEditing}
             editedTraining={editedTraining}
             isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={(newTraining) => {
+            onSave={(user) => {
               // Handle form submission here, e.g., add the new training to the list
               // or update the edited training, and close the modal
-              if (isEditing) {
-                handleSaveTraining(newTraining);
-              } else {
-                addTraining(newTraining);
-              }
+             
+                addTraining(user);
+              
               handleCloseTrainingForm();
             }}
             onCancel={handleCloseTrainingForm}

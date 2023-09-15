@@ -4,8 +4,9 @@ const Tdetails_table=db.TrainingTable;
 
 
 const edittraining=async(req,res)=>{
+    console.log("Edit Function called",req.params.id)
     try {
-        await Tdetails_table.update(req.body,{
+        await Tdetails_table.update({
             where:{
                 id: req.params.id
             }
