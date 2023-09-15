@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon,Add as AddIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -126,12 +126,12 @@ const TrainingTable = () => {
   };
 
 
-//From Delete Button
+  //From Delete Button
   const handleDelete = (id) => {
     // Implement delete functionality here
     console.log(`Delete training with ID ${id}`);
 
-    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err=>{
+    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err => {
       console.log(err);
     })
 
@@ -189,7 +189,7 @@ const TrainingTable = () => {
       <h1 className="lbheading"><strong>Learning and Development</strong></h1>
       <Grid item xs={12} className="headers">
         <Paper className="paper-container">
-          
+
           <div className="paper-content">
             <TextField
               id="search"
