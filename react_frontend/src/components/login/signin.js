@@ -55,10 +55,10 @@ function SignInForm() {
 
         if (roles.includes("Admin")){
 
-          navigate('/admin')
+          navigate('/adminTrainingTable')
         }
         else{
-          navigate('/adminTrainingTable')
+          navigate('/userTrainingTable')
         }    
       }
 

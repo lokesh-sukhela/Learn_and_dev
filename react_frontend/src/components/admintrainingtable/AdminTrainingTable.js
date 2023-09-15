@@ -92,7 +92,10 @@ const getAllDetails=()=>{
 }
 
 const editUser=(id)=>{
- 
+ console.log(id)
+  AdminService.updateDetails(id).then((data)=>{
+
+  })
 
   
 }
