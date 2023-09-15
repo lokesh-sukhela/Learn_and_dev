@@ -2,27 +2,27 @@ const db=require("../entities")
 
 const Tdetails_table=db.TrainingTable;
 const Traning_details= async(req,res)=>{
-    const{  trainingname,
-            skilltitle,
-            skillcategory,
-            startDateAndTime,
-            endDateAndTime,
+    const{  title,
+        skillType,
+        skillCategory,
+        startDateAndTime,
+        endDateAndTime,
             description,
             mode,
             Link,
             count
          } = req.body;
-    if(trainingname && skilltitle && skillcategory && startDateAndTime && endDateAndTime && description && mode && Link && count){
+    if(title && skillType && skillCategory && startDateAndTime && endDateAndTime && description && mode && count){
         try{
             console.log("data came")
             const newTraining = await Tdetails_table.create({
-                TrainingTitle:trainingname,
-                SkillTitle:skilltitle,
-                SkillCategory:skillcategory,
+                TrainingTitle:title,
+                SkillTitle:skillType,
+                SkillCategory:skillCategory,
                 StartDate:startDateAndTime,
                 EndDate:endDateAndTime,
                 Description:description,
-                MaxLimit:count,
+                ParticipationLimit:count,
                 TrainingMode:mode,
                 MeetingLink:Link,
                 

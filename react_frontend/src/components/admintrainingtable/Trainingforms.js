@@ -237,7 +237,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 required
                 // disabled
                 // InputProps={{ placeholder: '' }}
-                InputProps={{ inputProps: { min: 1 } }}
+               
               />
             </Grid>
             <Grid item xs={12} sm={6}>
