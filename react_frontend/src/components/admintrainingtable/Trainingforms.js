@@ -15,6 +15,8 @@ import {
 import { ForkRight } from '@mui/icons-material';
 import AdminService from '../../services/AdminService';
 import { toast } from 'react-toastify';
+// const mode = selectedTraining.mode;
+// const mode = selectedTraining ? selectedTraining.mode : '';
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const [formData, setFormData] = useState(() => {

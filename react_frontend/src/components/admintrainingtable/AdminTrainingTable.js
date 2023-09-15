@@ -12,13 +12,12 @@ import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import SideNav from '../side_nav/side_nav'
+// import SideNav from '../side_nav/side_nav'
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
+import LearningAndDev from '../side_nav/side_nav';
 
 
 
@@ -96,17 +95,21 @@ const TrainingTable = () => {
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  const handleEdit = (id) => {
-    // Find the training with the given id
-    const trainingToEdit = trainings.find((training) => training.id === id);
+  // const handleEdit = (id) => {
+  //   console.log('Edit button clicked with ID:', id);
+  //   const trainingToEdit = trainings.find((training) => training.id === id);
 
+  //   setSelectedTraining(trainingToEdit);
+
+  //   setTrainingFormOpen(true);
+  //   setIsEditing(true);
+  //   setEditedTraining(trainingToEdit);
+  // };
+  const handleEdit = (training) => {
     // Set the selected training for editing
-    setSelectedTraining(trainingToEdit);
-
-    // Open the popup form and pass the editing props
-    setTrainingFormOpen(true);
-    setIsEditing(true);
-    setEditedTraining(trainingToEdit);
+    setSelectedTraining(training);
+    setIsEditing(true); // Enable editing mode
+    setTrainingFormOpen(true); // Open the popup form
   };
 
   const handleSaveTraining = (editedTraining) => {
@@ -123,6 +126,8 @@ const TrainingTable = () => {
 
     // Clear the selected training
     setSelectedTraining(null);
+    setIsEditing(false);
+    setTrainingFormOpen(false);
   };
 
 
@@ -182,7 +187,7 @@ const TrainingTable = () => {
   return (
     <Grid container spacing={3}>
       <div className="large-screen-nav">
-        <SideNav />
+        <LearningAndDev />
       </div>
       <div className="small-screen-nav">
         <IconButton
@@ -197,7 +202,7 @@ const TrainingTable = () => {
 
       {isSideNavOpen && (
         <div className="side-nav">
-          <SideNav /> {/* Place your SideNav component here */}
+          <LearningAndDev /> {/* Place your SideNav component here */}
         </div>
       )}
 
@@ -280,7 +285,7 @@ const TrainingTable = () => {
                 <tbody>
                 {gettingAll.map((training) => (
                     <tr key={training.id}>
-                      <td className='td'>{training.TrainigTitle}</td>
+                      <td className='td'>{training.TrainingTitle}</td>
                       <td className='td'>{training.SkillTitle}</td>
                       <td className='td'>{training.SkillCategory}</td>
                       <td className='td'>{training.StartDate}</td>
@@ -296,7 +301,7 @@ const TrainingTable = () => {
                           id="button12"
                           variant="outlined"
                           startIcon={<EditIcon />}
-                          onClick={() => handleEdit(training.id)}
+                          onClick={() => handleEdit(training)}
                         >
                           Edit
                         </Button>

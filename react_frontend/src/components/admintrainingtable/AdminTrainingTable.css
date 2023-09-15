@@ -54,7 +54,7 @@
   background-color: #e84a8a !important;
 }
 
-.paper-container {
+.div-container {
   display: flex !important;
   justify-content: space-between !important;
   margin-left: -150px !important;
@@ -66,6 +66,7 @@
   text-align: center !important;
   border: 1px solid rgb(184, 184, 184) !important;
   height: 10px !important;
+  font-size: 0.875rem;
 }
 
 .filtering {
@@ -147,15 +148,15 @@ MenuItem {
 }
 
 .large-screen-nav {
-  display: block;
-}
-
-.small-screen-nav {
   display: none;
 }
 
+.small-screen-nav {
+  display: block;
+}
+
 /* Show/hide large-screen-nav on screens larger than 1024px */
-@media (min-width: 1025px) {
+@media (min-width: 768px) {
   .large-screen-nav {
     display: block;
   }
@@ -166,7 +167,7 @@ MenuItem {
 }
 
 /* Show/hide small-screen-nav on screens up to 1024px */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .large-screen-nav {
     display: none;
   }
@@ -174,7 +175,7 @@ MenuItem {
   .small-screen-nav {
     display: block;
   }
-}
+} */
 
 /* Style the hamburger icon */
 .hamburger-icon {
@@ -213,8 +214,8 @@ MenuItem {
   }
 }
 
-/* Default styles for the Paper container */
-.paper-container {
+/* Default styles for the div container */
+.div-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -235,7 +236,7 @@ MenuItem {
 
 /* Media query for screens smaller than 768px */
 @media (max-width: 768px) {
-  .paper-container {
+  .div-container {
     flex-direction: column;
     /* Stack elements vertically on smaller screens */
   }
@@ -244,8 +245,8 @@ MenuItem {
 
 }
 
-/* Default styles for the Paper container */
-.paper-container {
+/* Default styles for the div container */
+.div-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -265,7 +266,7 @@ MenuItem {
 @media (max-width: 768px) {
 
   /* Stack elements vertically on smaller screens */
-  .paper-container {
+  .div-container {
     flex-direction: column;
   }
 
@@ -300,8 +301,8 @@ MenuItem {
 
 /* Your custom styles */
 
-.paper-container {
-  /* Paper container styles */
+.div-container {
+  /* div container styles */
   padding: 10px;
   /* Add padding for better spacing */
   display: flex;
@@ -324,7 +325,7 @@ MenuItem {
     /* Add some space below the button */
   }
 
-  .paper-content {
+  .div-content {
     display: flex;
     flex-direction: row;
     /* Arrange search and filter side by side */
