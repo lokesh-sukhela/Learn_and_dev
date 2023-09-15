@@ -19,6 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -30,16 +31,13 @@ const TrainingTable = () => {
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
 
-<<<<<<< HEAD
-=======
   const[secondform,Setsecondform]=useState(false)
 
-const navigate=useNavigate();
+// const navigate=useNavigate();
 
 
   const[gettingAll,setGettingall]=useState([]);
 
->>>>>>> Kishore
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
   // const [skillcat, setskillcat] = useState('');
@@ -74,8 +72,8 @@ const navigate=useNavigate();
   };
 
   useEffect(() => {
-    const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-    setTrainings(storedTrainings);
+   
+    getAllDetails()
   }, []);
 
 
@@ -92,9 +90,9 @@ const navigate=useNavigate();
 
 const editUser=(user)=>{
  console.log(user)
-  // AdminService.updateDetails(user.id).then((data)=>{
+  AdminService.updateDetails(user).then((data)=>{
 
-  // })
+  })
   setIsEditing(false); // Set isEditing to false
   setIsAddingNewTraining(true); // Set isAddingNewTraining to true
   setTrainingFormOpen(true); 
@@ -140,18 +138,20 @@ alert("Not deleted",err);
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  const handleEdit = (id) => {
-    // Find the training with the given id
-    const trainingToEdit = trainings.find((training) => training.id === id);
+  // const handleEdit = (id) => {
+  //   // Find the training with the given id
+  //   console.log(id)
+  //   const trainingToEdit = gettingAll.find((training) => training.id === id);
+  //   console.log(trainingToEdit)
 
-    // Set the selected training for editing
-    setSelectedTraining(trainingToEdit);
+  //   // // Set the selected training for editing
+  //   setSelectedTraining(trainingToEdit);
 
-    // Open the popup form and pass the editing props
-    setTrainingFormOpen(true);
-    setIsEditing(true);
-    setEditedTraining(trainingToEdit);
-  };
+  //   // Open the popup form and pass the editing props
+  //   setTrainingFormOpen(true);
+  //   setIsEditing(true);
+  //  setEditedTraining(trainingToEdit);
+  // };
 
   
 
@@ -188,26 +188,10 @@ alert("Not deleted",err);
       field.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
-  const[gettingAll,setGettingall]=useState([]);
+  // const[gettingAll,setGettingall]=useState([]);
 
 
-    useEffect(() => {
-        // const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-        // setTrainings(storedTrainings);
-        getAllDetails();
-      }, []);
     
-    
-    const getAllDetails=()=>{
-    
-      AdminService.getAllTrainingDetails().then((data)=>{
-        console.log(data.data.alldata);
-        setGettingall(data.data.alldata);
-        
-      }).catch(err=>{
-        console.log(err)
-      })
-    }
 
   return (
     <Grid container spacing={3}>
@@ -286,7 +270,7 @@ alert("Not deleted",err);
         </Paper>
       </Grid>
 
-     
+      {isTableOpen && (
         <Grid item xs={12}>
           <Paper className="content">
             <div className="table-responsive">
@@ -308,9 +292,9 @@ alert("Not deleted",err);
                   </tr>
                 </thead>
                 <tbody>
-                {gettingAll.map((training) => (
-                    <tr key={training.id}>
-                      <td className='td'>{training.TrainigTitle}</td>
+                {gettingAll.map((training,index) => (
+                    <tr key={training.TrainingId}>
+                      <td className='td'>{training.TrainingTitle}</td>
                       <td className='td'>{training.SkillTitle}</td>
                       <td className='td'>{training.SkillCategory}</td>
                       <td className='td'>{training.StartDate}</td>
@@ -321,29 +305,36 @@ alert("Not deleted",err);
                       <td className='td'>{training.MeetingLink}</td>
                       <td className='td'>{training.Description}</td>
                       <td>
-                      <button
-                    onClick={()=>editUser(user)}
-                    className="button is-small is-info mr-2"
-                  >
-                    Edit
-                    </button></td>
-                    <td>
-                  <button
-                    onClick={() => deleteUser(user.TrainingId)}
-                    className="button is-small is-danger"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-         
-            ))}
-                  </tbody>
+
+                        <Button
+                          id="button12"
+                          variant="outlined"
+                          startIcon={<EditIcon />}
+                          onClick={() => editUser(training.TrainingId)}
+                        >
+                          Edit
+                        </Button>
+
+                      </td>
+                      <td>
+                        <Button
+                          id='delete_button_admin'
+                          variant="outlined"
+                          startIcon={<DeleteIcon />}
+                          onClick={() => handleDelete(training.id)}
+                        >
+                          Delete
+                        </Button>
+
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </Table>
             </div>
           </Paper>
         </Grid>
-      
+      )}
       <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
@@ -355,14 +346,14 @@ alert("Not deleted",err);
             isEditing={isEditing}
             editedTraining={editedTraining}
             isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={(user) => {
-              // Handle form submission here, e.g., add the new training to the list
-              // or update the edited training, and close the modal
+            onSave={gettingAll} //=> {
+            //   // Handle form submission here, e.g., add the new training to the list
+            //   // or update the edited training, and close the modal
              
-                addTraining(user);
+            //     addTraining(training);
               
-              handleCloseTrainingForm();
-            }}
+            //   handleCloseTrainingForm();
+            // }}
             onCancel={handleCloseTrainingForm}
 
 
