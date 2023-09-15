@@ -1,8 +1,9 @@
 const db = require("../entities");
 const UA_table = db.UserAdminRegTable;
 const jwt = require('jsonwebtoken')
-
-
+// import Cookies from "universal-cookie";
+// const Cookies = require("universal-cookie")
+// const cookies = new Cookies();
 const logindetailscheck = async (req, res) => {
   ;
   const { email, password } = req.body;
@@ -16,9 +17,13 @@ const logindetailscheck = async (req, res) => {
         const token = jwt.sign({email: existingUser.Email}, 'JMAN_USER_LOGIN',{expiresIn: "2d",});
 
         // Update the JWT column in the backend database
-        await existingUser.update({ JWT: token });
+        // await existingUser.update({ JWT: token });
 
-        res.status(200).json({ message: "Login Successful" ,userdata:existingUser});
+          
+        
+          // cookies.set('token',token)
+
+        res.status(200).json({ message: "Login Successful" ,userdata:existingUser,  token:token});
       } else{
         if(existingUser.Email !== email){
             res.status(200).json({message:"User does not Existed; Please Sign Up."})
