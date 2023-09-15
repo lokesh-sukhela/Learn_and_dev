@@ -10,7 +10,8 @@ const create_user_admin = async (req, res) => {
   const { name,email, password } = req.body;
 
   if (name && password && email) {
-    
+    const email_pattern=/^[\w.-]+@jmangroup\.com$/
+    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@#$%^&*!]{8,}$/
     try {
       // Check if a user with the same email already exists in the database
       const existingUser = await UA_table.findOne({ where: { Email: email } });
@@ -19,14 +20,14 @@ const create_user_admin = async (req, res) => {
         res.status(200).json({ message: "User already exists!" });
       } 
 
-    
+     // const email_pattern=/^[\w.-]+@jmangroup\.com$/
       else if(!email_pattern.test(email)){
-        res.status(200).json({ message: "In email domain name should contain jmangroup and only small letters"})
+        res.status(200).json({ message: "In email domain name should contain jmangroup"})
       }
 
 
-    
-       else if(!password_pattern.test(password)){
+      
+      else if(!password_pattern.test(password)){
         res.status(200).json({ message: "Password must have a capital letter a small letter and a number and include any special character"});  
       }
 

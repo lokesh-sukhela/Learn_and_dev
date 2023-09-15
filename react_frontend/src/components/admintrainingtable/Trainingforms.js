@@ -19,6 +19,8 @@ import { toast } from 'react-toastify';
 // const mode = selectedTraining ? selectedTraining.mode : '';
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
+
+
   const [formData, setFormData] = useState(() => {
     return isEditing
       ? editedTraining
@@ -37,6 +39,8 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
   });
 
+ 
+
   const [isVirtualSelected, setIsVirtualSelected] = useState(
     // Initialize isVirtualSelected based on formData.mode when editing
     isEditing && formData.mode === 'virtual'
@@ -52,7 +56,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTraining = {
-      id: isEditing ? formData.id : Date.now(), // Use existing ID if editing, generate a new one if not
+      id: isEditing ? formData.TrainingId : Date.now(), // Use existing ID if editing, generate a new one if not
       ...formData,
     };
     // navigate('/trainingtable');
@@ -63,15 +67,15 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'mode') {
-      setIsVirtualSelected(value === 'virtual');
+    if (name === 'Mode') {
+      setIsVirtualSelected(value === 'Virtual');
     }
     setFormData({ ...formData, [name]: value });
   };
   
   const handleChange2 = (e) => {
     const { name, value } = e.target;
-    if (name === 'mode') {
+    if (name === 'Mode') {
       setisPhysicalSelected(value === 'Physical');
     }
     setFormData({ ...formData, [name]: value });
@@ -165,7 +169,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 fullWidth
                 label="Title"
                 name="title"
-                value={formData.title}
+                value={formData.TrainingTitle}
                 onChange={handleChange}
                 required
               />

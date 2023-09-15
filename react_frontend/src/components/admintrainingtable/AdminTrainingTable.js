@@ -17,7 +17,6 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import AdminService from '../../services/AdminService';
-import LearningAndDev from '../side_nav/side_nav';
 
 
 
@@ -27,6 +26,13 @@ const TrainingTable = () => {
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
+
+  const[secondform,Setsecondform]=useState(false)
+
+// const navigate=useNavigate();
+
+
+  const[gettingAll,setGettingall]=useState([]);
 
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
@@ -62,9 +68,42 @@ const TrainingTable = () => {
   };
 
   useEffect(() => {
-    const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-    setTrainings(storedTrainings);
+   
+    getAllDetails()
   }, []);
+
+
+  const getAllDetails=()=>{
+    
+    AdminService.getAllTrainingDetails().then((data)=>{
+      console.log(data.data.alldata);
+      setGettingall(data.data.alldata);
+      
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+const editUser=(user)=>{
+ console.log(user)
+  AdminService.updateDetails(user).then((data)=>{
+
+  })
+  setIsEditing(false); // Set isEditing to false
+  setIsAddingNewTraining(true); // Set isAddingNewTraining to true
+  setTrainingFormOpen(true); 
+
+  
+}
+const deleteUser=(id)=>{
+
+  AdminService.deletedetails(id).then((data)=>{
+    getAllDetails();
+  }).catch(err=>{
+alert("Not deleted",err);
+  })
+}
+
 
   function addTraining(newTraining) {
     const updatedTrainings = [...trainings, newTraining];
@@ -95,21 +134,17 @@ const TrainingTable = () => {
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  // const handleEdit = (id) => {
-  //   console.log('Edit button clicked with ID:', id);
-  //   const trainingToEdit = trainings.find((training) => training.id === id);
+  const handleEdit = (id) => {
+    // Find the training with the given id
+    const trainingToEdit = trainings.find((training) => training.id === id);
 
-  //   setSelectedTraining(trainingToEdit);
-
-  //   setTrainingFormOpen(true);
-  //   setIsEditing(true);
-  //   setEditedTraining(trainingToEdit);
-  // };
-  const handleEdit = (training) => {
     // Set the selected training for editing
-    setSelectedTraining(training);
-    setIsEditing(true); // Enable editing mode
-    setTrainingFormOpen(true); // Open the popup form
+    setSelectedTraining(trainingToEdit);
+
+    // Open the popup form and pass the editing props
+    setTrainingFormOpen(true);
+    setIsEditing(true);
+    setEditedTraining(trainingToEdit);
   };
 
   const handleSaveTraining = (editedTraining) => {
@@ -126,8 +161,6 @@ const TrainingTable = () => {
 
     // Clear the selected training
     setSelectedTraining(null);
-    setIsEditing(false);
-    setTrainingFormOpen(false);
   };
 
 
@@ -163,26 +196,10 @@ const TrainingTable = () => {
       field.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
-  const[gettingAll,setGettingall]=useState([]);
+  // const[gettingAll,setGettingall]=useState([]);
 
 
-    useEffect(() => {
-        // const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-        // setTrainings(storedTrainings);
-        getAllDetails();
-      }, []);
     
-    
-    const getAllDetails=()=>{
-    
-      AdminService.getAllTrainingDetails().then((data)=>{
-        console.log(data.data.alldata);
-        setGettingall(data.data.alldata);
-        
-      }).catch(err=>{
-        console.log(err)
-      })
-    }
 
   return (
     <Grid container spacing={3}>
@@ -285,7 +302,7 @@ const TrainingTable = () => {
                 <tbody>
                 {gettingAll.map((training) => (
                     <tr key={training.id}>
-                      <td className='td'>{training.TrainingTitle}</td>
+                      <td className='td'>{training.TrainigTitle}</td>
                       <td className='td'>{training.SkillTitle}</td>
                       <td className='td'>{training.SkillCategory}</td>
                       <td className='td'>{training.StartDate}</td>
@@ -301,7 +318,7 @@ const TrainingTable = () => {
                           id="button12"
                           variant="outlined"
                           startIcon={<EditIcon />}
-                          onClick={() => handleEdit(training)}
+                          onClick={() => handleEdit(training.id)}
                         >
                           Edit
                         </Button>
@@ -337,16 +354,14 @@ const TrainingTable = () => {
             isEditing={isEditing}
             editedTraining={editedTraining}
             isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={(newTraining) => {
-              // Handle form submission here, e.g., add the new training to the list
-              // or update the edited training, and close the modal
-              if (isEditing) {
-                handleSaveTraining(newTraining);
-              } else {
-                addTraining(newTraining);
-              }
-              handleCloseTrainingForm();
-            }}
+            onSave={gettingAll} //=> {
+            //   // Handle form submission here, e.g., add the new training to the list
+            //   // or update the edited training, and close the modal
+             
+            //     addTraining(training);
+              
+            //   handleCloseTrainingForm();
+            // }}
             onCancel={handleCloseTrainingForm}
 
 

@@ -22,7 +22,7 @@ const trainingDetails = async (data) => {
 
 const updateDetails=async(id)=>{
     console.log("called api")
-    const training = await axios.put(`http://localhost:8080/admin/EditTrainingDetailsAdmin/${id}`);
+    const training = await axios.patch(`http://localhost:8080/admin/EditTrainingDetailsAdmin/${id}`);
     return training;
 }
 
