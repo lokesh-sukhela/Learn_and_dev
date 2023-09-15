@@ -2,7 +2,6 @@ import React from 'react';
 import SignUpForm from './signup';
 import SignInForm from './signin';
 import { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function SignUpAndSignInCombine() {

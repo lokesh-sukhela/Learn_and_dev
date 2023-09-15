@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import Sidebar from './components/admin/AdminTrainingDetails';
 import './style.css';

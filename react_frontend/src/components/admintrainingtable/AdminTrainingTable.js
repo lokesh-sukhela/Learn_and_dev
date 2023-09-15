@@ -12,12 +12,10 @@ import { Link } from 'react-router-dom';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import SideNav from '../side_nav/side_nav'
+// import SideNav from '../side_nav/side_nav'
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
 import ReactPaginate from 'react-paginate';
 
@@ -31,6 +29,13 @@ const TrainingTable = () => {
   const [currentPage, setCurrentPage] = useState(0); // Pagination
   const itemsPerPage = 5; // Pagination
   const [selectedRow, setSelectedRow] = useState(null);
+
+  const[secondform,Setsecondform]=useState(false)
+
+// const navigate=useNavigate();
+
+
+  const[gettingAll,setGettingall]=useState([]);
 
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
@@ -66,9 +71,42 @@ const TrainingTable = () => {
   };
 
   useEffect(() => {
-    const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-    setTrainings(storedTrainings);
+   
+    getAllDetails()
   }, []);
+
+
+  const getAllDetails=()=>{
+    
+    AdminService.getAllTrainingDetails().then((data)=>{
+      console.log(data.data.alldata);
+      setGettingall(data.data.alldata);
+      
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+const editUser=(user)=>{
+ console.log(user)
+  AdminService.updateDetails(user).then((data)=>{
+
+  })
+  setIsEditing(false); // Set isEditing to false
+  setIsAddingNewTraining(true); // Set isAddingNewTraining to true
+  setTrainingFormOpen(true); 
+
+  
+}
+const deleteUser=(id)=>{
+
+  AdminService.deletedetails(id).then((data)=>{
+    getAllDetails();
+  }).catch(err=>{
+alert("Not deleted",err);
+  })
+}
+
 
   function addTraining(newTraining) {
     const updatedTrainings = [...trainings, newTraining];
@@ -161,26 +199,10 @@ const TrainingTable = () => {
       field.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
-  const[gettingAll,setGettingall]=useState([]);
+  // const[gettingAll,setGettingall]=useState([]);
 
 
-    useEffect(() => {
-        // const storedTrainings = JSON.parse(localStorage.getItem('trainings')) || [];
-        // setTrainings(storedTrainings);
-        getAllDetails();
-      }, []);
     
-    
-    const getAllDetails=()=>{
-    
-      AdminService.getAllTrainingDetails().then((data)=>{
-        console.log(data.data.alldata);
-        setGettingall(data.data.alldata);
-        
-      }).catch(err=>{
-        console.log(err)
-      })
-    }
 
     
   // Pagination
