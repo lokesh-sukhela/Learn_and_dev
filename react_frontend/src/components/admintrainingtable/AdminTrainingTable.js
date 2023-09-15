@@ -79,16 +79,16 @@ const navigate=useNavigate();
   }, []);
 
 
-const getAllDetails=()=>{
-
-  AdminService.getAllTrainingDetails().then((data)=>{
-    console.log(data.data.alldata);
-    setGettingall(data.data.alldata);
+  const getAllDetails=()=>{
     
-  }).catch(err=>{
-    console.log(err)
-  })
-}
+    AdminService.getAllTrainingDetails().then((data)=>{
+      console.log(data.data.alldata);
+      setGettingall(data.data.alldata);
+      
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
 
 const editUser=(user)=>{
  console.log(user)
