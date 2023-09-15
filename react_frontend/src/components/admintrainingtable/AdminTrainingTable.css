@@ -354,3 +354,50 @@ MenuItem {
 #categoryFilter:focus{
   border:none !important
 }
+
+/* Add this CSS code to your external CSS file (e.g., a.css) or use the style attribute in your component */
+ .pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+ }
+
+
+.pagination ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination li {
+  cursor: pointer;
+  color:#19105B;
+  margin-left: 4px;
+  margin-right: 4px; 
+}
+
+/*  */
+  /* outline: none !important;
+}
+/* a.css */
+
+/* Remove blue border from Material-UI buttons */
+/* .MuiButton-root {
+  border: none !important;
+  outline: none !important;
+}   */
+.pagination-container span{
+  border: none !important;
+  outline: none !important;
+  color:#19105B;
+  width: 30px !important;
+  border: 1px solid #19105B;
+  
+}
+.pagination li.active {
+  background-color: none;
+  color:#FF6196;
+}

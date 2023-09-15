@@ -19,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
-
+import ReactPaginate from 'react-paginate';
 
 
 const TrainingTable = () => {
@@ -28,6 +28,9 @@ const TrainingTable = () => {
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
   const [isTableOpen, setTableOpen] = useState(true);
   const [selectedTraining, setSelectedTraining] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0); // Pagination
+  const itemsPerPage = 5; // Pagination
+  const [selectedRow, setSelectedRow] = useState(null);
 
   // const [training, setTraining] = useState('');
   // const [skill, setskill] = useState('');
@@ -179,181 +182,221 @@ const TrainingTable = () => {
       })
     }
 
-  return (
-    <Grid container spacing={3}>
-      <div className="large-screen-nav">
-        <SideNav />
+    
+  // Pagination
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedTrainings = gettingAll.slice(startIndex, endIndex);
+
+  // Calculate the total number of pages
+  const pageCount = Math.ceil(gettingAll.length / itemsPerPage);
+
+  // Handle page change
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+    setSelectedRow(null); // Reset selected row when changing pages
+  };
+
+  // Function to select the next row
+  const selectNextRow = () => {
+    const currentIndex = displayedTrainings.findIndex(
+      (training) => training.id === selectedRow
+    );
+    if (currentIndex < itemsPerPage - 1) {
+      setSelectedRow(displayedTrainings[currentIndex + 1].id);
+    }
+      
+};
+
+
+
+return (
+  <Grid container spacing={3}>
+    <div className="large-screen-nav">
+      <SideNav />
+    </div>
+    <div className="small-screen-nav">
+      <IconButton
+        color="inherit"
+        aria-label="menu"
+        className="hamburger-icon"
+        onClick={toggleSideNav}
+      >
+        <MenuIcon />
+      </IconButton>
+    </div>
+
+    {isSideNavOpen && (
+      <div className="side-nav">
+        <SideNav /> {/* Place your SideNav component here */}
       </div>
-      <div className="small-screen-nav">
-        <IconButton
-          color="inherit"
-          aria-label="menu"
-          className="hamburger-icon"
-          onClick={toggleSideNav}
-        >
-          <MenuIcon />
-        </IconButton>
-      </div>
+    )}
 
-      {isSideNavOpen && (
-        <div className="side-nav">
-          <SideNav /> {/* Place your SideNav component here */}
-        </div>
-      )}
-
-      <h1 className="lbheading"><strong>Learning and Development</strong></h1>
-      <Grid item xs={12} className="headers">
-        <Paper className="paper-container">
-
-          <div className="paper-content">
-            <TextField
-              id="search"
-              label="Search"
-              variant="outlined"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              className="responsive-search"
-            />
-          </div>
-          <div className="paper-content">
-            <FormControl className="form-control responsive-select">
-              {/* <InputLabel htmlFor="categoryFilter" className="label-filter">
-                Filter by Category:
-              </InputLabel> */}
-              <Select
-                id="categoryFilter"
-                value={filterCategory}
-                onChange={(e) => setFilterCategory(e.target.value)}
-              >
-                <MenuItem value="All">All</MenuItem>
-                <MenuItem value="pandas">pandas</MenuItem>
-                <MenuItem value="azure">azure</MenuItem>
-                <MenuItem value="sql">sql</MenuItem>
-                <MenuItem value="html">html</MenuItem>
-                <MenuItem value="css">css</MenuItem>
-                <MenuItem value="synapse">synapse</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="paper-content">
-            <Button
-              variant="outlined"
-              id="register_button_admin"
-              className="responsive-button"
-              startIcon={<AddIcon />}
-              onClick={handleOpenTrainingForm}
-            >
-              Add New Training
-            </Button>
-          </div>
-        </Paper>
-      </Grid>
-
-      {isTableOpen && (
-        <Grid item xs={12}>
-          <Paper className="content">
-            <div className="table-responsive">
-              <Table className="table-responsive-sm">
-                <thead className='tableheadings'>
-                  <tr>
-                    <td className="tf">Training Title</td>
-                    <td className="tf">Skill Type</td>
-                    <td className="tf">Skill Category</td>
-                    <td className="tf">Start Date and Time</td>
-                    <td className="tf">End Date and Time</td>
-                    <td className="tf">Participation limit</td>
-                    <td className='tf'>Number of Registrations</td>
-                    <td className="tf">Mode</td>
-                    <td className="tf">Location/Meeting Link</td>
-                    <td className="tf">Description</td>
-                    <td className="tf">Edit</td>
-                    <td className="tf">Delete</td>
-                  </tr>
-                </thead>
-                <tbody>
-                {gettingAll.map((training) => (
-                    <tr key={training.id}>
-                      <td className='td'>{training.TrainigTitle}</td>
-                      <td className='td'>{training.SkillTitle}</td>
-                      <td className='td'>{training.SkillCategory}</td>
-                      <td className='td'>{training.StartDate}</td>
-                      <td className='td'>{training.EndDate}</td>
-                      <td className='td'>{training.ParticipationLimit}</td>
-                      <td className='td'>{training.PeopleRegistered}</td>
-                      <td className='td'>{training.TrainingMode}</td>
-                      <td className='td'>{training.MeetingLink}</td>
-                      <td className='td'>{training.Description}</td>
-                      <td>
-
-                        <Button
-                          id="button12"
-                          variant="outlined"
-                          startIcon={<EditIcon />}
-                          onClick={() => handleEdit(training.id)}
-                        >
-                          Edit
-                        </Button>
-
-                      </td>
-                      <td>
-                        <Button
-                          id='delete_button_admin'
-                          variant="outlined"
-                          startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(training.id)}
-                        >
-                          Delete
-                        </Button>
-
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-          </Paper>
-        </Grid>
-      )}
-      <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
-        <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
-          X
-        </Button>
-
-        <DialogContent>
-          {/* Render the TrainingForm component with isEditing and editedTraining props */}
-          <TrainingForm
-            isEditing={isEditing}
-            editedTraining={editedTraining}
-            isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            onSave={(newTraining) => {
-              // Handle form submission here, e.g., add the new training to the list
-              // or update the edited training, and close the modal
-              if (isEditing) {
-                handleSaveTraining(newTraining);
-              } else {
-                addTraining(newTraining);
-              }
-              handleCloseTrainingForm();
+    <h1 className="lbheading">
+      <strong>Learning and Development</strong>
+    </h1>
+    <Grid item xs={12} className="headers">
+      <Paper className="paper-container">
+        <div className="paper-content">
+          <TextField
+            id="search"
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
             }}
-            onCancel={handleCloseTrainingForm}
-
-
+            className="responsive-search"
           />
-        </DialogContent>
-        <DialogActions>
-
-
-        </DialogActions>
-      </Dialog>
+        </div>
+        <div className="paper-content">
+          <FormControl className="form-control responsive-select">
+            <Select
+              id="categoryFilter"
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+            >
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="pandas">pandas</MenuItem>
+              <MenuItem value="azure">azure</MenuItem>
+              <MenuItem value="sql">sql</MenuItem>
+              <MenuItem value="html">html</MenuItem>
+              <MenuItem value="css">css</MenuItem>
+              <MenuItem value="synapse">synapse</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div className="paper-content">
+          <Button
+            variant="outlined"
+            id="register_button_admin"
+            className="responsive-button"
+            startIcon={<AddIcon />}
+            onClick={handleOpenTrainingForm}
+          >
+            Add New Training
+          </Button>
+        </div>
+      </Paper>
     </Grid>
-  );
+
+    <Grid item xs={12}>
+      <Paper className="content">
+        <div className="table-responsive">
+          <Table className="table-responsive-sm">
+            <thead className="tableheadings">
+              <tr>
+                <td className="tf">Training Title</td>
+                <td className="tf">Skill Type</td>
+                <td className="tf">Skill Category</td>
+                <td className="tf">Start Date and Time</td>
+                <td className="tf">End Date and Time</td>
+                <td className="tf">Participation limit</td>
+                <td className="tf">Number of Registrations</td>
+                <td className="tf">Mode</td>
+                <td className="tf">Location/Meeting Link</td>
+                <td className="tf">Description</td>
+                <td className="tf">Edit</td>
+                <td className="tf">Delete</td>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedTrainings.map((training) => (
+                <tr
+                key={training.id}
+                className={selectedRow === training.id ? 'selected-row' : ''}
+                onClick={() => setSelectedRow(training.id)}
+              >
+                  <td className="td">{training.TrainingTitle}</td>
+                  <td className="td">{training.SkillTitle}</td>
+                  <td className="td">{training.SkillCategory}</td>
+                  <td className="td">{training.StartDate}</td>
+                  <td className="td">{training.EndDate}</td>
+                  <td className="td">{training.ParticipationLimit}</td>
+                  <td className="td">{training.PeopleRegistered}</td>
+                  <td className="td">{training.TrainingMode}</td>
+                  <td className="td">{training.MeetingLink}</td>
+                  <td className="td">{training.Description}</td>
+                  
+                  <td>
+                    <Button
+                      id="button12"
+                      variant="outlined"
+                      startIcon={<EditIcon />}
+                      onClick={() => handleEdit(training.id)}
+                    >
+                      Edit
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      id="delete_button_admin"
+                      variant="outlined"
+                      startIcon={<DeleteIcon />}
+                      onClick={() => handleDelete(training.id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
+          
+        </div>
+        <Grid item xs={12}>
+        <div className="pagination-container">
+          <ReactPaginate
+            previousLabel={<span className="previous"><b>&lt;</b></span>}
+            nextLabel={<span className="next"><b>&gt;</b></span>}
+            breakLabel={'...'}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+          />
+        </div>
+      </Grid>
+      </Paper>
+      
+    </Grid>
+    
+
+    <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm}>
+      <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className="closebuttonpop">
+        X
+      </Button>
+
+      <DialogContent>
+        <TrainingForm
+          isEditing={isEditing}
+          editedTraining={editedTraining}
+          isAddingNewTraining={isAddingNewTraining}
+          onSave={(newTraining) => {
+            if (isEditing) {
+              handleSaveTraining(newTraining);
+            } else {
+              addTraining(newTraining);
+            }
+            handleCloseTrainingForm();
+          }}
+          onCancel={handleCloseTrainingForm}
+        />
+        
+      </DialogContent>
+      <DialogActions></DialogActions>
+    </Dialog>
+  </Grid>
+);
 };
 
 export default TrainingTable;
