@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Delete as DeleteIcon,Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import AdminService from '../../services/AdminService';
 
 
 
@@ -84,7 +85,7 @@ const TrainingTable = () => {
 
 
 
-  
+
   const handleOpenTrainingForm = () => {
     setIsEditing(false); // Set isEditing to false
     setIsAddingNewTraining(true); // Set isAddingNewTraining to true
@@ -125,10 +126,15 @@ const TrainingTable = () => {
   };
 
 
-
+//From Delete Button
   const handleDelete = (id) => {
     // Implement delete functionality here
     console.log(`Delete training with ID ${id}`);
+
+    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err=>{
+      console.log(err);
+    })
+
     const updatedTrainings = trainings.filter((training) => training.id !== id);
     setTrainings(updatedTrainings);
   };
@@ -170,7 +176,7 @@ const TrainingTable = () => {
           className="hamburger-icon"
           onClick={toggleSideNav}
         >
-          <MenuIcon  />
+          <MenuIcon />
         </IconButton>
       </div>
 
@@ -180,19 +186,10 @@ const TrainingTable = () => {
         </div>
       )}
 
-      <h1 className="lbheading">LEARNING AND DEVELOPMENT</h1>
+      <h1 className="lbheading"><strong>Learning and Development</strong></h1>
       <Grid item xs={12} className="headers">
         <Paper className="paper-container">
-          <div className="paper-content">
-            <Button
-              variant="outlined"
-              id="register_button_admin"
-              className="responsive-button"
-              onClick={handleOpenTrainingForm}
-            >
-              Add New Training
-            </Button>
-          </div>
+          
           <div className="paper-content">
             <TextField
               id="search"
@@ -230,6 +227,17 @@ const TrainingTable = () => {
               </Select>
             </FormControl>
           </div>
+          <div className="paper-content">
+            <Button
+              variant="outlined"
+              id="register_button_admin"
+              className="responsive-button"
+              startIcon={<AddIcon />}
+              onClick={handleOpenTrainingForm}
+            >
+              Add New Training
+            </Button>
+          </div>
         </Paper>
       </Grid>
 
@@ -240,17 +248,18 @@ const TrainingTable = () => {
               <Table className="table-responsive-sm">
                 <TableHead className='tableheadings'>
                   <TableRow>
-                    <TableCell className="tf"><strong>Training Title</strong></TableCell>
-                    <TableCell className="tf"><strong>Skill Type</strong></TableCell>
-                    <TableCell className="tf"><strong>Skill Category</strong></TableCell>
-                    <TableCell className="tf"><strong>Start Date and Time</strong></TableCell>
-                    <TableCell className="tf"><strong>End Date and Time</strong></TableCell>
-                    <TableCell className="tf"><strong>Description</strong></TableCell>
-                    <TableCell className="tf"><strong>Maximum Registration count</strong></TableCell>
-                    <TableCell className="tf"><strong>Mode</strong></TableCell>
-                    <TableCell className="tf"><strong>Location/Meeting Link</strong></TableCell>
-                    <TableCell className="tf"></TableCell>
-                    <TableCell className="tf"></TableCell>
+                    <TableCell className="tf">Training Title</TableCell>
+                    <TableCell className="tf">Skill Type</TableCell>
+                    <TableCell className="tf">Skill Category</TableCell>
+                    <TableCell className="tf">Start Date and Time</TableCell>
+                    <TableCell className="tf">End Date and Time</TableCell>
+                    <TableCell className="tf">Description</TableCell>
+                    <TableCell className="tf">Participation limit</TableCell>
+                    <TableCell className='tf'>Number of Registrations</TableCell>
+                    <TableCell className="tf">Mode</TableCell>
+                    <TableCell className="tf">Location/Meeting Link</TableCell>
+                    <TableCell className="tf">Edit</TableCell>
+                    <TableCell className="tf">Delete</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -263,6 +272,7 @@ const TrainingTable = () => {
                       <TableCell className='td'>{training.endDateAndTime}</TableCell>
                       <TableCell className='td'>{training.description}</TableCell>
                       <TableCell className='td'>{training.count}</TableCell>
+                      <TableCell className='td'>{training.registrations}</TableCell>
                       <TableCell className='td'>{training.mode}</TableCell>
                       <TableCell className='td'>{training.Link}</TableCell>
                       <TableCell>
@@ -300,7 +310,7 @@ const TrainingTable = () => {
         <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
           X
         </Button>
-        
+
         <DialogContent>
           {/* Render the TrainingForm component with isEditing and editedTraining props */}
           <TrainingForm
@@ -319,7 +329,7 @@ const TrainingTable = () => {
             }}
             onCancel={handleCloseTrainingForm}
 
-            
+
           />
         </DialogContent>
         <DialogActions>

@@ -23,13 +23,6 @@ function SignInForm() {
 
   // const cookies = new Cookies();
 
-  // Set a cookie
-  //cookies.set('myCookieName', 'myCookieValue', { path: '/' });
-
-  
-  
-
- // const [cookies, setCookie] = useCookies(['UserData']);
 
   const navigate = useNavigate()
   
@@ -63,6 +56,8 @@ function SignInForm() {
       //     navigate('/adminTrainingTable')
       //   }    
       }
+
+
   
       if (res.data.message=== "All fields are mandatory ; Please fill it."){
         toast.warning(res.data.message);
@@ -73,11 +68,6 @@ function SignInForm() {
       console.log(err);
       toast.error("Invalid email or password!")
     })
-
-
-    
-
-
     for (const key in state) {
       setState({
         ...state,
@@ -106,7 +96,6 @@ function SignInForm() {
           onChange={handleChange}
           className="password-input-feild"
         />
-        <a href="#" className = 'forgot-password'>Forgot your password?</a>
         <button className="sign-in-button">Sign In</button>
       </form>
     </div>
