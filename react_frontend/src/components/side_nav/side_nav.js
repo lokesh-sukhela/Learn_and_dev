@@ -3,8 +3,24 @@ import React, { useEffect, useState } from 'react'
 //import { json, useNavigate } from 'react-router-dom';
 import './side_nav.css';
 import { Link } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 
 function LearningAndDev() {
+const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  const handleLogout=()=>{
+  
+    cookies.remove('role')
+    cookies.remove('Email')
+    cookies.remove('token')
+    navigate('/')
+
+    
+
+  }
   return (
     <div>
       <div className="container">
@@ -31,6 +47,7 @@ function LearningAndDev() {
             <Link to='#' className='linkstonavigate'>Resourcing</Link>
             <Link to='#' className='linkstonavigate'>Access Control</Link>
             <Link to='/adminTrainingTable' className='linkstonavigate'>L&D</Link>
+            <button className='linkstonavigate' onClick={handleLogout} >Logout&nbsp;<LogoutIcon/></button>
 
             {/* <a href="/"><button type="button" id = "logoutbtn"class="btn btn-danger">Logout</button></a> */}
           </div>

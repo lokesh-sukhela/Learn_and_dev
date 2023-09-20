@@ -1,10 +1,7 @@
 import React from "react";
 import { toast } from 'react-toastify';
-
-// react_frontend/src/components/signup.js
-
-//,kjkvndsjknsjnvjn
 import LoginService from "../../services/LoginService";
+
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -13,11 +10,15 @@ function SignUpForm() {
   });
   const handleChange = evt => {
     const value = evt.target.value;
+  
     setState({
       ...state,
       [evt.target.name]: value
     });
   };
+
+
+
 
   const handleOnSubmit = evt => {
     evt.preventDefault();
@@ -47,7 +48,7 @@ function SignUpForm() {
       }
     })
     .catch(err=>{
-      toast.error("Email And Password is not matching")
+      toast.error("Server Error catch block frontend")
     })
 
     for (const key in state) {

@@ -4,9 +4,7 @@ const UA_table = db.UserAdminRegTable;
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
 
-  const email_pattern=/^[a-z.-]+@jmangroup\.com$/
-  const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@#$%^&*!]{8,}$/
-
+  console.log("It's coming in backend")
   const { name,email, password } = req.body;
 
   if (name && password && email) {

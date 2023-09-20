@@ -9,11 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
-import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
-
+import Cookies from 'universal-cookie';
 import { saveTrainingDetails } from '../../services/userService';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -30,8 +29,15 @@ const UserTrainingTable = () => {
         setIsSideNavOpen(!isSideNavOpen);
     };
 
+    const navigate =useNavigate()
 
    useEffect(()=>{
+    const cookies = new Cookies();
+    const token=cookies.get("token");
+    if(!token){
+    navigate("/")
+    toast.error("Authentication failed! Please Login.")
+    }
         GetAllDetails()
     },[])
 

@@ -20,8 +20,8 @@ function SignInForm() {
     });
   };
 
+  
   const cookies = new Cookies();
-
 
   const navigate = useNavigate()
   
@@ -57,7 +57,7 @@ function SignInForm() {
         // }
 
         if (roles.includes("Admin")){
-
+          
           navigate('/adminTrainingTable')
         }
         else{

@@ -1,8 +1,9 @@
+const dotenv = require('dotenv')
 const dbconfig=require("../../config/dbconfig");
 const sql=require("pg");
 const {Sequelize,DataTypes}=require("sequelize");
 const db={};
-
+dotenv.config()
 const client= new sql.Client({ user: dbconfig.USER, password: dbconfig.PASSWORD })
 
 
@@ -22,7 +23,7 @@ const sequelize=new Sequelize(
     dbconfig.DATABASE,
     dbconfig.USER,
     dbconfig.PASSWORD,{
-        dialect:dbconfig.DIALECT,
+        dialect:'postgres',
         host:dbconfig.HOST
     }
 );

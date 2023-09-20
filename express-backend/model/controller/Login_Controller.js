@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 // const Cookies = require("universal-cookie")
 // const cookies = new Cookies();
 const logindetailscheck = async (req, res) => {
-  ;
+  
   const { email, password } = req.body;
   if (password && email) {
     try {
@@ -47,9 +47,9 @@ const logindetailscheck = async (req, res) => {
 
 const logout = async (req, res) => {
   // Implement logout functionality here
-  try {
-    // Get the user ID from the authenticated request (you'll need middleware for this)
-    const userId = req.user.userId; // Assuming you have middleware that decodes the JWT token and adds the user object to the request
+  /* try {
+   // Get the user ID from the authenticated request (you'll need middleware for this)
+  const userId = req.user.userId; // Assuming you have middleware that decodes the JWT token and adds the user object to the request
 
     // Find the user in the database by ID
     const user = await UA_table.findByPk(userId);
@@ -64,7 +64,9 @@ const logout = async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Logout failed" });
-  }
+  }*/
+
+
 };
 
 

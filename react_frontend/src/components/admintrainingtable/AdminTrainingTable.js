@@ -20,7 +20,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
 import { useNavigate } from 'react-router-dom';
-
+import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 
 
@@ -33,7 +34,7 @@ const TrainingTable = () => {
 
   const[secondform,Setsecondform]=useState(false)
 
-// const navigate=useNavigate();
+const navigate=useNavigate();
 
 
   const[gettingAll,setGettingall]=useState([]);
@@ -72,7 +73,13 @@ const TrainingTable = () => {
   };
 
   useEffect(() => {
-   
+    const cookies = new Cookies();
+    const token=cookies.get("token");
+    if(!token){
+    
+    navigate("/")
+    toast.error("Authentication failed! Please Login.")
+    }
     getAllDetails()
   }, []);
 
