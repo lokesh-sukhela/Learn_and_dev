@@ -1,76 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid, Paper, IconButton } from '@mui/material';
+import { Table, TextField, Button, Select, MenuItem, FormControl, Grid, Paper, IconButton } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions,
 } from '@mui/material';
 import TrainingForm from './Trainingforms';
-import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import './AdminTrainingTable.css';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import SideNav from '../side_nav/side_nav'
-import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AdminService from '../../services/AdminService';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
+const TrainingTable = (props) => {
 
-const TrainingTable = () => {
-  const [trainings, setTrainings] = useState([]);
-  // const [training, setTraining] = useState('');
+
   const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
-  const [isTableOpen, setTableOpen] = useState(true);
-  const [selectedTraining, setSelectedTraining] = useState(null);
-
-  const[secondform,Setsecondform]=useState(false)
-
+  const [selectedRow, setSelectedRow] = useState(null);
+  const[gettingAll,setGettingall]=useState([]);
+  const itemsPerPage = 5; // Number of items to display per page
+  const [currentPage, setCurrentPage] = useState(0);
+  const [filtertiltle,setFiltertitle]=useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); //search
+  const [filterCategory, setFilterCategory] = useState('All'); //filtering
+  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false); //new pop will come
+  const [isEditing, setIsEditing] = useState(false); // when we click edit new pop form opens
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false); //responsive navba
+  const [getIddata,setIdData]=useState([])
 const navigate=useNavigate();
 
 
-  const[gettingAll,setGettingall]=useState([]);
-
-  // const [training, setTraining] = useState('');
-  // const [skill, setskill] = useState('');
-  // const [skillcat, setskillcat] = useState('');
   const handleCloseTrainingForm = () => {
     setTrainingFormOpen(false);
   };
 
-
-  // const training = [
-  //   {
-  //     trainingname: 'python',
-  //     value: 'py',
-  //     skillcategory: ['Critical Thinking', 'Problem Solving', 'Design'],
-  //     skilltitle: ['pandas', 'numpy', 'app development', 'DataScience'],
-  //   },
-  //   {
-  //     trainingname: 'java',
-  //     value: 'java',
-  //     skillcategory: ['Problem Solving', 'Development'],
-  //     skilltitle: ['Enterprise application', 'mobile app', 'games', 'website development'],
-  //   },
-  // ];
-
-  const handleSubmitTrainingForm = (newTraining) => {
-    // Handle form submission here, e.g., add the new training to the list
-    // and close the modal
-    addTraining(newTraining);
-    handleCloseTrainingForm(newTraining);
-  };
-  const toggleTable = () => {
-    setTableOpen(!isTableOpen);
-  };
 
   useEffect(() => {
     const cookies = new Cookies();
@@ -90,20 +63,38 @@ const navigate=useNavigate();
     .then((data)=>{
       console.log(data.data.alldata);
       setGettingall(data.data.alldata);
+      setFiltertitle(data.data.alldata.TrainingTitle);
       
     }).catch(err=>{
       console.log(err)
+      toast.error("Error fetching data")
     })
   }
 
-const editUser=(user)=>{
- console.log(user)
-  AdminService.updateDetails(user).then((data)=>{
+const editUser=(id)=>{
+ console.log(id)
 
-  })
-  setIsEditing(false); // Set isEditing to false
-  setIsAddingNewTraining(true); // Set isAddingNewTraining to true
-  setTrainingFormOpen(true); 
+AdminService.getTrainingById(id).then((data)=>{
+console.log(data.data.iddata);
+setIdData(data.data.iddata)
+props.history.push({
+  pathname: '/edit',
+  state: { getIddata }, // Pass the data as a state object
+});
+}).catch(err=>{
+  console.log("error");
+})
+
+
+
+
+
+  // AdminService.updateDetails(user).then((data)=>{
+
+  // })
+  // setIsEditing(true); // Set isEditing to false
+  // setIsAddingNewTraining(true); // Set isAddingNewTraining to true
+  // setTrainingFormOpen(true); 
 
   
 }
@@ -111,28 +102,11 @@ const deleteUser=(id)=>{
 
   AdminService.deletedetails(id).then((data)=>{
     getAllDetails();
+    toast.success("Training Deleted Successfully");
   }).catch(err=>{
-alert("Not deleted",err);
+toast.error("Error in Training Deletion");
   })
 }
-
-
-  function addTraining(newTraining) {
-    const updatedTrainings = [...trainings, newTraining];
-    setTrainings(updatedTrainings);
-    localStorage.setItem('trainings', JSON.stringify(updatedTrainings));
-  };
-
-  const [searchTerm, setSearchTerm] = useState(''); //search
-  const [filterCategory, setFilterCategory] = useState('All'); //filtering
-  const [isAddingNewTraining, setIsAddingNewTraining] = useState(false); //new pop will come
-  const [isEditing, setIsEditing] = useState(false); // when we click edit new pop form opens
-  const [editedTraining, setEditedTraining] = useState(null); //saving the details after editing
-
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false); //responsive navbar
-
-
-
 
 
 
@@ -146,60 +120,19 @@ alert("Not deleted",err);
     setIsSideNavOpen(!isSideNavOpen);
   };
 
-  // const handleEdit = (id) => {
-  //   // Find the training with the given id
-  //   console.log(id)
-  //   const trainingToEdit = gettingAll.find((training) => training.id === id);
-  //   console.log(trainingToEdit)
-
-  //   // // Set the selected training for editing
-  //   setSelectedTraining(trainingToEdit);
-
-  //   // Open the popup form and pass the editing props
-  //   setTrainingFormOpen(true);
-  //   setIsEditing(true);
-  //  setEditedTraining(trainingToEdit);
-  // };
-
-  
-
-
-  //From Delete Button
-  const handleDelete = (id) => {
-    // Implement delete functionality here
-    console.log(`Delete training with ID ${id}`);
-
-    AdminService.deletedetails(id).then(AdminService.getAllTrainingDetails()).catch(err => {
-      console.log(err);
-    })
-
-    const updatedTrainings = trainings.filter((training) => training.id !== id);
-    setTrainings(updatedTrainings);
+ 
+   // Pagination
+   const startIndex = currentPage * itemsPerPage;
+   const endIndex = startIndex + itemsPerPage;
+    const displayedTrainings = gettingAll.slice(startIndex, endIndex);
+ 
+    // Handle page change
+   const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+    setSelectedRow(null); // Reset selected row when changing pages
   };
-
-  const filteredTrainings = trainings.filter((training) => {
-    if (filterCategory === 'All') {
-      return true;
-    }
-    return training.skillCategory.toLowerCase() === filterCategory.toLowerCase();
-  });
-
-  const filteredTrainingsWithSearch = filteredTrainings.filter((training) => {
-    const searchFields = [
-      training.title,
-      training.skillType,
-      training.skillCategory,
-      training.description,
-    ];
-
-    return searchFields.some((field) =>
-      field.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
-  // const[gettingAll,setGettingall]=useState([]);
-
-
-    
+// Calculate the total number of pages
+const pageCount = Math.ceil(gettingAll.length / itemsPerPage);
 
   return (
     <Grid container spacing={3}>
@@ -224,6 +157,9 @@ alert("Not deleted",err);
       )}
 
       <h1 className="lbheading"><strong>Learning and Development</strong></h1>
+   
+
+
       <Grid item xs={12} className="headers">
         <Paper className="paper-container">
 
@@ -255,12 +191,15 @@ alert("Not deleted",err);
                 onChange={(e) => setFilterCategory(e.target.value)}
               >
                 <MenuItem value="All">All</MenuItem>
-                <MenuItem value="pandas">pandas</MenuItem>
+                {gettingAll.map((title)=>{
+                  return <MenuItem value={title.TrainingTitle}>{title.TrainingTitle}</MenuItem>
+                })}
+{/*                 
                 <MenuItem value="azure">azure</MenuItem>
                 <MenuItem value="sql">sql</MenuItem>
                 <MenuItem value="html">html</MenuItem>
                 <MenuItem value="css">css</MenuItem>
-                <MenuItem value="synapse">synapse</MenuItem>
+                <MenuItem value="synapse">synapse</MenuItem> */}
               </Select>
             </FormControl>
           </div>
@@ -278,18 +217,20 @@ alert("Not deleted",err);
         </Paper>
       </Grid>
 
-      {isTableOpen && (
+    
         <Grid item xs={12}>
           <Paper className="content">
             <div className="table-responsive">
-              <Table className="table-responsive-sm">
+              <Table className="table-responsive table table-hover table-borderless">
                 <thead className='tableheadings'>
                   <tr>
                     <td className="tf">Training Title</td>
                     <td className="tf">Skill Type</td>
                     <td className="tf">Skill Category</td>
-                    <td className="tf">Start Date and Time</td>
-                    <td className="tf">End Date and Time</td>
+                    <td className="tf">Start Date</td>
+                    <td className="tf">Start Time</td>
+                    <td className="tf">End Date </td>
+                    <td className="tf">End Time </td>
                     <td className="tf">Participation limit</td>
                     <td className='tf'>Number of Registrations</td>
                     <td className="tf">Mode</td>
@@ -300,13 +241,16 @@ alert("Not deleted",err);
                   </tr>
                 </thead>
                 <tbody>
-                {gettingAll.map((training,index) => (
+                {displayedTrainings.map((training,index) => (
                     <tr key={training.TrainingId}>
                       <td className='td'>{training.TrainingTitle}</td>
                       <td className='td'>{training.SkillTitle}</td>
                       <td className='td'>{training.SkillCategory}</td>
-                      <td className='td'>{training.StartDate}</td>
-                      <td className='td'>{training.EndDate}</td>
+                      <td className='td'>{(training.StartDate).split('T')[0]}</td>
+                      <td>{new Date((training.StartDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
+                      <td className='td'>{(training.EndDate).split('T')[0]}</td>
+                      <td>{new Date((training.EndDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
+                      
                       <td className='td'>{training.ParticipationLimit}</td>
                       <td className='td'>{training.PeopleRegistered}</td>
                       <td className='td'>{training.TrainingMode}</td>
@@ -320,18 +264,17 @@ alert("Not deleted",err);
                           startIcon={<EditIcon />}
                           onClick={() => editUser(training.TrainingId)}
                         >
-                          Edit
                         </Button>
 
                       </td>
                       <td>
                         <Button
                           id='delete_button_admin'
-                          variant="outlined"
+                         // variant="outlined"
                           startIcon={<DeleteIcon />}
-                          onClick={() => handleDelete(training.id)}
+                          onClick={() => deleteUser(training.TrainingId)}
                         >
-                          Delete
+                          
                         </Button>
 
                       </td>
@@ -340,28 +283,45 @@ alert("Not deleted",err);
                 </tbody>
               </Table>
             </div>
+            <Grid item xs={12}>
+        <div className="pagination-container">
+          <ReactPaginate
+            previousLabel={<span className="previous"><b>&lt;</b></span>}
+            nextLabel={<span className="next"><b>&gt;</b></span>}
+            breakLabel={'...'}
+            pageCount={pageCount}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+          />
+        </div>
+      </Grid>
           </Paper>
+     
+
+  
         </Grid>
-      )}
+ 
+     
       <Dialog open={isTrainingFormOpen} onClose={handleCloseTrainingForm} >
-        <Button onClick={handleCloseTrainingForm} style={{ color: 'red' }} className='closebuttonpop'>
-          X
+        <Button onClick={handleCloseTrainingForm} className='closebuttonpop'>
+          <CancelPresentationIcon fontSize='large'/>
         </Button>
 
         <DialogContent>
           {/* Render the TrainingForm component with isEditing and editedTraining props */}
           <TrainingForm
-            isEditing={isEditing}
-            editedTraining={editedTraining}
-            isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop
-            // onSave={gettingAll} //=> {
-            //   // Handle form submission here, e.g., add the new training to the list
-            //   // or update the edited training, and close the modal
+          /*  // isEditing={isEditing}
+            // editedTraining={editedTraining}
+            // isAddingNewTraining={isAddingNewTraining} // Pass isAddingNewTraining as a prop */
+           
+              // Handle form submission here, e.g., add the new training to the list
+            //   // or update the edited training, and close the modal */
              
-            //     addTraining(training);
-              
-            //   handleCloseTrainingForm();
-            // }}
+               
             onCancel={handleCloseTrainingForm}
 
 

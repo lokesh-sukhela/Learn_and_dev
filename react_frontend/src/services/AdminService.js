@@ -2,26 +2,31 @@ import axios from 'axios'
 
 
 const getAllTrainingDetails = async ()=> {
-    const Tdetails = await axios.get(`${process.env.REACT_APP_PORTSERVER}/admin`)
-    return Tdetails
+    const getAllTraining = await axios.get(`${process.env.REACT_APP_PORTSERVER}/admin`)
+    return getAllTraining
 }
 
 
+const getTrainingById= async (id)=>{
+    const getTrainingId = await axios.get(`${process.env.REACT_APP_PORTSERVER}/admin/get/${id}`)
+    return getTrainingId
+}
+
 const trainingDetails = async (data) => {
     console.log("called api")
-    const training = await axios.post(`${process.env.REACT_APP_PORTSERVER}/admin/TrainingDetailsAdmin`,data);
-    return training;
+    const trainingD = await axios.post(`${process.env.REACT_APP_PORTSERVER}/admin/TrainingDetailsAdmin`,data);
+    return trainingD;
 }
 
 const updateDetails=async(id)=>{
     console.log("called api")
-    const training = await axios.patch(`${process.env.REACT_APP_PORTSERVER}/admin/EditTrainingDetailsAdmin/${id}`);
-    return training;
+    const updatetraining = await axios.patch(`${process.env.REACT_APP_PORTSERVER}/admin/EditTrainingDetailsAdmin/${id}`);
+    return updatetraining;
 }
 
 const deletedetails=async(id)=>{
-    const training = await axios.delete(`${process.env.REACT_APP_PORTSERVER}/admin/DeleteTrainingDetailsAdmin/${id}`);
-    return training;
+    const deltraining = await axios.delete(`${process.env.REACT_APP_PORTSERVER}/admin/DeleteTrainingDetailsAdmin/${id}`);
+    return deltraining;
 }
 
 
@@ -29,5 +34,5 @@ const deletedetails=async(id)=>{
 
 
 
-export default {getAllTrainingDetails,trainingDetails,updateDetails,deletedetails}
+export default {getAllTrainingDetails,getTrainingById,trainingDetails,updateDetails,deletedetails}
 

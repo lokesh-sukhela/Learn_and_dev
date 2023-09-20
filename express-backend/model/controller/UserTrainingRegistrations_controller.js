@@ -2,7 +2,7 @@ const db=require("../entities")
 const UserTR_table=db.UserTRegTable
 const Admintable=db.TrainingTable
 const Create_UserTrainingDetails= async(req,res)=>{
-    // console.log(req.body.id)
+
     console.log(req.body)
 
       try{
@@ -32,9 +32,7 @@ const Create_UserTrainingDetails= async(req,res)=>{
       }catch(error){
         res.status(404).json({message:"Training"})
       }
-        // alert("Registration Successful"); 
-  
-    // alert("Registration Unsuccessful");
+
    
 }
 

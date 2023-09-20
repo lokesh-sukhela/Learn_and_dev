@@ -1,4 +1,4 @@
-const db=require("../entities")
+const db=require("../../entities")
 
 const Tdetails_table=db.TrainingTable;
 

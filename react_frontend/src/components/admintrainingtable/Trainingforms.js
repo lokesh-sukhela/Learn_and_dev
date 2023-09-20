@@ -12,32 +12,12 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-import { ForkRight } from '@mui/icons-material';
 import AdminService from '../../services/AdminService';
 import { toast } from 'react-toastify';
 
 const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
-
-  const [formData, setFormData] = useState(() => {
-    return isEditing
-      ? editedTraining
-      : {
-          title: '',
-          skillType: '',
-          skillCategory: '',
-          startDateAndTime: '',
-          endDateAndTime: '',
-          description: '',
-          count: 1, // Add any other default values you may have
-          mode: '', // Add any other default values you may have
-          
-          Link: 'Jman Group,tidel park,Chennai', // Add any other default values you may have
-        };
-
-  });
-
- 
+  const [isTrainingFormOpen, setTrainingFormOpen] = useState(false);
 
   const [isVirtualSelected, setIsVirtualSelected] = useState(
     // Initialize isVirtualSelected based on formData.mode when editing
@@ -48,6 +28,23 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
     // Initialize isPhysicalSelected based on formData.mode when editing
     isEditing && formData.mode === 'Physical'
   );
+  const [formData, setFormData] = useState(() => {
+    return isEditing
+      ? editedTraining
+      : {
+          title: '',
+          skillType: '',
+          skillCategory: '',
+          startDateAndTime: '',
+          endDateAndTime: '',
+          description: '',
+          count: 0, // Add any other default values you may have
+          mode: '', // Add any other default values you may have
+          Link: 'Jman Group,tidel park,Chennai', // Add any other default values you may have
+        };
+  });
+
+ 
 
   const navigate = useNavigate();
 
@@ -57,10 +54,26 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
       id: isEditing ? formData.TrainingId : Date.now(), // Use existing ID if editing, generate a new one if not
       ...formData,
     };
-    // navigate('/trainingtable');
-    onSave(newTraining);
+   
   };
   
+    const training = [
+    {
+      trainingname: 'python',
+      value: 'py',
+      skillcategory: ['Critical Thinking', 'Problem Solving', 'Design'],
+      skilltitle: ['pandas', 'numpy', 'app development', 'DataScience'],
+    },
+    {
+      trainingname: 'java',
+      value: 'java',
+      skillcategory: ['Problem Solving', 'Development'],
+      skilltitle: ['Enterprise application', 'mobile app', 'games', 'website development'],
+    },
+  ];
+
+
+
 
 
   const handleChange = (e) => {
@@ -109,25 +122,11 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   };
 
 
-
-
-
-  const handleSave = () => {
-    if (isEditing) {
-      // Update the existing training
-      const updatedTraining = { ...editedTraining, /* update fields from form inputs */ };
-      onSave(updatedTraining);
-    } else {
-      // Create a new training
-      const newTraining = { /* create a new training object from form inputs */ };
-      onSave(newTraining);
-    }
-  };
-
-  const handleTrainingsubmit = () =>{
+  const handleCloseTrainingForm = () =>{
     AdminService.trainingDetails(formData).then((data)=>{
       if(data.data.message ==="Training added"){
         toast.success("Training Published");
+        setTrainingFormOpen(true)
       }
     }).catch(error=>{
       toast.error("empty fields are not allowed")
@@ -157,13 +156,14 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   };
   return (
     <Container maxWidth="md">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4"  className='Heading' gutterBottom>
         {isEditing ? 'Edit Training' : 'Add New Training'}
       </Typography>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
         <form onSubmit={handleSubmit} >
           <Grid container spacing={2} >
             <Grid item xs={12}>
+          
               <TextField
                 fullWidth
                 label="Title"
@@ -328,9 +328,9 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
             className='addtrainingbutton'
             style={{
               marginTop: '16px',
-              marginLeft: "71.6%"// Add some space between the form and the button
+              /*marginLeft: "71.6%" */// Add some space between the form and the button
             }}
-          onClick={handleTrainingsubmit}>
+          onClick={handleCloseTrainingForm}>
             Add Training
           </Button>
         </form>

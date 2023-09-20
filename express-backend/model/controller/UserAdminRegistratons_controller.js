@@ -8,7 +8,7 @@ const create_user_admin = async (req, res) => {
   const { name,email, password } = req.body;
 
   if (name && password && email) {
-    const email_pattern=/^[\w.-]+@jmangroup\.com$/
+    const email_pattern=/^[[a-z].-]+@jmangroup\.com$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@#$%^&*!]{8,}$/
     try {
       // Check if a user with the same email already exists in the database
