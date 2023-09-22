@@ -6,7 +6,8 @@ import './style.css';
 import SignUpAndSignInCombine from './components/login/SignUpAndSignInCombine';
 import TrainingTable from './components/admintrainingtable/AdminTrainingTable';
 import UserTrainingTable from './components/UserTrainingTable/UserTrainingTable';
-import { Edit } from '@mui/icons-material';
+import EditTraining from './components/edittrainingtitle/EditTraining';
+
 
 
 
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignUpAndSignInCombine />}></Route>
           <Route path="/adminTrainingTable" element={<TrainingTable />}></Route>
-          <Route path="/edit" element={<Edit />}></Route>
+          <Route path="/edit/:id" element={<EditTraining />}></Route>
           <Route path="/userTrainingTable" element={<UserTrainingTable />}></Route>
         </Routes>
       </Router>

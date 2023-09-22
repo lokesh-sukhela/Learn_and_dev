@@ -18,7 +18,7 @@ function SignUpAndSignInCombine() {
     return (
       <>
       <div className='container-fluid'>
-        <h2 className='main-title'>Sign In / Sign-up</h2>
+        <h2 className='main-title'>SignIn / SignUp</h2>
         <div className={containerClass} >
 
           <SignUpForm />
@@ -26,7 +26,7 @@ function SignUpAndSignInCombine() {
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
+                <h1>Welcome</h1>
                 <p>
                   Already have an account? Sign In here
                 </p>

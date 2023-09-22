@@ -26,7 +26,6 @@ var login=require('./routes/login');
 var adminportal=require('./routes/admin')
 var userportal=require("./routes/users")
 
-
 app.use('/', userRouter);
 app.use('/loginDetails',login)
 app.use("/admin",adminportal);

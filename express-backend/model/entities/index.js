@@ -10,7 +10,7 @@ const client= new sql.Client({ user: dbconfig.USER, password: dbconfig.PASSWORD 
 // Connect to the PostgreSQL database
 client.connect()
   .then(() => {
-    console.log('Connected to PostgreSQL DATABASE Successfully');
+    console.log('4.Connected to PostgreSQL DATABASE Successfully');
     // You can start executing queries here
   })
   .catch((err) => {
@@ -42,7 +42,6 @@ db.sequelize=sequelize;
 db.UserAdminRegTable=require("./UserAdminRegistrations")(sequelize,DataTypes);
 db.TrainingTable=require("./TrainingDetails")(sequelize,DataTypes);
 db.UserTRegTable=require("./UserTrainingRegistrations")(sequelize,DataTypes);
-
 
 
 

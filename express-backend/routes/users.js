@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var createusertraining=require("../model/controller/UserTrainingRegistrations_controller")
+var createusertraining=require("../model/controller/UserController/UserTrainingRegistrations_controller")
 
 router.post("/",createusertraining.Create_UserTrainingDetails)
 

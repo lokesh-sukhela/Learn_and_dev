@@ -18,9 +18,9 @@ const trainingDetails = async (data) => {
     return trainingD;
 }
 
-const updateDetails=async(id)=>{
+const updateDetails=async(id,data)=>{
     console.log("called api")
-    const updatetraining = await axios.patch(`${process.env.REACT_APP_PORTSERVER}/admin/EditTrainingDetailsAdmin/${id}`);
+    const updatetraining = await axios.patch(`${process.env.REACT_APP_PORTSERVER}/admin/EditTrainingDetailsAdmin/${id}`,data);
     return updatetraining;
 }
 

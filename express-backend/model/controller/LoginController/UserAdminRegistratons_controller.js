@@ -1,14 +1,13 @@
-const db = require("../entities");
+const db = require("../../entities");
 const UA_table = db.UserAdminRegTable;
 
 const create_user_admin = async (req, res) => {
   console.log(req.body.name);
 
-  console.log("It's coming in backend")
   const { name,email, password } = req.body;
 
   if (name && password && email) {
-    const email_pattern=/^[[a-z].-]+@jmangroup\.com$/
+    const email_pattern=/^[a-z0-9]+@jmangroup\.com$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9@#$%^&*!]{8,}$/
     try {
       // Check if a user with the same email already exists in the database
@@ -40,7 +39,7 @@ const create_user_admin = async (req, res) => {
         res.status(200).json({ message: "User added" });
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message,"Error");
       res.status(500).json({ message: "Internal server error" });
     }
   } else {

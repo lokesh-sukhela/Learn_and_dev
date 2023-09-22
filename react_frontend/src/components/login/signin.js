@@ -38,7 +38,8 @@ function SignInForm() {
 
       if (res.data.message==="Login Successful"){
         
-        toast.success(res.data.message);
+        toast.success(res.data.message,{autoClose: 500});
+        
         // setCookie('UserData',res.data.userdata)
         cookies.set("role",res.data.userdata.Role);
         const roles=cookies.get("role");
@@ -57,24 +58,30 @@ function SignInForm() {
         // }
 
         if (roles.includes("Admin")){
+          setTimeout(() => {
+            navigate('/adminTrainingTable')
+          }, 500);
           
-          navigate('/adminTrainingTable')
+          
         }
         else{
-          navigate('/userTrainingTable')
+          setTimeout(() => {
+            navigate('/userTrainingTable')
+          }, 500);
+         
         }    
       }
 
 
   
       if (res.data.message=== "All fields are mandatory ; Please fill it."){
-        toast.warning(res.data.message);
+        toast.warning(res.data.message,{autoClose: 1500});
       }
   
       
     }).catch(err=>{
       console.log(err);
-      toast.error("Invalid email or password!")
+      toast.error("Invalid email or password!",{autoClose: 1500})
     })
 
 

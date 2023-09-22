@@ -125,7 +125,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
   const handleCloseTrainingForm = () =>{
     AdminService.trainingDetails(formData).then((data)=>{
       if(data.data.message ==="Training added"){
-        toast.success("Training Published");
+        toast.success("Training Published",{autoClose:500});
         setTrainingFormOpen(true)
       }
     }).catch(error=>{
@@ -182,9 +182,11 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   onChange={handleChange}
                 >
                   <MenuItem value="">Select Skill Type</MenuItem>
-                  <MenuItem value="Full Stack Developer">Full Stack Developer</MenuItem>
+                  <MenuItem value="Full Stack">Full Stack</MenuItem>
                   <MenuItem value="Data Engineer">Data Engineer</MenuItem>
-                  <MenuItem value="Cloud Manager">Cloud Manager</MenuItem>
+                  <MenuItem value="Data Science">Data Science</MenuItem>
+                  <MenuItem value="DevOps">DevOps</MenuItem>
+                  <MenuItem value="Quality Automation">Quality Automation</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -198,10 +200,15 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                   onChange={handleChange}
                 >
                   <MenuItem value="">Select Skill category</MenuItem>
-                  <MenuItem value="Python">Python</MenuItem>
-                  <MenuItem value="Azure">Azure </MenuItem>
-                  <MenuItem value="Frontend">Frontend</MenuItem>
-                  <MenuItem value="Backend">Backend</MenuItem>
+                  <MenuItem value="Pandas">Pandas</MenuItem>
+                  <MenuItem value="ADF">ADF </MenuItem>
+                  <MenuItem value="React JS">React JS</MenuItem>
+                  <MenuItem value="Node JS">Node JS</MenuItem>
+                  <MenuItem value="GIT">GIT</MenuItem>
+                  <MenuItem value="Docker">Docker</MenuItem>
+                  <MenuItem value="Apache Spark">Apache Spark</MenuItem>
+                  <MenuItem value="Databricks">Databricks</MenuItem>
+                  <MenuItem value="Selenium">Selenium</MenuItem>
 
                 </Select>
               </FormControl>
@@ -237,6 +244,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
                 label="Max count of registrations"
                 type="number"
                 name="count"
+                min = {0}
                 value={formData.count}
                 onChange={handleChange}
                 required
@@ -269,6 +277,7 @@ const TrainingForm = ({ isEditing, editedTraining, onSave, onCancel }) => {
 
                   <TextField 
                     name="Link"
+                    type='link'
                     label="Meeting Link"
                     value={formData.meetingLink}
                     onChange={handleChange}

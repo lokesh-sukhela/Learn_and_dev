@@ -3,7 +3,7 @@ var router = express.Router();
 
 //controller is for applying business logic
 //here we are taking the insert logic from controller and save in varaible admin
-var Useradmin=require("../model/controller/UserAdminRegistratons_controller")
+var Useradmin=require("../model/controller/LoginController/UserAdminRegistratons_controller")
 
 
 

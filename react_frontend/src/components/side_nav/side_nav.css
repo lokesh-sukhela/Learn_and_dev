@@ -36,8 +36,17 @@ body {
   text-align: left;
   cursor: pointer;
   outline: none;
+
 }
 
+#logoutbutton{
+  margin-top: 70% !important;
+  /* background-color: red !important; */
+  width:70% !important;
+  border-radius:7px;
+  margin-left:10px !important;
+
+}
 .linkstonavigate {
   margin: 0px !important;
 }

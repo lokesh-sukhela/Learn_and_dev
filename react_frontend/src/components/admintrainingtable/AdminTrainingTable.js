@@ -51,7 +51,7 @@ const navigate=useNavigate();
     if(!token){
     
     navigate("/")
-    toast.error("Authentication failed! Please Login.")
+    toast.error("Authentication failed! Please Login.",{autoClose: 1000})
     }
     getAllDetails()
   }, []);
@@ -67,23 +67,17 @@ const navigate=useNavigate();
       
     }).catch(err=>{
       console.log(err)
-      toast.error("Error fetching data")
+      toast.error("Error fetching data",{autoClose: 1000})
     })
   }
 
-const editUser=(id)=>{
- console.log(id)
+const editUser=(tid)=>{
+  console.log(tid)
 
-AdminService.getTrainingById(id).then((data)=>{
-console.log(data.data.iddata);
-setIdData(data.data.iddata)
-props.history.push({
-  pathname: '/edit',
-  state: { getIddata }, // Pass the data as a state object
-});
-}).catch(err=>{
-  console.log("error");
-})
+navigate(`/edit/${tid}`)
+
+}
+
 
 
 
@@ -97,15 +91,19 @@ props.history.push({
   // setTrainingFormOpen(true); 
 
   
-}
-const deleteUser=(id)=>{
 
-  AdminService.deletedetails(id).then((data)=>{
-    getAllDetails();
-    toast.success("Training Deleted Successfully");
-  }).catch(err=>{
-toast.error("Error in Training Deletion");
-  })
+const deleteUser=(id)=>{
+  if(window.confirm("Are You Sure Want to delete the training?")){
+    AdminService.deletedetails(id).then((data)=>{
+      getAllDetails();
+      toast.success("Training Deleted Successfully", {autoClose:500});
+    }).catch(err=>{
+  toast.error("Error in Training Deletion");
+    })
+  }
+  
+  
+ 
 }
 
 
@@ -247,10 +245,9 @@ const pageCount = Math.ceil(gettingAll.length / itemsPerPage);
                       <td className='td'>{training.SkillTitle}</td>
                       <td className='td'>{training.SkillCategory}</td>
                       <td className='td'>{(training.StartDate).split('T')[0]}</td>
-                      <td>{new Date((training.StartDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
+                      <td className='td'>{new Date((training.StartDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
                       <td className='td'>{(training.EndDate).split('T')[0]}</td>
-                      <td>{new Date((training.EndDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
-                      
+                      <td className='td'>{new Date((training.EndDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
                       <td className='td'>{training.ParticipationLimit}</td>
                       <td className='td'>{training.PeopleRegistered}</td>
                       <td className='td'>{training.TrainingMode}</td>

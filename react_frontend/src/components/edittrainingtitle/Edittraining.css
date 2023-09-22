@@ -1,0 +1,28 @@
+.box{
+    width:60vh !important;
+    height:auto !important;
+    top:50px !important;
+    border:none !important;
+}
+#color{
+    background-color:white !important;
+}
+#label{
+    display:flex !important;
+    justify-content:flex-start !important;
+    align-items:center !important;
+    font-weight: bold;
+}
+h4{
+    text-decoration: underline !important;
+    color:#19105B;
+
+    font-weight: bold;
+}
+#button{
+    background-color:#19105B
+}
+#createbutton{
+    background-color:pink;
+    color:black
+}

@@ -1,4 +1,4 @@
-const db = require("../entities");
+const db = require("../../entities");
 const UA_table = db.UserAdminRegTable;
 const jwt = require('jsonwebtoken')
 // import Cookies from "universal-cookie";

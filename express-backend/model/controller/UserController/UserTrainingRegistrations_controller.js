@@ -1,4 +1,4 @@
-const db=require("../entities")
+const db=require("../../entities")
 const UserTR_table=db.UserTRegTable
 const Admintable=db.TrainingTable
 const Create_UserTrainingDetails= async(req,res)=>{

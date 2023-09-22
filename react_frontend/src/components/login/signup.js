@@ -27,34 +27,35 @@ function SignUpForm() {
       
  
       if (d.data.message==="User added"){
-        toast.success(d.data.message);
+        toast.success(d.data.message,{autoClose: 500});
+          
       }
 
       if (d.data.message==="Password must have a capital letter a small letter and a number and include any special character"){
-        toast.warning(d.data.message);
+        toast.warning(d.data.message,{autoClose: 2000});
       }
 
       if (d.data.message=== "In email domain name should contain jmangroup and only small letters"){
-        toast.error(d.data.message);
+        toast.error(d.data.message,{autoClose: 2000});
       }
 
 
       if (d.data.message=== "User already exists!"){
-        toast.error(d.data.message);
+        toast.error(d.data.message,{autoClose: 1000});
       }
 
       if (d.data.message=== "All fields are mandatory ; Please fill it."){
-        toast.warning(d.data.message);
+        toast.warning(d.data.message,{autoClose: 2000});
       }
     })
     .catch(err=>{
-      toast.error("Server Error catch block frontend")
+      toast.error("Server Error catch block frontend",{autoClose: 1000})
     })
 
     for (const key in state) {
       setState({
         ...state,
-        [key]: ""
+        [key]: " "
       });
     }
   };

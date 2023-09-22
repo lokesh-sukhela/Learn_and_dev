@@ -41,7 +41,7 @@ const UserTrainingTable = () => {
         const token = cookies.get("token");
         if (!token) {
             navigate("/")
-            toast.error("Authentication failed! Please Login.")
+            toast.error("Authentication failed! Please Login.",{autoClose: 1000})
         }
         GetAllDetails()
     }, [])
@@ -219,13 +219,13 @@ const UserTrainingTable = () => {
                                             <td className='td'>{training.SkillTitle}</td>
                                             <td className='td'>{training.SkillCategory}</td>
                                             <td className='td'>{(training.StartDate).split('T')[0]}</td>
-                      <td>{new Date((training.StartDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
+                      <td className='td'>{new Date((training.StartDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
                       <td className='td'>{(training.EndDate).split('T')[0]}</td>
-                      <td>{new Date((training.EndDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
+                      <td className='td'>{new Date((training.EndDate)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })} </td>
                                             <td className='td'>{training.Description}</td>
                                             <td className='td'>{training.TrainingMode}</td>
                                             <td className='td'>{training.MeetingLink}</td>
-                                            <td>
+                                            <td className='td'>
 
                                                 <Button id='register_button_user' startIcon={<PersonAddIcon />} variant="outlined" onClick={() => TrainingRegistration(training.TrainingId, Email)}
                                                     disabled={buttondisable}>

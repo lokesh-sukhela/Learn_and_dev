@@ -17,9 +17,6 @@ const navigate = useNavigate();
     cookies.remove('Email')
     cookies.remove('token')
     navigate('/')
-
-    
-
   }
   return (
     <div>
@@ -47,7 +44,7 @@ const navigate = useNavigate();
             <Link to='#' className='linkstonavigate'>Resourcing</Link>
             <Link to='#' className='linkstonavigate'>Access Control</Link>
             <Link to='/adminTrainingTable' className='linkstonavigate'>L&D</Link>
-            <button className='linkstonavigate' onClick={handleLogout} >Logout&nbsp;<LogoutIcon/></button>
+            <button className='linkstonavigate'  id = "logoutbutton" onClick={handleLogout} >Logout&nbsp;<LogoutIcon/></button>
 
             {/* <a href="/"><button type="button" id = "logoutbtn"class="btn btn-danger">Logout</button></a> */}
           </div>
